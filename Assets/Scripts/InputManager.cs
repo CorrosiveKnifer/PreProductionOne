@@ -17,7 +17,7 @@ public enum KeyType
     A, S, D, F, G, H, J, K, L,
     Z, X, C, V, B, N, M,
     NUM_ONE, NUM_TWO, NUM_THREE, NUM_FOUR, NUM_FIVE, NUM_SIX, NUM_SEVEN, NUM_EIGHT, NUM_NINE, NUM_ZERO,
-    L_SHIFT, L_CTRL, L_ALT, TAB, ESC,
+    L_SHIFT, L_CTRL, L_ALT, TAB, ESC, SPACE,
     R_SHIFT, R_CTRL, R_ALT, ENTER,
 }
 public enum MouseButton
@@ -288,6 +288,7 @@ public class InputManager : MonoBehaviour
             case KeyType.L_ALT: { return keyboard.leftAltKey; }
             case KeyType.TAB: { return keyboard.tabKey; }
             case KeyType.ESC: { return keyboard.escapeKey; }
+            case KeyType.SPACE: { return keyboard.spaceKey; }
 
             case KeyType.R_SHIFT: { return keyboard.rightShiftKey; }
             case KeyType.R_CTRL: { return keyboard.rightCtrlKey; }
