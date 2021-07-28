@@ -17,11 +17,13 @@ public class InventoryDisplay : MonoBehaviour
     public Sprite m_tempItemSprite;
 
     private GameObject[,] m_grid; //[x, y]
+    private Image heldImage = null;
 
     // Start is called before the first frame update
     void Start()
     {
         m_grid = new GameObject[m_columnCount, m_rowCount];
+
         for (int c = 0; c < m_columnCount; c++)
         {
             for (int r = 0; r < m_rowCount; r++)
@@ -29,12 +31,38 @@ public class InventoryDisplay : MonoBehaviour
                 SetUpCell(c, r);
             }
         }
+
+        GridLayoutGroup layout = gameObject.AddComponent<GridLayoutGroup>();
+        layout.cellSize = new Vector2(GetComponent<RectTransform>().rect.width / m_columnCount, GetComponent<RectTransform>().rect.height / m_rowCount);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(InputManager.instance.GetMouseButtonPressed(MouseButton.RIGHT))
+        {
+            Vector2 mousePos = InputManager.instance.GetMousePosition();
+            if (heldImage == null)
+            {
+                foreach (var item in GetComponentsInChildren<Button>())
+                {
+                    if (item.gameObject.GetComponent<RectTransform>().rect.Contains(mousePos))
+                    {
+                        heldImage = item.GetComponentsInChildren<Image>()[1];
+                    }
+                }
+            }
+            else
+            {
+                heldImage.transform.position = mousePos;
+            }
+            
+        }
+        else
+        {
+            heldImage = null;
+        }
+
     }
 
     public bool SetSpriteInCell(int column, int row, Sprite newSprite)
@@ -47,7 +75,7 @@ public class InventoryDisplay : MonoBehaviour
         foreach (var item in m_grid[column, row].GetComponentsInChildren<Image>())
         {
             if(item.gameObject.name.Contains("Image"))
-            {
+            { 
                 item.sprite = newSprite;
                 return true;
             }
@@ -89,7 +117,7 @@ public class InventoryDisplay : MonoBehaviour
 
         Button cellButton =  m_grid[c, r].AddComponent<Button>();
         cellButton.targetGraphic = cellImage;
-
+        
         GameObject subObject = new GameObject();
         subObject.name = $"Image[{c},{r}]";
         subObject.transform.parent = m_grid[c, r].transform;

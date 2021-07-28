@@ -60,7 +60,12 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_instance != this)
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+
+        if (_instance == this)
         {
             InitialFunc();
             DontDestroyOnLoad(gameObject);
@@ -336,24 +341,26 @@ public class InputManager : MonoBehaviour
         return GetMouseButton(button).wasPressedThisFrame;
     }
 
-    public bool GetMouseUp(MouseButton button)
+    public bool GetMouseButtonUp(MouseButton button)
     {
         return GetMouseButton(button).wasReleasedThisFrame;
     }
 
-    public bool GetMousePressed(MouseButton button)
+    public bool GetMouseButtonPressed(MouseButton button)
     {
         return GetMouseButton(button).isPressed;
     }
 
-    public bool GetMouseReleased(MouseButton button)
+    public bool GetMouseButtonReleased(MouseButton button)
     {
         return !(GetMouseButton(button).isPressed);
     }
 
     public Vector2 GetMousePosition()
     {
-        return new Vector2(mouse.position.x.ReadValue(), mouse.position.y.ReadValue());
+        Vector3 screenPoint = new Vector2(mouse.position.x.ReadValue(), mouse.position.y.ReadValue());
+        Debug.Log(new Vector2(screenPoint.x - Camera.main.scaledPixelWidth / 2, screenPoint.y - Camera.main.scaledPixelHeight / 2));
+        return new Vector2(screenPoint.x - Camera.main.scaledPixelWidth / 2, screenPoint.y - Camera.main.scaledPixelHeight / 2);
     }
 
     public Vector2 GetMouseDelta()

@@ -1,0 +1,16 @@
+{
+  "list": [
+    {
+      "name": "Corn",
+      "groundPrefabName": "Corn Test",
+      "inventoryImageName": "Sprites/Corn",
+      "itemType": "Crop"
+    },
+    {
+      "name": "Apple",
+      "groundPrefabName": "Corn Test",
+      "inventoryImageName": "Sprites/Apple",
+      "itemType": "Crop"
+    }
+  ]
+}
