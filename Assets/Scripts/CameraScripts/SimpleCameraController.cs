@@ -73,6 +73,8 @@ namespace UnityTemplateProjects
         [Tooltip("Whether or not to invert our Y axis for mouse input to rotation.")]
         public bool invertY = false;
 
+        public bool canQuitWithEsc = true;
+
         void OnEnable()
         {
             m_TargetCameraState.SetFromTransform(transform);
@@ -124,7 +126,7 @@ namespace UnityTemplateProjects
             }
 
             // Exit Sample  
-            if (InputManager.instance.IsKeyDown(KeyType.ESC))
+            if (InputManager.instance.IsKeyDown(KeyType.ESC) && canQuitWithEsc)
             {
                 Application.Quit();
 				#if UNITY_EDITOR

@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
 /// <summary>
-/// Rachael Colaco, Michael Jordan
+/// Michael Jordan
 /// </summary>
 /// 
 
