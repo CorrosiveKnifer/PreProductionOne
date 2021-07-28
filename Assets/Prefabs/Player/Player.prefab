@@ -130,6 +130,8 @@ MonoBehaviour:
   jumpSpeed: 4
   gravity: 9.81
   ledgeForgiveDelay: 0.2
+  cameraZoomSpeed: 1
+  cameraZoomMax: 5
 --- !u!1 &4574658801071179562
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,8 +188,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.05
+  far clip plane: 100
   field of view: 60
   orthographic: 1
   orthographic size: 4

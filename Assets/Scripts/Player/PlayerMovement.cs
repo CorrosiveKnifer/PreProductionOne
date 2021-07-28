@@ -18,6 +18,9 @@ public class PlayerMovement : MonoBehaviour
     public float ledgeForgiveDelay = 0.0f;
     private float ledgeForgiveTimer = 0.0f;
 
+    public float cameraZoomSpeed = 1.0f;
+    public float cameraZoomMax = 5.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +31,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Camera zoom
+        playerCamera.orthographicSize = Mathf.Clamp(playerCamera.orthographicSize - InputManager.instance.GetMouseScrollDelta() * cameraZoomSpeed * Time.deltaTime, 1, cameraZoomMax);
+        Debug.Log(InputManager.instance.GetMouseScrollDelta());
     }
 
     private void FixedUpdate()
