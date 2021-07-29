@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
         // Get jump input
         if (!jumpInput)
             jumpInput = InputManager.instance.IsKeyDown(KeyType.SPACE);
+
     }
     private void FixedUpdate()
     {

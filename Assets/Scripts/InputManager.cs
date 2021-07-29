@@ -379,6 +379,11 @@ public class InputManager : MonoBehaviour
         return new Vector2(mouse.delta.x.ReadValue(), mouse.delta.y.ReadValue());
     }
 
+    public float GetMouseScrollDelta()
+    {
+        return mouse.scroll.y.ReadValue();
+    }
+
     /// <summary>
     /// Checking if the mouse button is down
     /// </summary>
