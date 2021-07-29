@@ -20,7 +20,7 @@ public struct Slot
 class PlayerInventory : MonoBehaviour
 {
     private Slot[,] m_itemGrid;
-    [SerializeField] private InventoryDisplay m_display;
+    [SerializeField] private UI_GridDisplay m_display;
 
     public void Start()
     {

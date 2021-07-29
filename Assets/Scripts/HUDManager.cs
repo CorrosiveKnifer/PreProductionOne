@@ -30,16 +30,28 @@ public class HUDManager : MonoBehaviour
 
     #endregion
 
-    //[Header("UI Objects")]
+    [Header("UI Objects")]
+    public GameObject[] m_UIElements;
 
     private void Start()
     {
-
+        gameObject.name = $"HUDManager ({gameObject.name})";
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (InputManager.instance.GetMouseButtonPressed(MouseButton.LEFT))
+        {
+            Vector2 mousePos = InputManager.instance.GetMousePositionInScreen();
+            foreach (var elements in m_UIElements)
+            {
+                if(elements.GetComponent<UI_Element>() != null 
+                    && elements.GetComponent<UI_Element>().IsContainingVector(mousePos))
+                {
+                    
+                }
+            }
+        }
     }
 }
