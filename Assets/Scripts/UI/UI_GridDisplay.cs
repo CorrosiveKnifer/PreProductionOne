@@ -167,8 +167,6 @@ public class UI_GridDisplay : UI_Element
         if (m_grid == null || m_heldItem == null)
             return;
 
-        UI_SlotDisplay target;
-
         for (int c = 0; c < m_columnCount; c++)
         {
             for (int r = 0; r < m_rowCount; r++)

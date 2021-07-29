@@ -40,7 +40,9 @@ class PlayerInventory : MonoBehaviour
         ItemElement itemDef;
         if(GameManager.instance.m_items.dictionary.TryGetValue("Corn", out itemDef))
         {
-            m_itemGrid[0, 0] = new ItemObject(itemDef, 1);
+            m_itemGrid[0, 0] = ScriptableObject.CreateInstance("ItemObject") as ItemObject;
+            m_itemGrid[0, 0].m_definition = itemDef;
+            m_itemGrid[0, 0].m_amount = 1;
         }
     }
 
