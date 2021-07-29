@@ -41,16 +41,23 @@ public class HUDManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector2 mousePos = InputManager.instance.GetMousePositionInScreen();
         if (InputManager.instance.GetMouseButtonPressed(MouseButton.LEFT))
         {
-            Vector2 mousePos = InputManager.instance.GetMousePositionInScreen();
             foreach (var elements in m_UIElements)
             {
                 if(elements.GetComponent<UI_Element>() != null 
                     && elements.GetComponent<UI_Element>().IsContainingVector(mousePos))
                 {
-                    
+                    elements.GetComponent<UI_Element>().OnMouseDownEvent();
                 }
+            }
+        }
+        else if(InputManager.instance.GetMouseButtonUp(MouseButton.LEFT))
+        {
+            foreach (var elements in m_UIElements)
+            {
+                 elements.GetComponent<UI_Element>().OnMouseUpEvent();
             }
         }
     }

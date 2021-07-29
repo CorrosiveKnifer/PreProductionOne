@@ -12,6 +12,8 @@ using UnityEngine.UI;
  */
 public class UI_GridDisplay : UI_Element
 {
+    public bool generateOnAwake = false;
+
     public Vector2Int m_spacing;
 
     [Range(1, 20)]
@@ -24,20 +26,14 @@ public class UI_GridDisplay : UI_Element
     public GameObject m_buttonPrefab;
 
     private UI_SlotDisplay[,] m_grid; //[x, y]
-    private Image heldImage = null;
+    private UI_SlotDisplay m_heldItem = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_grid = new UI_SlotDisplay[m_columnCount, m_rowCount];
-
-        for (int c = 0; c < m_columnCount; c++)
+        if(generateOnAwake)
         {
-            for (int r = 0; r < m_rowCount; r++)
-            {
-                m_grid[c, r] = GameObject.Instantiate(m_buttonPrefab, transform).GetComponent<UI_SlotDisplay>();
-                m_grid[c, r].gameObject.name = $"Slot[{c},{r}]";
-            }
+            Generate(null, new Vector2Int(m_columnCount, m_rowCount));
         }
 
         //~~~ Start creating the layout ~~~
@@ -61,63 +57,132 @@ public class UI_GridDisplay : UI_Element
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(m_grid[1, 0].GetComponent<RectTransform>().position.x);
-        //if(InputManager.instance.GetMouseButtonPressed(MouseButton.RIGHT))
-        //{
-        //    Vector2 mousePos = InputManager.instance.GetMousePosition();
-        //    if (heldImage == null)
-        //    {
-        //        foreach (var item in GetComponentsInChildren<Button>())
-        //        {
-        //            if (item.gameObject.GetComponent<RectTransform>().rect.Contains(mousePos))
-        //            {
-        //                heldImage = item.GetComponentsInChildren<Image>()[1];
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        heldImage.transform.position = mousePos;
-        //    }
-        //    
-        //}
-        //else
-        //{
-        //    heldImage = null;
-        //}
+        if(m_heldItem != null)
+        {
+            m_heldItem.MoveImageTo(InputManager.instance.GetMousePositionInScreen());
+        }
     }
 
-    public bool SetSpriteInCell(int column, int row, Sprite newSprite)
+    private void OnDisable()
     {
-        //if(column >= m_columnCount || row > m_rowCount)
-        //{
-        //    throw new IndexOutOfRangeException($"Either column or row was larger than the specified range in InventoryDisplay.");
-        //}
-        //
-        //foreach (var item in m_grid[column, row].GetComponentsInChildren<Image>())
-        //{
-        //    if(item.gameObject.name.Contains("Image"))
-        //    { 
-        //        item.sprite = newSprite;
-        //        return true;
-        //    }
-        //}
-        return false;
+        if(m_grid != null)
+            for (int c = 0; c < m_columnCount; c++)
+            {
+                for (int r = 0; r < m_rowCount; r++)
+                {
+                    Destroy(m_grid[c,r].gameObject);
+                }
+            }
+        m_grid = null;
+    }
+
+    public void Generate(ItemObject[,] _itemGrid, Vector2Int _size)
+    {
+        if (_itemGrid == null)
+        {
+            GenerateCleared();
+            return;
+        }
+            
+        m_columnCount = _size.x;
+        m_rowCount = _size.y;
+        m_grid = new UI_SlotDisplay[m_columnCount, m_rowCount];
+        for (int c = 0; c < m_columnCount; c++)
+        {
+            for (int r = 0; r < m_rowCount; r++)
+            {
+                m_grid[c, r] = GameObject.Instantiate(m_buttonPrefab, transform).GetComponent<UI_SlotDisplay>();
+                m_grid[c, r].gameObject.name = $"Slot[{c},{r}]";
+                m_grid[c, r].SetItem(_itemGrid[c, r]);
+            }
+        }
+    }
+
+    private void GenerateCleared()
+    {
+        m_grid = new UI_SlotDisplay[m_columnCount, m_rowCount];
+
+        for (int c = 0; c < m_columnCount; c++)
+        {
+            for (int r = 0; r < m_rowCount; r++)
+            {
+                m_grid[c, r] = GameObject.Instantiate(m_buttonPrefab, transform).GetComponent<UI_SlotDisplay>();
+                m_grid[c, r].gameObject.name = $"Slot[{c},{r}]";
+            }
+        }
+    }
+
+    public void UpdateInventory(ItemObject[,] _itemGrid)
+    {
+        if (m_grid == null)
+            return;
+
+        for (int c = 0; c < m_columnCount; c++)
+        {
+            for (int r = 0; r < m_rowCount; r++)
+            {
+                _itemGrid[c, r] = m_grid[c, r].GetItem();
+            }
+        }
     }
 
     public override bool IsContainingVector(Vector2 _pos)
     {
+        if (m_grid == null)
+            return false;
+
         for (int c = 0; c < m_columnCount; c++)
         {
             for (int r = 0; r < m_rowCount; r++)
             {
                 if (m_grid[c, r].IsContainingVector(_pos))
                 {
-                    Debug.Log($"{m_grid[c, r].name}");
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    public override void OnMouseDownEvent()
+    {
+        if (m_grid == null || m_heldItem != null)
+            return;
+
+        for (int c = 0; c < m_columnCount; c++)
+        {
+            for (int r = 0; r < m_rowCount; r++)
+            {
+                if (m_grid[c, r].IsContainingVector(InputManager.instance.GetMousePositionInScreen()))
+                {
+                    m_heldItem = m_grid[c, r];
+                    m_heldItem.OnMouseDownEvent();
+                }
+            }
+        }
+    }
+
+    public override void OnMouseUpEvent()
+    {
+        if (m_grid == null || m_heldItem == null)
+            return;
+
+        UI_SlotDisplay target;
+
+        for (int c = 0; c < m_columnCount; c++)
+        {
+            for (int r = 0; r < m_rowCount; r++)
+            {
+                if (m_grid[c, r].IsContainingVector(InputManager.instance.GetMousePositionInScreen()))
+                {
+                    m_heldItem.TransferItemTo(m_grid[c, r]);
+                    m_heldItem.OnMouseUpEvent();
+                    m_heldItem = null;
+                    return;
+                }
+            }
+        }
+        m_heldItem.OnMouseUpEvent();
+        m_heldItem = null;
     }
 }

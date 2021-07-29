@@ -9,4 +9,6 @@ using UnityEngine.UI;
 public abstract class UI_Element : MonoBehaviour
 {
     public abstract bool IsContainingVector(Vector2 _pos);
+    public abstract void OnMouseDownEvent();
+    public abstract void OnMouseUpEvent();
 }

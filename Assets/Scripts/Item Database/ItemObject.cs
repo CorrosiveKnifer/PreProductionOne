@@ -1,25 +1,15 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
-public enum ItemType
+public class ItemObject : ScriptableObject
 {
-    Null,
-    Crop,
-}
+    public ItemElement m_definition = null;
+    public uint m_amount = 0;
 
-[Serializable]
-public class ItemObject
-{
-    public string name;
-    public string groundPrefabName;
-    public string inventoryImageName;
-    public string itemType;
-
-    protected GameObject groundPrefab;
-    protected Sprite inventoryImage;
-
+    public ItemObject(ItemElement myType, uint amount)
+    {
+        m_definition = myType;
+        m_amount = amount;
+    }
 }

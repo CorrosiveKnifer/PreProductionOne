@@ -19,39 +19,52 @@ public struct Slot
 
 class PlayerInventory : MonoBehaviour
 {
-    private Slot[,] m_itemGrid;
+    private ItemObject[,] m_itemGrid;
     [SerializeField] private UI_GridDisplay m_display;
 
+    private Vector2Int m_size;
+    private float m_inputDelay;
     public void Start()
     {
-        m_itemGrid = new Slot[m_display.m_columnCount, m_display.m_rowCount];
+        m_itemGrid = new ItemObject[m_display.m_columnCount, m_display.m_rowCount];
+        m_size = new Vector2Int(m_display.m_columnCount, m_display.m_rowCount);
+
         for (int c = 0; c < m_display.m_columnCount; c++)
         {
             for (int r = 0; r < m_display.m_rowCount; r++)
             {
-                m_itemGrid[c, r] = new Slot(new Vector2(c, r));
+                m_itemGrid[c, r] = null;
             }
         }
 
-        GameManager.instance.m_items.dictionary.TryGetValue("Corn", out m_itemGrid[0, 0].item);
+        ItemElement itemDef;
+        if(GameManager.instance.m_items.dictionary.TryGetValue("Corn", out itemDef))
+        {
+            m_itemGrid[0, 0] = new ItemObject(itemDef, 1);
+        }
     }
 
     private void Update()
     {
-        for (int c = 0; c < m_display.m_columnCount; c++)
+        if(m_inputDelay > 0.0f)
         {
-            for (int r = 0; r < m_display.m_rowCount; r++)
+            m_inputDelay -= Time.deltaTime;
+            return;
+        }
+
+        if(InputManager.instance.IsKeyDown(KeyType.I))
+        {
+            m_inputDelay = 0.25f;
+            if (!m_display.enabled)
             {
-                if(m_itemGrid[c, r].item != null)
-                {
-                    //Note: add error message:
-                    m_display.SetSpriteInCell(c, r, Resources.Load<Sprite>(m_itemGrid[c, r].item.inventoryImageName));
-                }
-                else
-                {
-                    m_display.SetSpriteInCell(c, r, null);
-                }
+                m_display.Generate(m_itemGrid, m_size);
             }
+            else
+            {
+                m_display.UpdateInventory(m_itemGrid);
+            }
+
+            m_display.enabled = !m_display.enabled;
         }
     }
 }
