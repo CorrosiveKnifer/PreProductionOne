@@ -2,7 +2,7 @@
   "list": [
     {
       "name": "Corn",
-      "groundPrefabName": "Corn Test",
+      "groundPrefabName": "Prefabs/Corn Test",
       "inventoryImageName": "Sprites/Corn",
       "itemType": "Crop"
     },

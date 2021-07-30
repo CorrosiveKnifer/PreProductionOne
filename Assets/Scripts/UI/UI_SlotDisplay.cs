@@ -38,6 +38,12 @@ public class UI_SlotDisplay : UI_Element
         UpdateDimentions();
         m_itemImage.gameObject.SetActive(m_currentItem != null);
         m_amountText.gameObject.SetActive(m_currentItem != null);
+
+        if(m_amountText.isActiveAndEnabled)
+        {
+            m_amountText.text = m_currentItem.m_amount.ToString();
+        }
+        
     }
 
     /*
@@ -111,7 +117,21 @@ public class UI_SlotDisplay : UI_Element
 
     public void TransferItemTo(UI_SlotDisplay uI_SlotDisplay)
     {
+        if (uI_SlotDisplay == this)
+            return;
+
         ItemObject temp = uI_SlotDisplay.m_currentItem;
+        
+        if(uI_SlotDisplay.m_currentItem != null && m_currentItem != null)
+        {
+            if (uI_SlotDisplay.m_currentItem.m_definition == m_currentItem.m_definition)
+            {
+                uI_SlotDisplay.m_currentItem.m_amount += m_currentItem.m_amount;
+                this.SetItem(null);
+                return;
+            }
+        }
+        
         uI_SlotDisplay.SetItem(m_currentItem);
         this.SetItem(temp);
     }
