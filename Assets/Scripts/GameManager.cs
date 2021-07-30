@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     public float m_currentHour = 8;
     public int m_day = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,20 +64,24 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(InputManager.instance.IsKeyDown(KeyType.T))
+        {
+            SkipTime(8.0f);
+        }
     }
 
     private void InitialiseFunc()
     {
         m_items = new ItemDB(m_itemsJson.text);
+
     }
 
     public void SkipTime(float hoursIncreased)
     {
         m_currentHour += hoursIncreased;
-        if (m_currentHour > 23)
+        if (m_currentHour >= 24)
         {
-            m_currentHour -= 23;
+            m_currentHour -= 24;
             m_day++;
         }
             
