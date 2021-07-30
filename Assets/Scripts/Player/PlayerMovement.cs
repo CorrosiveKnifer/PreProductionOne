@@ -21,11 +21,18 @@ public class PlayerMovement : MonoBehaviour
     public float cameraZoomSpeed = 1.0f;
     public float cameraZoomMax = 5.0f;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        characterController.enabled = false;
+        transform.position = FindObjectOfType<SceneDoorManager>().GetDoorSpawnPosition(GameManager.instance.m_TargetDoor);
+        characterController.enabled = true;
     }
 
     // Update is called once per frame
@@ -33,7 +40,6 @@ public class PlayerMovement : MonoBehaviour
     {
         // Camera zoom
         playerCamera.orthographicSize = Mathf.Clamp(playerCamera.orthographicSize - InputManager.instance.GetMouseScrollDelta() * cameraZoomSpeed * Time.deltaTime, 1, cameraZoomMax);
-        Debug.Log(InputManager.instance.GetMouseScrollDelta());
     }
 
     private void FixedUpdate()
