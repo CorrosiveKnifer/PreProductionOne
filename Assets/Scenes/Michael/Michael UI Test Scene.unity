@@ -121,6 +121,62 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &88671590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 88671591}
+  - component: {fileID: 88671592}
+  m_Layer: 5
+  m_Name: HotBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &88671591
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88671590}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 890283675}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 4.1, y: -454}
+  m_SizeDelta: {x: 800, y: 160}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &88671592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88671590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6643d4f021d22af4799acecc2a419c7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generateOnAwake: 0
+  m_spacing: {x: 5, y: 5}
+  m_hasUpdated: 0
+  m_rowCount: 1
+  m_columnCount: 5
+  m_itemScale: 0.65
+  m_buttonPrefab: {fileID: 1171543320446144440, guid: 5d2cc283f50d3634e95cfda953363748,
+    type: 3}
 --- !u!1 &384373597
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,6 +425,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1224270399}
+  - {fileID: 88671591}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -391,6 +448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UIElements:
   - {fileID: 1224270398}
+  - {fileID: 88671590}
 --- !u!1 &902700905
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,6 +598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   generateOnAwake: 0
   m_spacing: {x: 2, y: 2}
+  m_hasUpdated: 0
   m_rowCount: 5
   m_columnCount: 5
   m_itemScale: 0.65
@@ -670,6 +729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_display: {fileID: 1224270400}
+  m_hotbar: {fileID: 88671592}
 --- !u!65 &2048461579
 BoxCollider:
   m_ObjectHideFlags: 0
