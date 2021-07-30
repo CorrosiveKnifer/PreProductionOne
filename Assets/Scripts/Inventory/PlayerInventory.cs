@@ -98,4 +98,16 @@ class PlayerInventory : MonoBehaviour
     {
         return m_hotbarItem[index, 0];
     }
+
+    public void UseItem(int index)
+    {
+        if(m_hotbarItem[index, 0] != null)
+        {
+            m_hotbarItem[index, 0].m_amount--;
+            if(m_hotbarItem[index, 0].m_amount == 0)
+            {
+                m_hotbarItem[index, 0] = null;
+            }
+        }
+    }
 }
