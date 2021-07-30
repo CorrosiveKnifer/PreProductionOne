@@ -357,21 +357,11 @@ public class InputManager : MonoBehaviour
         return !(GetMouseButton(button).isPressed);
     }
 
-    /*
-    * GetMousePositionInScreen by Michael Jordan
-    * Description:
-    *  Returns the position of the mouse where 0,0 is the bottem left of the screen.
-    *
-    * Return: 
-    *  Vector2 - Mouse position
-    */
-    public Vector2 GetMousePositionInScreen()
+    public Vector2 GetMousePosition()
     {
-        //Convert to 0,0 middle
-        //Vector3 screenPoint = new Vector2(mouse.position.x.ReadValue(), mouse.position.y.ReadValue());
-        //new Vector2(screenPoint.x - Camera.main.scaledPixelWidth / 2, screenPoint.y - Camera.main.scaledPixelHeight / 2);
-        
-        return new Vector2(mouse.position.x.ReadValue(), mouse.position.y.ReadValue());
+        Vector3 screenPoint = new Vector2(mouse.position.x.ReadValue(), mouse.position.y.ReadValue());
+        Debug.Log(new Vector2(screenPoint.x - Camera.main.scaledPixelWidth / 2, screenPoint.y - Camera.main.scaledPixelHeight / 2));
+        return new Vector2(screenPoint.x - Camera.main.scaledPixelWidth / 2, screenPoint.y - Camera.main.scaledPixelHeight / 2);
     }
 
     public Vector2 GetMouseDelta()
