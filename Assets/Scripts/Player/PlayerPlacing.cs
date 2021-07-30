@@ -39,6 +39,9 @@ public class PlayerPlacing : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Vector3 TargetPoint = hit.point;
+                TargetPoint.x = Mathf.Round(TargetPoint.x);
+                TargetPoint.z = Mathf.Round(TargetPoint.z);
+
                 m_TargetingArea.transform.position = TargetPoint;
                 if (hit.transform.gameObject.layer == 8)
                 {
