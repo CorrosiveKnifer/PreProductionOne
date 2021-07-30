@@ -12,14 +12,19 @@ public enum ItemType
 }
 
 [Serializable]
-public class ItemObject
+public class ItemElement
 {
     public string name;
     public string groundPrefabName;
     public string inventoryImageName;
     public string itemType;
 
-    protected GameObject groundPrefab;
-    protected Sprite inventoryImage;
+    public GameObject groundPrefab { get; protected set; }
+    public Sprite inventoryImage { get; protected set; }
 
+    public void UpdateElement()
+    {
+        inventoryImage = Resources.Load<Sprite>(inventoryImageName);
+        groundPrefab = Resources.Load<GameObject>(groundPrefabName);
+    }
 }

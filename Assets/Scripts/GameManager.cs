@@ -48,8 +48,7 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    public DoorDirection m_TargetDoor;
-    public ItemDirectory m_items;
+    public ItemDB m_items;
     public TextAsset m_itemsJson;
     // Start is called before the first frame update
     void Start()
@@ -65,6 +64,6 @@ public class GameManager : MonoBehaviour
 
     private void InitialiseFunc()
     {
-        m_items = new ItemDirectory(m_itemsJson.text);
+        m_items = new ItemDB(m_itemsJson.text);
     }
 }
