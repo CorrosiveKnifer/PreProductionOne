@@ -8,10 +8,15 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementInput;
     private bool jumpInput = false;
 
+    private void Awake()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
+
     }
 
     // Update is called once per frame

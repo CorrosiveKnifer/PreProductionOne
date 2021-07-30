@@ -5,24 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
- 
-public class ItemDB
+public class ItemDirectory
 {
     [Serializable]
     class Items
     {
-        public ItemElement[] list;
+        public ItemObject[] list;
     }
 
-    public Dictionary<string, ItemElement> dictionary;
-    public ItemDB(string jsonData)
+    public Dictionary<string, ItemObject> dictionary;
+    public ItemDirectory(string jsonData)
     {
         Items itemList = JsonUtility.FromJson<Items>(jsonData);
-        dictionary = new Dictionary<string, ItemElement>();
+        dictionary = new Dictionary<string, ItemObject>();
         foreach (var item in itemList.list)
         {
             dictionary.Add(item.name, item);
-            item.UpdateElement();
         }
 
     }
