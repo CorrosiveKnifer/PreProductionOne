@@ -106,6 +106,7 @@ class PlayerInventory : MonoBehaviour
             m_hotbarItem[index, 0].m_amount--;
             if(m_hotbarItem[index, 0].m_amount == 0)
             {
+                m_hotbar.SetSlotItem(null, index, 0);
                 m_hotbarItem[index, 0] = null;
             }
         }
