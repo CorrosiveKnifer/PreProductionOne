@@ -45,7 +45,8 @@ class PlayerInventory : MonoBehaviour
         {
             m_hotbarItem[c, 0] = null;
         }
-                ItemElement itemDef;
+
+        ItemElement itemDef;
         if(GameManager.instance.m_items.dictionary.TryGetValue("Corn", out itemDef))
         {
             m_itemGrid[0, 0] = ScriptableObject.CreateInstance("ItemObject") as ItemObject;
