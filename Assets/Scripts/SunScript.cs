@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SunScript : MonoBehaviour
 {
-
     public float m_secondsPerDay;
     public float m_hourOfRise = 6;
     public float m_hourOfNoon = 12;
@@ -16,10 +15,7 @@ public class SunScript : MonoBehaviour
         float secondsPerHour = (m_secondsPerDay / 24.0f); //1 minute for 1 ingame day
         float secondsPassed = Time.deltaTime;
 
-        GameManager.instance.m_currentHour += secondsPassed / secondsPerHour;
-
-        if (GameManager.instance.m_currentHour > 23)
-            GameManager.instance.m_currentHour -= 23;
+        GameManager.instance.SkipTime(secondsPassed / secondsPerHour);
 
         float hour = GameManager.instance.m_currentHour;
 

@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     public TextAsset m_itemsJson;
 
     public float m_currentHour = 8;
+    public int m_day = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +75,10 @@ public class GameManager : MonoBehaviour
     {
         m_currentHour += hoursIncreased;
         if (m_currentHour > 23)
+        {
             m_currentHour -= 23;
+            m_day++;
+        }
+            
     }
 }
