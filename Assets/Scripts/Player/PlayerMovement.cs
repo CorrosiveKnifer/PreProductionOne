@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 storedMovement;
     private Vector3 lastMovement;
 
+    public GameObject m_playerModel;
+
     public bool grounded = true;
     public float movementSpeed = 2.0f;
     public float jumpSpeed = 4.0f;
@@ -102,5 +104,18 @@ public class PlayerMovement : MonoBehaviour
 
         // Apply movement to character controller
         characterController.Move(movement);
+
+        Vector3 direction = movement;
+        direction.y = 0;
+        // Rotate player model
+        if (direction != new Vector3(0,0,0) && m_playerModel != null)
+        {
+            direction = direction.normalized;
+            float angle = Vector3.Angle(transform.position, direction);
+
+            m_playerModel.transform.rotation = Quaternion.Lerp(m_playerModel.transform.rotation, 
+                Quaternion.Euler(0, angle, 0), 
+                0.1f);
+        }
     }
 }

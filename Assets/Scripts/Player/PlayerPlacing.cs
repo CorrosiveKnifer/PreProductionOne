@@ -5,14 +5,16 @@ using UnityEngine;
 public class PlayerPlacing : MonoBehaviour
 {
     private Camera m_PlayerCamera;
-    public GameObject m_SelectedObject;
+    private GameObject m_SelectedObject;
     public GameObject m_TargetingArea;
+    private PlayerInventory m_PlayerInventory;
     private float m_CurrentRotation = 0;
-
+    private int m_SelectedIndex = 0;
     // Start is called before the first frame update
     void Start()
     {
         m_PlayerCamera = GetComponentInChildren<Camera>();
+        m_PlayerInventory = GetComponent<PlayerInventory>();
     }
 
     // Update is called once per frame
@@ -43,15 +45,25 @@ public class PlayerPlacing : MonoBehaviour
                     if (InputManager.instance.GetMouseButtonDown(MouseButton.LEFT)) // Need to check for valid placement ground
                     {
                         Instantiate(m_SelectedObject, TargetPoint, Quaternion.Euler(0, m_CurrentRotation, 0));
-                        //m_SelectedObject = null;
+                        m_PlayerInventory.UseItem(m_SelectedIndex);
+                        SetSelectedIndex(m_SelectedIndex);
                     }
                 }
             }
         }
+        else
+        {
+            m_TargetingArea.GetComponent<MeshFilter>().sharedMesh = null;
+        }
     }
 
-    public void SetSelectedObject(GameObject _Prefab)
+    public void SetSelectedIndex(int _index)
     {
-        m_SelectedObject = _Prefab;
+        m_SelectedIndex = _index;
+        ItemObject item = m_PlayerInventory.GetItemFromHotbar(_index);
+        if (item != null)
+            m_SelectedObject = item.m_definition.groundPrefab;
+        else
+            m_SelectedObject = null;
     }
 }
