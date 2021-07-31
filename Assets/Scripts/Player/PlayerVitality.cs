@@ -27,7 +27,7 @@ public class PlayerVitality : MonoBehaviour
     public List<statusEffect> playerEffects = new List<statusEffect>();
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         m_hunger = GameManager.instance.m_hunger;
     }
@@ -43,6 +43,9 @@ public class PlayerVitality : MonoBehaviour
 
         if (!IsStatusActive(statusType.OVER_FILLED))
             m_hunger -= Time.deltaTime;
+
+        if (m_hunger < 0)
+            m_hunger = 0;
 
         StatusUpdate();
     }
