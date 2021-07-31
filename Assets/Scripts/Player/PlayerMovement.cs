@@ -105,17 +105,23 @@ public class PlayerMovement : MonoBehaviour
         // Apply movement to character controller
         characterController.Move(movement);
 
-        Vector3 direction = movement;
+        Vector3 direction;
+        direction.x = _move.x;
         direction.y = 0;
+        direction.z = _move.y;
         // Rotate player model
         if (direction != new Vector3(0,0,0) && m_playerModel != null)
         {
             direction = direction.normalized;
-            float angle = Vector3.Angle(transform.position, direction);
+            float angle = Vector3.SignedAngle(transform.right, direction, transform.up);
+
+            //angle *= Mathf.Sign(direction.x);
 
             m_playerModel.transform.rotation = Quaternion.Lerp(m_playerModel.transform.rotation, 
                 Quaternion.Euler(0, angle, 0), 
                 0.1f);
+
+            Debug.Log(angle);
         }
     }
 }

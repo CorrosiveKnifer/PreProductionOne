@@ -193,6 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9090de221fc15640994c4ad957fbfe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_validMaterial: {fileID: 2100000, guid: 9de31f9a3bfdf4c479f222656a5623c2, type: 2}
+  m_invalidMaterial: {fileID: 2100000, guid: 62b67ddeccebdb949911603d69f340ef, type: 2}
   m_TargetingArea: {fileID: 0}
 --- !u!114 &161103162
 MonoBehaviour:
