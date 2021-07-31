@@ -18,7 +18,7 @@ public class UI_GameTime : UI_Element
     // Update is called once per frame
     void Update()
     {
-        float time = m_sunTimer.m_currentHour;
+        float time = GameManager.instance.m_currentHour;
         int minutes = (int)Mathf.Floor((time - Mathf.Floor(time)) * 60.0f);
         string minuteDisplay = (minutes >= 10) ? minutes.ToString() : "0"+ minutes.ToString();
         if (time > 0 && time < 12)

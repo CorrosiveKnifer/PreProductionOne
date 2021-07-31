@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Materials/TestTargetInvalid.mat.meta
 guid: 62b67ddeccebdb949911603d69f340ef
 NativeFormatImporter:
+=======
+guid: 3d3441af37090a24a93a4215b5973635
+folderAsset: yes
+DefaultImporter:
+>>>>>>> origin/Michael:Assets/Materials/Enviroment.meta
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 
