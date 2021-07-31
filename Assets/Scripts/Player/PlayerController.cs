@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            if (InputManager.instance.IsKeyDown(KeyType.NUM_ONE + i))
+            if (InputManager.instance.IsKeyDown(KeyType.ALP_ONE + i))
             {
                 m_playerPlacing.SetSelectedIndex(i);
             }

@@ -53,7 +53,7 @@ public class SceneDoorManager : MonoBehaviour
                         break;
                 }
 
-                return Door.transform.position + SpawnOffset * 1.2f;
+                return Door.transform.position + SpawnOffset * 1.5f;
             }
         }
         if (m_Doors[0] != null)

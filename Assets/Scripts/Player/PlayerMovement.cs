@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private PlayerVitality m_playerVitality;
+
     private CharacterController characterController;
     private Camera playerCamera;
     private float yVelocity = 0.0f;
@@ -27,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
+        m_playerVitality = GetComponent<PlayerVitality>();
     }
 
     // Start is called before the first frame update
@@ -76,6 +79,10 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Move(Vector2 _move, bool _jump)
     {
+        float speed = movementSpeed;
+        if (m_playerVitality.IsStatusActive(statusType.OVER_FILLED))
+            speed *= 0.5f;
+
         Vector3 normalizedMove = new Vector3(0, 0, 0);
 
         // Movement
@@ -83,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         normalizedMove += _move.x * transform.right;
 
         // Apply movement
-        Vector3 movement = normalizedMove.normalized * movementSpeed * Time.fixedDeltaTime;
+        Vector3 movement = normalizedMove.normalized * speed * Time.fixedDeltaTime;
         lastMovement = movement;
 
         // Jump
@@ -120,8 +127,6 @@ public class PlayerMovement : MonoBehaviour
             m_playerModel.transform.rotation = Quaternion.Lerp(m_playerModel.transform.rotation, 
                 Quaternion.Euler(0, angle, 0), 
                 0.1f);
-
-            Debug.Log(angle);
         }
     }
 }

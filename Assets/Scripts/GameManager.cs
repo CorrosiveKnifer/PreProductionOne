@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     public DoorDirection m_TargetDoor;
     public TextAsset m_itemsJson;
 
+    public float m_hunger = 100.0f;
     public float m_currentHour = 8;
     public int m_day = 0;
 
