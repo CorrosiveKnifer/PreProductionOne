@@ -40,16 +40,19 @@ public class SceneDoorManager : MonoBehaviour
                 switch (_Direction)
                 {
                     case DoorDirection.NORTH:
-                        SpawnOffset = -transform.forward; 
+                        SpawnOffset = -Vector3.forward; 
                         break;
                     case DoorDirection.SOUTH:
-                        SpawnOffset = transform.forward;
+                        SpawnOffset = Vector3.forward;
                         break;
                     case DoorDirection.EAST:
-                        SpawnOffset = -transform.right;
+                        SpawnOffset = -Vector3.right;
                         break;
                     case DoorDirection.WEST:
-                        SpawnOffset = transform.right;
+                        SpawnOffset = Vector3.right;
+                        break;
+                    case DoorDirection.INTERIOR:
+                        SpawnOffset = transform.forward;
                         break;
                 }
 
