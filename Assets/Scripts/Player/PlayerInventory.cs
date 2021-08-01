@@ -44,7 +44,7 @@ class PlayerInventory : MonoBehaviour
         {
             for (int r = 0; r < rows; r++)
             {
-                m_itemGrid[c, r] = GameManager.instance.m_saveSlot.GetPlayerBackpackData(c,r);
+                m_itemGrid[c, r] = GameManager.instance.m_saveSlot.GetPlayerBackpackData(c, r);
             }
         }
         for (int c = 0; c < hotbarCount; c++)
@@ -52,34 +52,7 @@ class PlayerInventory : MonoBehaviour
             m_hotbarItem[c, 0] = GameManager.instance.m_saveSlot.GetPlayerHotbarData(c);
         }
 
-        //Spawn in corn
-        //m_itemGrid[0, 0] = ItemObject.CreateItem(0, 1);
-        //m_hotbarItem[1, 0] = ItemObject.CreateItem(0, 1);
-
         m_hotbar.Generate(m_hotbarItem, new Vector2Int(5, 1));
-    }
-
-    public void SaveToSlot(SaveSlot slot)
-    {
-        for (int c = 0; c < m_size.x; c++)
-        {
-            for (int r = 0; r < m_size.y; r++)
-            {
-                if(m_itemGrid[c, r] != null)
-                    slot.SavePlayerBackpackData(c, r, m_itemGrid[c,r].m_id, (uint)m_itemGrid[c, r].m_amount);
-                else
-                    slot.SavePlayerBackpackData(c, r, -1, 0);
-            }
-        }
-
-        for (int c = 0; c < m_hotbarItem.GetLength(0); c++)
-        {
-            if (m_hotbarItem[c, 0] != null)
-                slot.SavePlayerHotbarData(c, m_hotbarItem[c, 0].m_id, (uint)m_hotbarItem[c, 0].m_amount);
-            else
-                slot.SavePlayerHotbarData(c, -1, 0);
-            
-        }
     }
 
     private void Update()
@@ -112,6 +85,37 @@ class PlayerInventory : MonoBehaviour
         if (m_hotbar.m_hasUpdated)
         {
             m_hotbar.UpdateInventory(m_hotbarItem);
+        }
+    }
+
+    public void OnDestroy()
+    {
+        if(GameManager.HasInstance())
+        {
+            SaveToSlot(GameManager.instance.m_saveSlot);
+        }
+    }
+
+    public void SaveToSlot(SaveSlot slot)
+    {
+        for (int c = 0; c < m_size.x; c++)
+        {
+            for (int r = 0; r < m_size.y; r++)
+            {
+                if (m_itemGrid[c, r] != null)
+                    slot.SavePlayerBackpackData(c, r, m_itemGrid[c, r].m_id, (uint)m_itemGrid[c, r].m_amount);
+                else
+                    slot.SavePlayerBackpackData(c, r, -1, 0);
+            }
+        }
+
+        for (int c = 0; c < m_hotbarItem.GetLength(0); c++)
+        {
+            if (m_hotbarItem[c, 0] != null)
+                slot.SavePlayerHotbarData(c, m_hotbarItem[c, 0].m_id, (uint)m_hotbarItem[c, 0].m_amount);
+            else
+                slot.SavePlayerHotbarData(c, -1, 0);
+
         }
     }
 
