@@ -62,7 +62,7 @@ public class PlayerPlacing : MonoBehaviour
         m_SelectedIndex = _index;
         ItemObject item = m_PlayerInventory.GetItemFromHotbar(_index);
         if (item != null)
-            m_SelectedObject = item.m_definition.groundPrefab;
+            m_SelectedObject = item.GetPlaceObject();
         else
             m_SelectedObject = null;
     }

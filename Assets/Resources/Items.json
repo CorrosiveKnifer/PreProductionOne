@@ -1,15 +1,19 @@
 {
   "list": [
     {
+      "id": 0,
       "name": "Corn",
-      "groundPrefabName": "Prefabs/Corn Test",
+      "placePrefabName": "Prefabs/Corn Test",
       "inventoryImageName": "Sprites/Corn",
+      "dropPrefabName": "",
       "itemType": "Crop"
     },
     {
+      "id": 1,
       "name": "Apple",
-      "groundPrefabName": "Corn Test",
+      "placePrefabName": "Corn Test",
       "inventoryImageName": "Sprites/Apple",
+      "dropPrefabName": "",
       "itemType": "Crop"
     }
   ]

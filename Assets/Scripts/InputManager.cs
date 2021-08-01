@@ -53,6 +53,7 @@ public class InputManager : MonoBehaviour
             {
                 GameObject loader = new GameObject();
                 _instance = loader.AddComponent<InputManager>();
+                loader.name = "Input Manager";
                 return loader.GetComponent<InputManager>();
             }
             return _instance;

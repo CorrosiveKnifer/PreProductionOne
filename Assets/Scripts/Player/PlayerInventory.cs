@@ -21,46 +21,57 @@ class PlayerInventory : MonoBehaviour
 {
     private ItemObject[,] m_itemGrid;
     private ItemObject[,] m_hotbarItem;
+
     //private 
     [SerializeField] private UI_GridDisplay m_display;
     [SerializeField] private UI_GridDisplay m_hotbar;
+
     private Vector2Int m_size;
     private float m_inputDelay;
 
     public void Start()
     {
-        m_itemGrid = new ItemObject[m_display.m_columnCount, m_display.m_rowCount];
+        int columns = GameManager.instance.m_saveSlot.GetPlayerIntegerData("backpack_column");
+        int rows = GameManager.instance.m_saveSlot.GetPlayerIntegerData("backpack_row");
+        int hotbarCount = GameManager.instance.m_saveSlot.GetPlayerIntegerData("hotbar_column");
+
+        m_itemGrid = new ItemObject[columns, rows];
         m_hotbarItem = new ItemObject[5,1];
 
-        m_size = new Vector2Int(m_display.m_columnCount, m_display.m_rowCount);
+        m_size = new Vector2Int(columns, rows);
 
-        for (int c = 0; c < m_display.m_columnCount; c++)
+        for (int c = 0; c < columns; c++)
         {
-            for (int r = 0; r < m_display.m_rowCount; r++)
+            for (int r = 0; r < rows; r++)
             {
-                m_itemGrid[c, r] = null;
+                m_itemGrid[c, r] = GameManager.instance.m_saveSlot.GetPlayerBackpackData(c,r);
             }
         }
-        for (int c = 0; c < 5; c++)
+        for (int c = 0; c < hotbarCount; c++)
         {
-            m_hotbarItem[c, 0] = null;
+            m_hotbarItem[c, 0] = GameManager.instance.m_saveSlot.GetPlayerHotbarData(c);
         }
 
-        ItemElement itemDef;
-        if(GameManager.instance.m_items.dictionary.TryGetValue("Corn", out itemDef))
-        {
-            m_itemGrid[0, 0] = ScriptableObject.CreateInstance("ItemObject") as ItemObject;
-            m_itemGrid[0, 0].m_definition = itemDef;
-            m_itemGrid[0, 0].m_amount = 1;
-
-            m_hotbarItem[0, 0] = ScriptableObject.CreateInstance("ItemObject") as ItemObject;
-            m_hotbarItem[0, 0].m_definition = itemDef;
-            m_hotbarItem[0, 0].m_amount = 1;
-        }
+        m_itemGrid[0, 0] = ItemObject.CreateItem(0, 1);
+        m_hotbarItem[1, 0] = ItemObject.CreateItem(0, 1);
 
         m_hotbar.Generate(m_hotbarItem, new Vector2Int(5, 1));
     }
 
+    public void OnDestroy()
+    {
+        for (int c = 0; c < m_size.x; c++)
+        {
+            for (int r = 0; r < m_size.y; r++)
+            {
+                if(m_itemGrid[c, r] != null)
+                    GameManager.instance.m_saveSlot.SavePlayerBackpackData(c, r, m_itemGrid[c,r].m_id, (uint)m_itemGrid[c, r].m_amount);
+                else
+                    GameManager.instance.m_saveSlot.SavePlayerBackpackData(c, r, -1, 0);
+            }
+        }
+                
+    }
     private void Update()
     {
         if(m_inputDelay > 0.0f)

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -50,8 +51,8 @@ public class GameManager : MonoBehaviour
 
     public ItemDB m_items;
     public DoorDirection m_TargetDoor;
-    public TextAsset m_itemsJson;
-
+    private TextAsset m_itemsJson;
+    public SaveSlot m_saveSlot;
     public float m_currentHour = 8;
     public int m_day = 0;
 
@@ -72,8 +73,21 @@ public class GameManager : MonoBehaviour
 
     private void InitialiseFunc()
     {
-        m_items = new ItemDB(m_itemsJson.text);
+        gameObject.name = "Game Manager";
+        m_itemsJson = Resources.Load<TextAsset>("Items");
+        m_items = JsonUtility.FromJson<ItemDB>(m_itemsJson.text);
 
+        if(File.Exists(Application.dataPath + "/SaveSlot1.json"))
+        {
+            m_saveSlot = new SaveSlot(File.ReadAllText(Application.dataPath + "/SaveSlot1.json"));
+        }
+        else
+        {
+            File.Create(Application.dataPath + "/SaveSlot1.json");
+            Debug.Log($"SaveSlot doesn't exist, it was created in {Application.dataPath}/");
+            m_saveSlot = new SaveSlot();
+        }
+        
     }
 
     public void SkipTime(float hoursIncreased)
@@ -84,6 +98,9 @@ public class GameManager : MonoBehaviour
             m_currentHour -= 24;
             m_day++;
         }
-            
+    }
+    public void OnApplicationQuit()
+    {
+        m_saveSlot.SaveToFile(Application.dataPath + "/SaveSlot1.json");
     }
 }
