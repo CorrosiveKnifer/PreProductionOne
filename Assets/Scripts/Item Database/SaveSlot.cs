@@ -40,7 +40,7 @@ public class SaveSlot
     {
         public int m_id;
         public int m_objectCount;
-        public SerializedObject[] m_objects;
+        public SerializedData[] m_objects;
 
     }
 
@@ -148,9 +148,9 @@ public class SaveSlot
         int id = SceneManager.GetActiveScene().buildIndex;
 
         //If this is the first save:
-        if (savedData.m_scenes[id].m_objectCount == 0 || savedData.m_scenes[id].m_objectCount < gameObjects.Length)
+        if (savedData.m_scenes[id].m_objectCount != gameObjects.Length)
         {
-            savedData.m_scenes[id].m_objects = new SerializedObject[gameObjects.Length];
+            savedData.m_scenes[id].m_objects = new SerializedData[gameObjects.Length];
         }
 
         //For each object:
@@ -160,7 +160,7 @@ public class SaveSlot
             if(gameObjects[i].GetComponentInChildren<SerializedObject>() != null)
             {
                 //Set Data:
-                savedData.m_scenes[id].m_objects[i] = gameObjects[i].GetComponentInChildren<SerializedObject>();
+                savedData.m_scenes[id].m_objects[i] = gameObjects[i].GetComponentInChildren<SerializedObject>().data;
             }
         }
 
@@ -168,7 +168,7 @@ public class SaveSlot
         savedData.m_scenes[id].m_objectCount = savedData.m_scenes[id].m_objects.Length;
     }
 
-    public SerializedObject[] GetSceneData(int buildIndex)
+    public SerializedData[] GetSceneData(int buildIndex)
     {
         if (savedData.m_scenes == null || savedData.m_scenes.Length != SceneManager.sceneCountInBuildSettings)
         {

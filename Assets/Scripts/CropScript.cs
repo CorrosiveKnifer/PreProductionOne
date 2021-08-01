@@ -23,9 +23,11 @@ public class CropScript : MonoBehaviour
 
     void Start()
     {
-        SerializedObject data = GetComponentInParent<SerializedObject>();
-        if (data)
+        
+        if (GetComponentInParent<SerializedObject>() != null)
         {
+            SerializedData data = GetComponentInParent<SerializedObject>().data;
+
             m_plant.transform.localScale = new Vector3(data.cx, data.cy, data.cz);
 
             m_birthDay = (data.m_age == -1) ? GameManager.instance.m_day : data.m_age;

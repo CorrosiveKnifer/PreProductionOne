@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class SerializedObject : MonoBehaviour
+public class SerializedData
 {
     public int m_itemID; //In ItemDB
     public int m_age = -1; //In Days
@@ -13,37 +13,43 @@ public class SerializedObject : MonoBehaviour
     //Transform
     public float x, y, z;
     public float rx, ry, rz;
+}
+
+public class SerializedObject : MonoBehaviour
+{
+    public SerializedData data;
 
     public void Update()
     {
-        x = transform.position.x;
-        y = transform.position.y;
-        z = transform.position.z;
-
-        rx = transform.rotation.eulerAngles.x;
-        ry = transform.rotation.eulerAngles.y;
-        rz = transform.rotation.eulerAngles.z;
-
-        cx = GetComponentInChildren<CropScript>().m_plant.transform.localScale.x;
-        cy = GetComponentInChildren<CropScript>().m_plant.transform.localScale.y;
-        cz = GetComponentInChildren<CropScript>().m_plant.transform.localScale.z;
+        data.x = transform.position.x;
+        data.y = transform.position.y;
+        data.z = transform.position.z;
+        
+        data.rx = transform.rotation.eulerAngles.x;
+        data.ry = transform.rotation.eulerAngles.y;
+        data.rz = transform.rotation.eulerAngles.z;
+        
+        data.cx = GetComponentInChildren<CropScript>().m_plant.transform.localScale.x;
+        data.cy = GetComponentInChildren<CropScript>().m_plant.transform.localScale.y;
+        data.cz = GetComponentInChildren<CropScript>().m_plant.transform.localScale.z;
     }
 
-    internal void UpdateTo(SerializedObject item)
+    public void UpdateTo(SerializedData item)
     {
-        m_itemID = item.m_itemID;
-        m_age = item.m_age;
-
-        x = item.x;
-        y = item.y;
-        z = item.z;
-
-        rx = item.x;
-        ry = item.y;
-        rz = item.z;
-
-        cx = item.cx;
-        cy = item.cy;
-        cz = item.cz;
+        data = new SerializedData();
+        data.m_itemID = item.m_itemID;
+        data.m_age = item.m_age;
+        
+        data.x = item.x;
+        data.y = item.y;
+        data.z = item.z;
+        
+        data.rx = item.x;
+        data.ry = item.y;
+        data.rz = item.z;
+        
+        data.cx = item.cx;
+        data.cy = item.cy;
+        data.cz = item.cz;
     }
 }
