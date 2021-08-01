@@ -47,7 +47,6 @@ public class SaveSlot
     }
 
     protected Save savedData;
-    //public Save_Scene[] m_scenes;
     
     public SaveSlot()
     {

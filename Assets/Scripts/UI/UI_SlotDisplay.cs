@@ -124,7 +124,7 @@ public class UI_SlotDisplay : UI_Element
         
         if(uI_SlotDisplay.m_currentItem != null && m_currentItem != null)
         {
-            if (uI_SlotDisplay.m_currentItem == m_currentItem)
+            if (uI_SlotDisplay.m_currentItem.m_id == m_currentItem.m_id)
             {
                 uI_SlotDisplay.m_currentItem.m_amount += m_currentItem.m_amount;
                 this.SetItem(null);

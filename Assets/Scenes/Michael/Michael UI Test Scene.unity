@@ -399,7 +399,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 3314583151299256152}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6643d4f021d22af4799acecc2a419c7f, type: 3}
   m_Name: 
@@ -416,7 +416,6 @@ GameObject:
   - component: {fileID: 1263787917}
   - component: {fileID: 1263787916}
   - component: {fileID: 1263787915}
-  - component: {fileID: 1263787914}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -424,20 +423,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1263787914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263787913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76cc814608072694094017114e263439, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_display: {fileID: 1224270400}
-  m_hotbar: {fileID: 88671592}
 --- !u!65 &1263787915
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -539,7 +524,7 @@ GameObject:
   - component: {fileID: 2048461578}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -817,6 +802,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314583152232971544, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3314583152676426963, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
         type: 3}

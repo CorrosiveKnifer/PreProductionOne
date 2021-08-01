@@ -99,8 +99,15 @@ public class GameManager : MonoBehaviour
             m_day++;
         }
     }
+
     public void OnApplicationQuit()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null && player.GetComponent<PlayerInventory>() != null)
+        {
+            player.GetComponent<PlayerInventory>().SaveToSlot(m_saveSlot);
+        }
+
         m_saveSlot.SaveToFile(Application.dataPath + "/SaveSlot1.json");
     }
 }
