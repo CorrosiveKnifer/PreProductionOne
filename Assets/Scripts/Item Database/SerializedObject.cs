@@ -6,6 +6,8 @@ using UnityEngine;
 [Serializable]
 public class SerializedObject : MonoBehaviour
 {
+    public Transform serializedTransform;
+
     public int m_itemID; //In ItemDB
     public int m_age; //In Days
 
@@ -16,16 +18,16 @@ public class SerializedObject : MonoBehaviour
 
     public void Update()
     {
-        x = transform.position.x;
-        y = transform.position.y;
-        z = transform.position.z;
+        x = serializedTransform.position.x;
+        y = serializedTransform.position.y;
+        z = serializedTransform.position.z;
 
-        rx = transform.rotation.eulerAngles.x;
-        ry = transform.rotation.eulerAngles.y;
-        rz = transform.rotation.eulerAngles.z;
+        rx = serializedTransform.rotation.eulerAngles.x;
+        ry = serializedTransform.rotation.eulerAngles.y;
+        rz = serializedTransform.rotation.eulerAngles.z;
 
-        sx = transform.localScale.x;
-        sy = transform.localScale.y;
-        sz = transform.localScale.z;
+        sx = serializedTransform.localScale.x;
+        sy = serializedTransform.localScale.y;
+        sz = serializedTransform.localScale.z;
     }
 }

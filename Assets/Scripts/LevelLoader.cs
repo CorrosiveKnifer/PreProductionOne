@@ -153,6 +153,8 @@ public class LevelLoader : MonoBehaviour
 
     IEnumerator LoadLevel(int levelIndex)
     {
+        SaveSceneToSlot(GameManager.instance.m_saveSlot);
+
         isTransitioning = true;
         if (transition != null)
         {
@@ -166,5 +168,10 @@ public class LevelLoader : MonoBehaviour
         // Load Scene
         SceneManager.LoadScene(levelIndex);
         yield return new WaitForSeconds(transitionTime);
+    }
+
+    private void SaveSceneToSlot(SaveSlot slot)
+    {
+        slot.SaveObjects(GameObject.FindGameObjectsWithTag("SerializedObject"));
     }
 }
