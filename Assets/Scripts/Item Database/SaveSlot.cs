@@ -138,6 +138,7 @@ public class SaveSlot
             savedData.m_scenes = new Save_Scene[SceneManager.sceneCountInBuildSettings];
             for (int i = 0; i < savedData.m_scenes.Length; i++)
             {
+                savedData.m_scenes[i] = new Save_Scene();
                 savedData.m_scenes[i].m_id = i;
                 savedData.m_scenes[i].m_objectCount = 0;
             }
@@ -147,7 +148,7 @@ public class SaveSlot
         int id = SceneManager.GetActiveScene().buildIndex;
 
         //If this is the first save:
-        if (savedData.m_scenes[id].m_objectCount == 0)
+        if (savedData.m_scenes[id].m_objectCount == 0 || savedData.m_scenes[id].m_objectCount < gameObjects.Length)
         {
             savedData.m_scenes[id].m_objects = new SerializedObject[gameObjects.Length];
         }
@@ -165,5 +166,21 @@ public class SaveSlot
 
         //Update length:
         savedData.m_scenes[id].m_objectCount = savedData.m_scenes[id].m_objects.Length;
+    }
+
+    public SerializedObject[] GetSceneData(int buildIndex)
+    {
+        if (savedData.m_scenes == null || savedData.m_scenes.Length != SceneManager.sceneCountInBuildSettings)
+        {
+            savedData.m_scenes = new Save_Scene[SceneManager.sceneCountInBuildSettings];
+            for (int i = 0; i < savedData.m_scenes.Length; i++)
+            {
+                savedData.m_scenes[i] = new Save_Scene();
+                savedData.m_scenes[i].m_id = i;
+                savedData.m_scenes[i].m_objectCount = 0;
+            }
+        }
+
+        return savedData.m_scenes[buildIndex].m_objects;
     }
 }

@@ -18,30 +18,32 @@ public class CropScript : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        SerializedObject data = GetComponentInParent<SerializedObject>();
-
-        if(data)
-        {
-            transform.position = data.serializedTransform.position;
-            transform.rotation = data.serializedTransform.rotation;
-            transform.localScale = data.serializedTransform.localScale;
-
-            m_birthDay = data.m_age;
-        }
+        
     }
 
     void Start()
     {
-        m_birthDay = (m_birthDay == -1) ? GameManager.instance.m_day : m_birthDay;
+        SerializedObject data = GetComponentInParent<SerializedObject>();
+        if (data)
+        {
+            m_plant.transform.localScale = new Vector3(data.cx, data.cy, data.cz);
 
-        if(m_birthDay != GameManager.instance.m_day)
+            m_birthDay = (data.m_age == -1) ? GameManager.instance.m_day : data.m_age;
+        }
+
+        m_stepSize = m_finalSize / m_growthPeriod;
+
+        if (m_birthDay != GameManager.instance.m_day)
         {
             int diff = GameManager.instance.m_day - m_birthDay;
+
+            if(m_plant.transform.localScale.x < (m_plant.transform.localScale + m_stepSize * diff).x)
+            {
+                StartCoroutine(GrowStep(m_plant.transform.localScale + m_stepSize * diff, 1.0f));
+            }
         }
 
         m_nextHarvest = m_birthDay + m_growthPeriod;
-
-        m_stepSize = m_finalSize / m_growthPeriod;
     }
 
     // Update is called once per frame

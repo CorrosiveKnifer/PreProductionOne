@@ -67,7 +67,7 @@ public class LevelLoader : MonoBehaviour
 
     private void InitialiseFunc()
     {
-
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
     }
 
@@ -173,6 +173,27 @@ public class LevelLoader : MonoBehaviour
             transition = null;
         }
         isTransitioning = false;
+        
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(GameManager.HasInstance())
+        {
+            var objects = GameManager.instance.m_saveSlot.GetSceneData(scene.buildIndex);
+
+            foreach (var item in objects)
+            {
+                if (item != null)
+                {
+                    int id = item.m_itemID;
+                    GameObject prefab = Resources.Load<GameObject>(GameManager.instance.m_items.list[id].placePrefabName);
+
+                    GameObject inWorld = Instantiate(prefab, new Vector3(item.x, item.y, item.z), Quaternion.Euler(item.rx, item.ry, item.rz));
+                    inWorld.GetComponent<SerializedObject>().UpdateTo(item);
+                }
+            }
+        }
     }
 
     private void SaveSceneToSlot(SaveSlot slot)

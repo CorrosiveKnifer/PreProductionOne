@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -66,7 +67,22 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(GameObject.FindGameObjectsWithTag("SerializedObject").Length == 0)
+        {
+            var objects = GameManager.instance.m_saveSlot.GetSceneData(SceneManager.GetActiveScene().buildIndex);
+
+            foreach (var item in objects)
+            {
+                if(item != null)
+                {
+                    int id = item.m_itemID;
+                    GameObject prefab = Resources.Load<GameObject>(GameManager.instance.m_items.list[id].placePrefabName);
+
+                    GameObject inWorld = Instantiate(prefab, new Vector3(item.x, item.y, item.z), Quaternion.Euler(item.rx, item.ry, item.rz));
+                    inWorld.GetComponent<SerializedObject>().UpdateTo(item);
+                }
+            }
+        }
     }
 
     // Update is called once per frame
