@@ -92,7 +92,7 @@ public class UI_SlotDisplay : UI_Element
         m_currentItem = _itemObject;
         if(m_currentItem != null)
         {
-            m_itemImage.sprite = _itemObject.m_definition.inventoryImage;
+            m_itemImage.sprite = _itemObject.GetSprite();
             m_amountText.text = _itemObject.m_amount.ToString();
         }
         else
@@ -124,7 +124,7 @@ public class UI_SlotDisplay : UI_Element
         
         if(uI_SlotDisplay.m_currentItem != null && m_currentItem != null)
         {
-            if (uI_SlotDisplay.m_currentItem.m_definition == m_currentItem.m_definition)
+            if (uI_SlotDisplay.m_currentItem.m_id == m_currentItem.m_id)
             {
                 uI_SlotDisplay.m_currentItem.m_amount += m_currentItem.m_amount;
                 this.SetItem(null);

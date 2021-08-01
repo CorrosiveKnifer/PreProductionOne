@@ -99,6 +99,11 @@ public class UI_GridDisplay : UI_Element
         }
     }
 
+    public void SetSlotItem(ItemObject _itemGrid, int column, int row)
+    {
+        m_grid[column, row].SetItem(_itemGrid);
+    }
+
     private void GenerateCleared()
     {
         m_grid = new UI_SlotDisplay[m_columnCount, m_rowCount];
