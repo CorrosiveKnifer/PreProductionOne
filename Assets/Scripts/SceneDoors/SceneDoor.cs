@@ -9,6 +9,7 @@ public enum DoorDirection
     SOUTH,
     WEST,
     EAST,
+    INTERIOR,
 }
 public class SceneDoor : MonoBehaviour
 {
@@ -34,6 +35,9 @@ public class SceneDoor : MonoBehaviour
             case DoorDirection.EAST:
                 m_DirectionTarget = DoorDirection.WEST;
                 break;
+            case DoorDirection.INTERIOR:
+                m_DirectionTarget = DoorDirection.INTERIOR;
+                break;
             default:
                 break;
         }
@@ -58,7 +62,12 @@ public class SceneDoor : MonoBehaviour
 
         // Prevent player from opening menus.
 
+        LevelLoader.instance.LoadNewLevel(m_TargetScene);
+    }
 
-        SceneManager.LoadScene(m_TargetScene); // TEMP WHILE LEVEL LOADER IS NOT HERE
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 2.0f);
     }
 }
