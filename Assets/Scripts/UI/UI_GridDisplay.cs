@@ -15,6 +15,7 @@ public class UI_GridDisplay : UI_Element
     public bool generateOnAwake = false;
 
     public Vector2Int m_spacing;
+    public bool m_hasUpdated = false;
 
     [Range(1, 20)]
     public int m_rowCount = 5;
@@ -124,6 +125,7 @@ public class UI_GridDisplay : UI_Element
                 _itemGrid[c, r] = m_grid[c, r].GetItem();
             }
         }
+        m_hasUpdated = false;
     }
 
     public override bool IsContainingVector(Vector2 _pos)
@@ -167,6 +169,7 @@ public class UI_GridDisplay : UI_Element
         if (m_grid == null || m_heldItem == null)
             return;
 
+        //Check own grid:
         for (int c = 0; c < m_columnCount; c++)
         {
             for (int r = 0; r < m_rowCount; r++)
@@ -176,11 +179,37 @@ public class UI_GridDisplay : UI_Element
                     m_heldItem.TransferItemTo(m_grid[c, r]);
                     m_heldItem.OnMouseUpEvent();
                     m_heldItem = null;
+                    m_hasUpdated = true;
                     return;
                 }
             }
         }
+        //Must be another grid:
+        UI_Element otherSystem = HUDManager.instance.GetElementUnderMouse();
+        if(otherSystem != null)
+        {
+            (otherSystem as UI_GridDisplay).SwitchItem(m_heldItem);
+            m_hasUpdated = true;
+        }
+
         m_heldItem.OnMouseUpEvent();
         m_heldItem = null;
+    }
+
+    public bool SwitchItem(UI_SlotDisplay fromSlot)
+    {
+        for (int c = 0; c < m_columnCount; c++)
+        {
+            for (int r = 0; r < m_rowCount; r++)
+            {
+                if (m_grid[c, r].IsContainingVector(InputManager.instance.GetMousePositionInScreen()))
+                {
+                    fromSlot.TransferItemTo(m_grid[c, r]);
+                    m_hasUpdated = true;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
