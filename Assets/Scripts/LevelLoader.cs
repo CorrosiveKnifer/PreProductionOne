@@ -27,6 +27,8 @@ public class LevelLoader : MonoBehaviour
 
     private void Awake()
     {
+        transitionPrefab = Resources.Load<GameObject>("Prefabs/Transition/TransitionCanvas");
+
         if (_instance == null)
         {
             _instance = this;
@@ -57,7 +59,8 @@ public class LevelLoader : MonoBehaviour
 
     public GameObject CompleteLoadUI;
 
-    public Animator transition;
+    public static GameObject transitionPrefab;
+    public static Animator transition;
 
     public bool isTransitioning = false;
     public float transitionTime = 1.0f;
@@ -85,32 +88,28 @@ public class LevelLoader : MonoBehaviour
         Debug.Log("Quit");
         Application.Quit();
     }
-    private void OnLevelWasLoaded(int level)
-    {
-        GetComponentInChildren<Animator>().SetTrigger("Blink");
-    }
 
     public void LoadNextLevel()
     {
         loadingNextArea = true;
         if (SceneManager.sceneCountInBuildSettings <= SceneManager.GetActiveScene().buildIndex + 1) // Check if index exceeds scene count
         {
-            StartCoroutine(LoadLevel(0)); // Load menu
+            StartCoroutine(LoadLevel(SceneManager.GetSceneByBuildIndex(0).name)); // Load menu
         }
         else
         {
-            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1)); // Loade next scene
+            StartCoroutine(LoadLevel(SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1).name)); // Loade next scene
         }
     }
     public void LoadNewLevel(string _name)
     {
         if (!isTransitioning)
-            StartCoroutine(LoadLevel(SceneManager.GetSceneByName(_name).buildIndex));
+            StartCoroutine(LoadLevel(_name));
     }
     public void ResetScene()
     {
         loadingNextArea = true;
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().name));
     }
 
     public void LoadLevelAsync(int levelIndex, float maxTime)
@@ -151,20 +150,26 @@ public class LevelLoader : MonoBehaviour
     //    yield return null;
     //}
 
-    IEnumerator LoadLevel(int levelIndex)
+    IEnumerator LoadLevel(string _name)
     {
         isTransitioning = true;
+
+        transition = Instantiate(transitionPrefab, transform).GetComponent<Animator>();
+
         if (transition != null)
         {
-            // Play Animation
-            transition.SetTrigger("Start");
-
             // Wait to let animation finish playing
             yield return new WaitForSeconds(transitionTime);
         }
-        isTransitioning = false;
         // Load Scene
-        SceneManager.LoadScene(levelIndex);
+        SceneManager.LoadScene(_name);
         yield return new WaitForSeconds(transitionTime);
+
+        if (transition != null)
+        {
+            Destroy(transition.gameObject);
+            transition = null;
+        }
+        isTransitioning = false;
     }
 }
