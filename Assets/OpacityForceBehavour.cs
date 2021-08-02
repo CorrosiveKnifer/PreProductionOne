@@ -6,7 +6,8 @@ public class OpacityForceBehavour : MonoBehaviour
 {
     // Start is called before the first frame update
     public Camera m_cam;
-
+    [Range(0.0f, 1.0f)]
+    public float m_alphaVal = 0.5f;
     public List<GameObject> m_influenced = new List<GameObject>();
 
     void Start()
@@ -25,14 +26,21 @@ public class OpacityForceBehavour : MonoBehaviour
         List<GameObject> nextList = new List<GameObject>();
         foreach (var item in hits)
         {
+            if(item.collider.tag == "Player")
+            {
+                continue;
+            }
+
             nextList.Add(item.collider.gameObject);
             foreach (var renderer in item.collider.gameObject.GetComponentsInParent<MeshRenderer>())
             {
-                renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0.5f);
+                renderer.material.SetFloat("_Surface", 1.0f);
+                renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, m_alphaVal);
             }
             foreach (var renderer in item.collider.gameObject.GetComponentsInChildren<MeshRenderer>())
             {
-                renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0.5f);
+                renderer.material.SetFloat("_Surface", 1.0f);
+                renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, m_alphaVal);
             }
         }
 
@@ -42,10 +50,12 @@ public class OpacityForceBehavour : MonoBehaviour
             {
                 foreach (var renderer in item.gameObject.GetComponentsInParent<MeshRenderer>())
                 {
+                    renderer.material.SetFloat("_Surface", 0.0f);
                     renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 1.0f);
                 }
                 foreach (var renderer in item.gameObject.GetComponentsInChildren<MeshRenderer>())
                 {
+                    renderer.material.SetFloat("_Surface", 0.0f);
                     renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 1.0f);
                 }
             }
