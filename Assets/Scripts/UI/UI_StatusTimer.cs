@@ -31,7 +31,7 @@ public class UI_StatusTimer : UI_Element
             case statusType.OVER_FILLED:
                 m_icon.sprite = Resources.Load<Sprite>("Sprites/TEMP/Anvil");
                 break;
-            case statusType.TEST:
+            case statusType.SPEED:
                 m_icon.sprite = Resources.Load<Sprite>("Sprites/TEMP/Test");
                 break;
             default:

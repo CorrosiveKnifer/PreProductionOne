@@ -16,7 +16,7 @@ public class statusEffect
 }
 public enum statusType
 {
-    TEST,
+    SPEED,
     OVER_FILLED,
 }
 
@@ -36,7 +36,7 @@ public class PlayerVitality : MonoBehaviour
     void Update()
     {
         if (InputManager.instance.IsKeyDown(KeyType.V))
-            AddStatus(statusType.TEST, 12.0f, false);
+            AddStatus(statusType.SPEED, 12.0f, false);
 
         if (InputManager.instance.IsKeyDown(KeyType.F))
             Eat(30.0f);

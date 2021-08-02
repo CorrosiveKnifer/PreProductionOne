@@ -720,8 +720,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694a79a981c3fe649a4c9e87f381986d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_items:
+    list: []
   m_TargetDoor: 0
-  m_itemsJson: {fileID: 4900000, guid: ce771c8fd914d93469c8ba72931bea1f, type: 3}
   m_hunger: 100
   m_currentHour: 8
   m_day: 0
@@ -1109,7 +1110,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1253047123, guid: 1d57402e9ddb91241acabb26c8f7b94a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1d57402e9ddb91241acabb26c8f7b94a, type: 3}
 --- !u!1001 &9186559458560553956
 PrefabInstance:

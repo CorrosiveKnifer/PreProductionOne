@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Prefabs/Base model.meta
 guid: af13952d646b9d14db71b8aed1752cf9
+=======
+guid: 9d431d30dd0a555429b4b779f8fa71a8
+>>>>>>> origin/De-Beer:Assets/Resources/Sprites/TEMP.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

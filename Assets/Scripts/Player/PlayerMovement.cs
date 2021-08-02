@@ -82,6 +82,8 @@ public class PlayerMovement : MonoBehaviour
         float speed = movementSpeed;
         if (m_playerVitality.IsStatusActive(statusType.OVER_FILLED))
             speed *= 0.5f;
+        if (m_playerVitality.IsStatusActive(statusType.SPEED))
+            speed *= 2.0f;
 
         Vector3 normalizedMove = new Vector3(0, 0, 0);
 
