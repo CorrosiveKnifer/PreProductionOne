@@ -182,6 +182,9 @@ public class LevelLoader : MonoBehaviour
         {
             var objects = GameManager.instance.m_saveSlot.GetSceneData(scene.buildIndex);
 
+            if (objects == null || objects.Length == 0)
+                return;
+
             foreach (var item in objects)
             {
                 if (item != null)
