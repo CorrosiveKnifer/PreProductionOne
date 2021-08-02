@@ -821,6 +821,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_hungerBar: {fileID: 52241356}
   m_hunger: 0
+--- !u!1 &1504037046 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4574658801071179562, guid: 1d57402e9ddb91241acabb26c8f7b94a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4574658801167607915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1504037051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504037046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b5d46caac2e7c843bd6648e8c6396ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_cam: {fileID: 0}
+  m_influenced: []
 --- !u!1 &1532533464
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,8 +902,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694a79a981c3fe649a4c9e87f381986d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_items:
+    list: []
   m_TargetDoor: 0
-  m_itemsJson: {fileID: 4900000, guid: ce771c8fd914d93469c8ba72931bea1f, type: 3}
   m_hunger: 100
   m_currentHour: 8
   m_day: 0
@@ -1254,6 +1275,11 @@ PrefabInstance:
     - target: {fileID: 4574658800959128103, guid: 1d57402e9ddb91241acabb26c8f7b94a,
         type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574658800959128103, guid: 1d57402e9ddb91241acabb26c8f7b94a,
+        type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4574658800959128121, guid: 1d57402e9ddb91241acabb26c8f7b94a,
