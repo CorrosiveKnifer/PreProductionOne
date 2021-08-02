@@ -683,7 +683,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1532533464}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 3, z: 0}
+  m_LocalPosition: {x: -5, y: 3, z: -3.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 849367835}
@@ -853,7 +853,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2e1d3a1dfe161724381f1d62622bfa4c, type: 2}
+  - {fileID: 2100000, guid: cb1daf8c9c781ad4e831bedb974796a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -971,7 +971,7 @@ PrefabInstance:
     - target: {fileID: 3325177385435676976, guid: c89136e84ecf7324db35c858474c18b3,
         type: 3}
       propertyPath: m_DoorDirection
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3896173894283091672, guid: c89136e84ecf7324db35c858474c18b3,
         type: 3}
