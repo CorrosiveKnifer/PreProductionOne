@@ -16,6 +16,7 @@ public enum KeyType
     Q, W, E, R, T, Y, U, I, O, P,
     A, S, D, F, G, H, J, K, L,
     Z, X, C, V, B, N, M,
+    ALP_ONE, ALP_TWO, ALP_THREE, ALP_FOUR, ALP_FIVE, ALP_SIX, ALP_SEVEN, ALP_EIGHT, ALP_NINE, ALP_ZERO,
     NUM_ONE, NUM_TWO, NUM_THREE, NUM_FOUR, NUM_FIVE, NUM_SIX, NUM_SEVEN, NUM_EIGHT, NUM_NINE, NUM_ZERO,
     L_SHIFT, L_CTRL, L_ALT, TAB, ESC, SPACE,
     R_SHIFT, R_CTRL, R_ALT, ENTER,
@@ -52,6 +53,7 @@ public class InputManager : MonoBehaviour
             {
                 GameObject loader = new GameObject();
                 _instance = loader.AddComponent<InputManager>();
+                loader.name = "Input Manager";
                 return loader.GetComponent<InputManager>();
             }
             return _instance;
@@ -283,6 +285,17 @@ public class InputManager : MonoBehaviour
             case KeyType.NUM_NINE:    { return keyboard.numpad9Key; }
             case KeyType.NUM_ZERO: { return keyboard.numpad0Key; }
 
+            case KeyType.ALP_ONE: { return keyboard.digit1Key; }
+            case KeyType.ALP_TWO: { return keyboard.digit2Key; }
+            case KeyType.ALP_THREE: { return keyboard.digit3Key; }
+            case KeyType.ALP_FOUR: { return keyboard.digit4Key; }
+            case KeyType.ALP_FIVE: { return keyboard.digit5Key; }
+            case KeyType.ALP_SIX: { return keyboard.digit6Key; }
+            case KeyType.ALP_SEVEN: { return keyboard.digit7Key; }
+            case KeyType.ALP_EIGHT: { return keyboard.digit8Key; }
+            case KeyType.ALP_NINE: { return keyboard.digit9Key; }
+            case KeyType.ALP_ZERO: { return keyboard.digit0Key; }
+
             case KeyType.L_SHIFT: { return keyboard.leftShiftKey; }
             case KeyType.L_CTRL: { return keyboard.leftCtrlKey; }
             case KeyType.L_ALT: { return keyboard.leftAltKey; }
@@ -357,11 +370,21 @@ public class InputManager : MonoBehaviour
         return !(GetMouseButton(button).isPressed);
     }
 
-    public Vector2 GetMousePosition()
+    /*
+    * GetMousePositionInScreen by Michael Jordan
+    * Description:
+    *  Returns the position of the mouse where 0,0 is the bottem left of the screen.
+    *
+    * Return: 
+    *  Vector2 - Mouse position
+    */
+    public Vector2 GetMousePositionInScreen()
     {
-        Vector3 screenPoint = new Vector2(mouse.position.x.ReadValue(), mouse.position.y.ReadValue());
-        Debug.Log(new Vector2(screenPoint.x - Camera.main.scaledPixelWidth / 2, screenPoint.y - Camera.main.scaledPixelHeight / 2));
-        return new Vector2(screenPoint.x - Camera.main.scaledPixelWidth / 2, screenPoint.y - Camera.main.scaledPixelHeight / 2);
+        //Convert to 0,0 middle
+        //Vector3 screenPoint = new Vector2(mouse.position.x.ReadValue(), mouse.position.y.ReadValue());
+        //new Vector2(screenPoint.x - Camera.main.scaledPixelWidth / 2, screenPoint.y - Camera.main.scaledPixelHeight / 2);
+        
+        return new Vector2(mouse.position.x.ReadValue(), mouse.position.y.ReadValue());
     }
 
     public Vector2 GetMouseDelta()
