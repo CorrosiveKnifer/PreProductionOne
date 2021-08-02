@@ -5,25 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
- 
+[Serializable]
 public class ItemDB
 {
     [Serializable]
-    class Items
+    public class ItemElement
     {
-        public ItemElement[] list;
-    }
-
-    public Dictionary<string, ItemElement> dictionary;
-    public ItemDB(string jsonData)
-    {
-        Items itemList = JsonUtility.FromJson<Items>(jsonData);
-        dictionary = new Dictionary<string, ItemElement>();
-        foreach (var item in itemList.list)
-        {
-            dictionary.Add(item.name, item);
-            item.UpdateElement();
-        }
+        public int id;
+        public string name;
+        public string placePrefabName;
+        public string inventoryImageName;
+        public string dropPrefabName;
+        public string itemType;
 
     }
+
+    public ItemElement[] list;
 }
