@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject m_playerModel;
 
+    [Header("Movement")]
     public bool grounded = true;
     public float movementSpeed = 2.0f;
     public float jumpSpeed = 4.0f;
@@ -24,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
 
     public float cameraZoomSpeed = 1.0f;
     public float cameraZoomMax = 5.0f;
+
+    [Header("Combat")]
+    public Transform m_attackPoint;
+    public float m_attackRange = 0.5f;
+    public LayerMask m_enemyLayer;
 
     private void Awake()
     {
@@ -130,5 +136,24 @@ public class PlayerMovement : MonoBehaviour
                 Quaternion.Euler(0, angle, 0), 
                 0.1f);
         }
+    }
+
+    public void SwingAttack()
+    {
+        // Play an attack anmation
+
+        // Detect enemies in range of attacks
+        Collider[] hits = Physics.OverlapSphere(m_attackPoint.position, m_attackRange, m_enemyLayer);
+
+        // Damage them
+        foreach (var enemy in hits)
+        {
+            Debug.Log("Damage Enemy");
+        }
+    }
+
+    public void SlamAttack()
+    {
+
     }
 }
