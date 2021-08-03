@@ -23,7 +23,7 @@ public class CropScript : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        
+        m_harvest.GetComponent<Animator>().SetBool("IsHarvested", true);
     }
 
     void Start()
@@ -36,14 +36,18 @@ public class CropScript : MonoBehaviour
 
             m_birthDay = (data.m_age == -1) ? GameManager.instance.m_day : data.m_age;
 
+            m_nextHarvest = (data.m_age == -1) ? m_age + m_growthPeriod : data.m_nextHarvest;
+
             m_age = GameManager.instance.m_day - m_birthDay;
+        }
+        else
+        {
+            m_nextHarvest = m_age + m_growthPeriod;
         }
 
         m_stepSize = m_finalSize / m_growthPeriod;
 
         Grow();
-
-        m_nextHarvest = m_birthDay + m_growthPeriod;
     }
 
     // Update is called once per frame
@@ -54,6 +58,9 @@ public class CropScript : MonoBehaviour
             m_lastRecordedDay = GameManager.instance.m_day;
             Grow();
         }
+
+        GetComponent<SerializedObject>().data.m_age = m_age;
+        GetComponent<SerializedObject>().data.m_nextHarvest = m_nextHarvest;
     }
 
     public void Harvest()
@@ -62,6 +69,8 @@ public class CropScript : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().AddItem(ItemObject.CreateItem(m_itemID, (uint)m_dropAmount));
             m_harvest.GetComponent<Animator>().SetBool("IsHarvested", true);
+
+            m_nextHarvest += m_growthPeriod;
         }
     }
 
