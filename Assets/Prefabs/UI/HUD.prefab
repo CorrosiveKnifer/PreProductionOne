@@ -89,6 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerVitality: {fileID: 0}
   m_display: {fileID: 52241357}
+  m_timerPrefab: {fileID: 0}
 --- !u!1 &1435204453
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,8 +430,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -160, y: -30}
-  m_SizeDelta: {x: 320, y: 60}
+  m_AnchoredPosition: {x: -160, y: -71}
+  m_SizeDelta: {x: 320, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3314583152488217803
 CanvasRenderer:
@@ -466,7 +467,7 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 2
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
