@@ -140,6 +140,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void SwingAttack()
     {
+        Debug.Log("Swing!");
         // Play an attack anmation
 
         // Detect enemies in range of attacks
@@ -148,12 +149,17 @@ public class PlayerMovement : MonoBehaviour
         // Damage them
         foreach (var enemy in hits)
         {
-            Debug.Log("Damage Enemy");
+            Debug.Log("Detected!");
+            if (enemy.GetComponentInParent<Slime>())
+            {
+                enemy.GetComponentInParent<Slime>().Knockback((enemy.transform.position - transform.position).normalized, 10.0f);
+                Debug.Log("Damage Enemy");
+            }
         }
     }
 
     public void SlamAttack()
     {
-
+        Debug.Log("Slam!");
     }
 }

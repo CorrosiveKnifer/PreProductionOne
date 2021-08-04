@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
         MovementInput();
         HotbarInput();
         InteractInput();
+        CombatInput();
     }
     private void FixedUpdate()
     {
@@ -76,6 +77,18 @@ public class PlayerController : MonoBehaviour
         if (InputManager.instance.IsKeyDown(KeyType.E))
         {
             m_playerInteractor.InteractWithObject();
+        }
+    }
+
+    private void CombatInput()
+    {
+        if (InputManager.instance.GetMouseButtonDown(MouseButton.LEFT))
+        {
+            playerMovement.SlamAttack();
+        }
+        if (InputManager.instance.GetMouseButtonDown(MouseButton.RIGHT))
+        {
+            playerMovement.SwingAttack();
         }
     }
 }
