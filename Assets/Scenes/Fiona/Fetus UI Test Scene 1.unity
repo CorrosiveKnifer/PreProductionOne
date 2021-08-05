@@ -390,6 +390,7 @@ MonoBehaviour:
   m_items:
     list: []
   m_TargetDoor: 0
+  m_hunger: 100
   m_currentHour: 8
   m_day: 0
 --- !u!114 &1224270400 stripped
@@ -693,6 +694,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1435204454, guid: 7eb9afbf7f0ecd843a954ed4677fa798, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3314583152021699011, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
         type: 3}
       propertyPath: m_Pivot.x
