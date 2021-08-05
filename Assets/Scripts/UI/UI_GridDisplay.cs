@@ -28,6 +28,7 @@ public class UI_GridDisplay : UI_Element
 
     private UI_SlotDisplay[,] m_grid; //[x, y]
     private UI_SlotDisplay m_heldItem = null;
+    private UI_SlotDisplay m_selectSlot = null;
 
     // Start is called before the first frame update
     void Start()
@@ -216,5 +217,11 @@ public class UI_GridDisplay : UI_Element
             }
         }
         return false;
+    }
+    public void SelectItem(int column, int row)
+    {
+        m_selectSlot.Unselect();
+        m_selectSlot = m_grid[column, row];
+        m_selectSlot.Select();
     }
 }
