@@ -134,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
 
             m_playerModel.transform.rotation = Quaternion.Lerp(m_playerModel.transform.rotation, 
                 Quaternion.Euler(0, angle, 0), 
-                0.1f);
+                0.35f);
         }
     }
 
@@ -152,7 +152,10 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Detected!");
             if (enemy.GetComponentInParent<Slime>())
             {
-                enemy.GetComponentInParent<Slime>().Knockback((enemy.transform.position - transform.position).normalized, 10.0f);
+                Vector3 direction = enemy.transform.position - transform.position;
+                direction.y = 0;
+                direction = direction.normalized;
+                enemy.GetComponentInParent<Slime>().Knockback(direction, 7.0f);
                 enemy.GetComponentInParent<Slime>().DamageEnemy(2);
                 Debug.Log("Damage Enemy");
             }
