@@ -140,4 +140,13 @@ public class UI_SlotDisplay : UI_Element
     {
         return m_currentItem;
     }
+    public void Select()
+    {
+        m_buttonImage.color = Color.blue;
+    }
+
+    public void Unselect()
+    {
+        m_buttonImage.color = Color.white;
+    }
 }
