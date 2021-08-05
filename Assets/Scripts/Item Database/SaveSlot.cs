@@ -28,7 +28,7 @@ public class SaveSlot
 
         public Save_Player()
         {
-            m_rows = 5;
+            m_rows = 3;
             m_columns = 5;
             m_hotbarCount = 5;
             m_backpack = new Save_Item[m_columns * m_rows];
