@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     {
         if(GameObject.FindGameObjectsWithTag("SerializedObject").Length == 0)
         {
-            var objects = GameManager.instance.m_saveSlot.GetSceneData(SceneManager.GetActiveScene().buildIndex);
+            var objects = m_saveSlot.GetSceneData(SceneManager.GetActiveScene().buildIndex);
 
             if (objects == null || objects.Length == 0)
                 return;
@@ -85,6 +85,9 @@ public class GameManager : MonoBehaviour
                     inWorld.GetComponent<SerializedObject>().UpdateTo(item);
                 }
             }
+
+            m_day = m_saveSlot.GetSaveDay();
+            m_currentHour = m_saveSlot.GetSaveHour();
         }
     }
 
@@ -95,6 +98,8 @@ public class GameManager : MonoBehaviour
         {
             SkipTime(8.0f);
         }
+
+        m_saveSlot.SetTime(m_day, m_currentHour);
     }
 
     private void InitialiseFunc()
@@ -134,6 +139,6 @@ public class GameManager : MonoBehaviour
             player.GetComponent<PlayerInventory>().SaveToSlot(m_saveSlot);
         }
 
-        m_saveSlot.SaveToFile(Application.dataPath + "/SaveSlot1.json");
+        m_saveSlot?.SaveToFile(Application.dataPath + "/SaveSlot1.json");
     }
 }

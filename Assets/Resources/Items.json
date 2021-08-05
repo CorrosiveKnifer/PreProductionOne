@@ -10,9 +10,33 @@
     },
     {
       "id": 1,
-      "name": "Apple",
-      "placePrefabName": "Corn Test",
-      "inventoryImageName": "Sprites/Apple",
+      "name": "Strawberries",
+      "placePrefabName": "Strawberries",
+      "inventoryImageName": "Sprites/Strawberries",
+      "dropPrefabName": "",
+      "itemType": "Crop"
+    },
+	{
+      "id": 2,
+      "name": "Sunflower",
+      "placePrefabName": "Sunflower",
+      "inventoryImageName": "Sprites/Sunflower",
+      "dropPrefabName": "",
+      "itemType": "Crop"
+    },
+	{
+      "id": 3,
+      "name": "Tomato",
+      "placePrefabName": "Tomato",
+      "inventoryImageName": "Sprites/Tomato",
+      "dropPrefabName": "",
+      "itemType": "Crop"
+    },
+	{
+      "id": 4,
+      "name": "Berries",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/Berries",
       "dropPrefabName": "",
       "itemType": "Crop"
     }
