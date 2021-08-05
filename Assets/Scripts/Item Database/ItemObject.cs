@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ItemType
+{
+    Crop,
+    Tool,
+    CropUtil,
+};
+
 public class ItemObject : ScriptableObject
 {
     public int m_id = -1;
     public string m_placePrefabName;
     public string m_inventoryImageName;
     public string m_dropPrefabName;
+    public ItemType m_type;
 
     public uint m_amount = 0;
 
@@ -23,6 +31,20 @@ public class ItemObject : ScriptableObject
         temp.m_inventoryImageName = GameManager.instance.m_items.list[index].inventoryImageName;
         temp.m_dropPrefabName = GameManager.instance.m_items.list[index].dropPrefabName;
 
+        switch (GameManager.instance.m_items.list[index].itemType.ToLower())
+        {
+            case "crop":
+                temp.m_type = ItemType.Crop;
+                break;
+            case "tool":
+                temp.m_type = ItemType.Tool;
+                break;
+            case "croputil":
+                temp.m_type = ItemType.CropUtil;
+                break;
+            default:
+                break;
+        }
         temp.m_amount = amount;
 
         return temp;

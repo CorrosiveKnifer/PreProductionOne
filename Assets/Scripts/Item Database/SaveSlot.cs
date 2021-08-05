@@ -28,7 +28,7 @@ public class SaveSlot
 
         public Save_Player()
         {
-            m_rows = 5;
+            m_rows = 3;
             m_columns = 5;
             m_hotbarCount = 5;
             m_backpack = new Save_Item[m_columns * m_rows];
@@ -37,7 +37,7 @@ public class SaveSlot
             {
                 for (int j = 0; j < m_rows; j++)
                 {
-                    m_backpack[i * m_columns + j] = new Save_Item();
+                    m_backpack[i * m_rows + j] = new Save_Item();
                 }
             }
 
@@ -62,6 +62,9 @@ public class SaveSlot
     {
         public Save_Player m_player;
         public Save_Scene[] m_scenes;
+
+        public int m_day = 0;
+        public float m_hour = 6.0f;
 
         public Save()
         {
@@ -96,7 +99,7 @@ public class SaveSlot
 
     public ItemObject GetPlayerBackpackData(int _column, int _row)
     {
-        int width = savedData.m_player.m_columns;
+        int width = savedData.m_player.m_rows;
         Save_Item item = savedData.m_player.m_backpack[_column * width + _row];
 
         if (item.m_quantity < 0)
@@ -131,7 +134,7 @@ public class SaveSlot
     }
     public void SavePlayerBackpackData(int _column, int _row, int _id, uint _quantity)
     {
-        int width = savedData.m_player.m_columns;
+        int width = savedData.m_player.m_rows;
         Save_Item item = savedData.m_player.m_backpack[_column * width + _row];
         item.m_id = _id;
         item.m_quantity = (int)_quantity;
@@ -200,5 +203,19 @@ public class SaveSlot
         }
 
         return savedData.m_scenes[buildIndex].m_objects;
+    }
+
+    public float GetSaveHour()
+    {
+        return savedData.m_hour;
+    }
+    public int GetSaveDay()
+    {
+        return savedData.m_day;
+    }
+    public void SetTime(int day, float hour)
+    {
+        savedData.m_day = day;
+        savedData.m_hour = hour;
     }
 }
