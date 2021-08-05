@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private PlayerVitality m_playerVitality;
+
     private CharacterController characterController;
     private Camera playerCamera;
     private float yVelocity = 0.0f;
     private Vector3 storedMovement;
     private Vector3 lastMovement;
+
+    public GameObject m_playerModel;
 
     public bool grounded = true;
     public float movementSpeed = 2.0f;
@@ -21,11 +25,19 @@ public class PlayerMovement : MonoBehaviour
     public float cameraZoomSpeed = 1.0f;
     public float cameraZoomMax = 5.0f;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
+        m_playerVitality = GetComponent<PlayerVitality>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        characterController.enabled = false;
+        transform.position = FindObjectOfType<SceneDoorManager>().GetDoorSpawnPosition(GameManager.instance.m_TargetDoor);
+        characterController.enabled = true;
     }
 
     // Update is called once per frame
@@ -33,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
     {
         // Camera zoom
         playerCamera.orthographicSize = Mathf.Clamp(playerCamera.orthographicSize - InputManager.instance.GetMouseScrollDelta() * cameraZoomSpeed * Time.deltaTime, 1, cameraZoomMax);
-        Debug.Log(InputManager.instance.GetMouseScrollDelta());
     }
 
     private void FixedUpdate()
@@ -68,6 +79,12 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Move(Vector2 _move, bool _jump)
     {
+        float speed = movementSpeed;
+        if (m_playerVitality.IsStatusActive(statusType.OVER_FILLED))
+            speed *= 0.5f;
+        if (m_playerVitality.IsStatusActive(statusType.SPEED))
+            speed *= 2.0f;
+
         Vector3 normalizedMove = new Vector3(0, 0, 0);
 
         // Movement
@@ -75,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
         normalizedMove += _move.x * transform.right;
 
         // Apply movement
-        Vector3 movement = normalizedMove.normalized * movementSpeed * Time.fixedDeltaTime;
+        Vector3 movement = normalizedMove.normalized * speed * Time.fixedDeltaTime;
         lastMovement = movement;
 
         // Jump
@@ -96,5 +113,22 @@ public class PlayerMovement : MonoBehaviour
 
         // Apply movement to character controller
         characterController.Move(movement);
+
+        Vector3 direction;
+        direction.x = _move.x;
+        direction.y = 0;
+        direction.z = _move.y;
+        // Rotate player model
+        if (direction != new Vector3(0,0,0) && m_playerModel != null)
+        {
+            direction = direction.normalized;
+            float angle = Vector3.SignedAngle(transform.right, direction, transform.up);
+
+            //angle *= Mathf.Sign(direction.x);
+
+            m_playerModel.transform.rotation = Quaternion.Lerp(m_playerModel.transform.rotation, 
+                Quaternion.Euler(0, angle, 0), 
+                0.1f);
+        }
     }
 }

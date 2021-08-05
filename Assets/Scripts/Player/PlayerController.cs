@@ -5,17 +5,41 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private PlayerMovement playerMovement;
+    private PlayerPlacing m_playerPlacing;
+    private PlayerInteractor m_playerInteractor;
     private Vector2 movementInput;
     private bool jumpInput = false;
+
+    private void Awake()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+        m_playerPlacing = GetComponent<PlayerPlacing>();
+        m_playerInteractor = GetComponent<PlayerInteractor>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
+
     }
 
     // Update is called once per frame
     void Update()
+    {
+        MovementInput();
+        HotbarInput();
+        InteractInput();
+    }
+    private void FixedUpdate()
+    {
+        // Call movement function
+        playerMovement.Move(movementInput, jumpInput);
+
+        // Set jump input to off
+        jumpInput = false;
+    }
+
+    private void MovementInput()
     {
         movementInput = new Vector2();
 
@@ -34,14 +58,24 @@ public class PlayerController : MonoBehaviour
         // Get jump input
         if (!jumpInput)
             jumpInput = InputManager.instance.IsKeyDown(KeyType.SPACE);
-
     }
-    private void FixedUpdate()
-    {
-        // Call movement function
-        playerMovement.Move(movementInput, jumpInput);
 
-        // Set jump input to off
-        jumpInput = false;
+    private void HotbarInput()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (InputManager.instance.IsKeyDown(KeyType.ALP_ONE + i))
+            {
+                m_playerPlacing.SetSelectedIndex(i);
+            }
+        }
+    }
+
+    private void InteractInput()
+    {
+        if (InputManager.instance.IsKeyDown(KeyType.E))
+        {
+            m_playerInteractor.InteractWithObject();
+        }
     }
 }
