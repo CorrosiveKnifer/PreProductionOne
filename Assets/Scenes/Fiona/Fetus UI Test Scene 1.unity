@@ -133,6 +133,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6643d4f021d22af4799acecc2a419c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &284539563 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 52241356, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
+    type: 3}
+  m_PrefabInstance: {fileID: 3314583151299256152}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13cffe0a679034448a866f0c3e6c05d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &384373597
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,6 +535,7 @@ GameObject:
   - component: {fileID: 2048461580}
   - component: {fileID: 2048461579}
   - component: {fileID: 2048461578}
+  - component: {fileID: 2048461583}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Player
@@ -618,6 +631,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2048461583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048461577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a34945936c76445a8caa0e52940fe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_hungerBar: {fileID: 284539563}
+  m_hunger: 0
 --- !u!1001 &3096487569550400085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -694,10 +721,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1435204454, guid: 7eb9afbf7f0ecd843a954ed4677fa798, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 52241356, guid: 7eb9afbf7f0ecd843a954ed4677fa798, type: 3}
+      propertyPath: m_playerVitality
+      value: 
+      objectReference: {fileID: 2048461583}
     - target: {fileID: 3314583152021699011, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
         type: 3}
       propertyPath: m_Pivot.x
