@@ -52,6 +52,7 @@ class PlayerInventory : MonoBehaviour
             m_hotbarItem[c, 0] = GameManager.instance.m_saveSlot.GetPlayerHotbarData(c);
         }
 
+        m_hotbarItem[0, 0] = ItemObject.CreateItem(0, 5);
         m_hotbar.Generate(m_hotbarItem, new Vector2Int(5, 1));
     }
 
@@ -98,24 +99,30 @@ class PlayerInventory : MonoBehaviour
 
     public void SaveToSlot(SaveSlot slot)
     {
-        for (int c = 0; c < m_size.x; c++)
+        if(m_itemGrid != null)
         {
-            for (int r = 0; r < m_size.y; r++)
+            for (int c = 0; c < m_size.x; c++)
             {
-                if (m_itemGrid[c, r] != null)
-                    slot.SavePlayerBackpackData(c, r, m_itemGrid[c, r].m_id, (uint)m_itemGrid[c, r].m_amount);
-                else
-                    slot.SavePlayerBackpackData(c, r, -1, 0);
+                for (int r = 0; r < m_size.y; r++)
+                {
+                    if (m_itemGrid[c, r] != null)
+                        slot.SavePlayerBackpackData(c, r, m_itemGrid[c, r].m_id, (uint)m_itemGrid[c, r].m_amount);
+                    else
+                        slot.SavePlayerBackpackData(c, r, -1, 0);
+                }
             }
         }
 
-        for (int c = 0; c < m_hotbarItem.GetLength(0); c++)
+        if (m_itemGrid != null)
         {
-            if (m_hotbarItem[c, 0] != null)
-                slot.SavePlayerHotbarData(c, m_hotbarItem[c, 0].m_id, (uint)m_hotbarItem[c, 0].m_amount);
-            else
-                slot.SavePlayerHotbarData(c, -1, 0);
+            for (int c = 0; c < m_hotbarItem.GetLength(0); c++)
+            {
+                if (m_hotbarItem[c, 0] != null)
+                    slot.SavePlayerHotbarData(c, m_hotbarItem[c, 0].m_id, (uint)m_hotbarItem[c, 0].m_amount);
+                else
+                    slot.SavePlayerHotbarData(c, -1, 0);
 
+            }
         }
     }
 

@@ -27,6 +27,7 @@ public class PlayerPlacing : MonoBehaviour
         {
             m_TargetingArea.GetComponent<MeshFilter>().sharedMesh = m_SelectedObject.GetComponent<MeshFilter>().sharedMesh;
             m_TargetingArea.GetComponent<MeshCollider>().sharedMesh = m_SelectedObject.GetComponent<MeshFilter>().sharedMesh;
+            m_TargetingArea.transform.localScale = m_SelectedObject.GetComponent<MeshFilter>().transform.lossyScale;
 
             if (m_TargetingArea.GetComponent<TargetArea>().HasObstructions())
             {
@@ -49,11 +50,13 @@ public class PlayerPlacing : MonoBehaviour
                     m_CurrentRotation -= 360.0f;
                 }
             }
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, 1000, 1 << 8))
             {
+                m_TargetingArea.SetActive(true);
+
                 Vector3 TargetPoint = hit.point;
-                //TargetPoint.x = Mathf.Round(TargetPoint.x);
-                //TargetPoint.z = Mathf.Round(TargetPoint.z);
+                TargetPoint.x = Mathf.Round(TargetPoint.x);
+                TargetPoint.z = Mathf.Round(TargetPoint.z);
 
                 m_TargetingArea.transform.position = TargetPoint;
                 if (hit.transform.gameObject.layer == 8 && !m_TargetingArea.GetComponent<TargetArea>().HasObstructions())
@@ -65,6 +68,10 @@ public class PlayerPlacing : MonoBehaviour
                         SetSelectedIndex(m_SelectedIndex);
                     }
                 }
+            }
+            else
+            {
+                m_TargetingArea.SetActive(false);
             }
         }
         else

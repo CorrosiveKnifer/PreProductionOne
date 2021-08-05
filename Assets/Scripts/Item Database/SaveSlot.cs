@@ -32,7 +32,20 @@ public class SaveSlot
             m_columns = 5;
             m_hotbarCount = 5;
             m_backpack = new Save_Item[m_columns * m_rows];
+
+            for (int i = 0; i < m_columns; i++)
+            {
+                for (int j = 0; j < m_rows; j++)
+                {
+                    m_backpack[i * m_columns + j] = new Save_Item();
+                }
+            }
+
             m_hotbar = new Save_Item[m_hotbarCount];
+            for (int i = 0; i < m_hotbarCount; i++)
+            {
+                m_hotbar[i] = new Save_Item();
+            }
         }
     }
     [Serializable]
@@ -132,6 +145,11 @@ public class SaveSlot
 
     public void SaveObjects(GameObject[] gameObjects)
     {
+        if(gameObjects == null || gameObjects.Length == 0)
+        {
+            return;
+        }
+
         //If it doesn't exist, create the data
         if(savedData.m_scenes == null || savedData.m_scenes.Length != SceneManager.sceneCountInBuildSettings)
         {
