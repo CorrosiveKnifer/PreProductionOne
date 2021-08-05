@@ -10,7 +10,7 @@
     },
     {
       "id": 1,
-      "name": "Strawberries",
+      "name": "Apple",
       "placePrefabName": "Corn Test",
       "inventoryImageName": "Sprites/Apple",
       "dropPrefabName": "",
