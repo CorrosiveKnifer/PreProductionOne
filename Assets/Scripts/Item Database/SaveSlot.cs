@@ -28,7 +28,7 @@ public class SaveSlot
 
         public Save_Player()
         {
-            m_rows = 5;
+            m_rows = 3;
             m_columns = 5;
             m_hotbarCount = 5;
             m_backpack = new Save_Item[m_columns * m_rows];
@@ -62,6 +62,9 @@ public class SaveSlot
     {
         public Save_Player m_player;
         public Save_Scene[] m_scenes;
+
+        public int m_day = 0;
+        public float m_hour = 6.0f;
 
         public Save()
         {
@@ -200,5 +203,19 @@ public class SaveSlot
         }
 
         return savedData.m_scenes[buildIndex].m_objects;
+    }
+
+    public float GetSaveHour()
+    {
+        return savedData.m_hour;
+    }
+    public int GetSaveDay()
+    {
+        return savedData.m_day;
+    }
+    public void SetTime(int day, float hour)
+    {
+        savedData.m_day = day;
+        savedData.m_hour = hour;
     }
 }

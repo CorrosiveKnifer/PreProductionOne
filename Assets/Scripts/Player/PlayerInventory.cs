@@ -143,4 +143,58 @@ class PlayerInventory : MonoBehaviour
             }
         }
     }
+
+    public void AddItem(ItemObject addition)
+    {
+        ItemObject slot = null;
+        bool foundDupe = false;
+        for (int c = 0; c < m_size.x; c++)
+        {
+            if (foundDupe)
+                break;
+
+            for (int r = 0; r < m_size.y; r++)
+            { 
+                if(m_itemGrid[c, r] == null || m_itemGrid[c, r].m_id == -1)
+                {
+                    slot = m_itemGrid[c, r];
+                    continue;
+                }
+                if(m_itemGrid[c, r].m_id == addition.m_id)
+                {
+                    slot = m_itemGrid[c, r];
+                    foundDupe = true;
+                    break;
+                }
+            }
+        }
+
+        if(!foundDupe)
+        {
+            for (int c = 0; c < m_hotbarItem.Length; c++)
+            {
+                if (m_hotbarItem[c, 0] == null || m_hotbarItem[c, 0].m_id == -1)
+                {
+                    slot = m_hotbarItem[c, 0];
+                    continue;
+                }
+                if (m_hotbarItem[c, 0].m_id == addition.m_id)
+                {
+                    slot = m_hotbarItem[c, 0];
+                    foundDupe = true;
+                    break;
+                }
+            }
+        }
+
+        if (slot != null && slot.m_id == addition.m_id)
+        {
+            slot.m_amount += addition.m_amount;
+        }
+        else
+        {
+            slot = addition;
+        }
+        return;
+    }
 }
