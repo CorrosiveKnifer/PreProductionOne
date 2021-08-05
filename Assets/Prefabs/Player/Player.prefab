@@ -90,7 +90,7 @@ MonoBehaviour:
   cameraZoomSpeed: 1
   cameraZoomMax: 5
   m_attackPoint: {fileID: 1129382016408976058}
-  m_attackRange: 2
+  m_attackRange: 1
   m_enemyLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -288,7 +288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4684361713239100783}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0.7}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5712657125345498430}

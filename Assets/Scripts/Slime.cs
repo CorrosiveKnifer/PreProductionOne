@@ -34,6 +34,31 @@ public class Slime : MonoBehaviour
     public void SetSize(int _size)
     {
         m_size = _size;
+        m_slimeModel.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f) * (1.0f + (m_size - 1.0f) * 0.25f);
+
+        Color slimeColor;
+
+        switch (m_size)
+        {
+            default:
+                slimeColor = new Color(0.812f, 0.886f, 0.953f, 0.9f);
+                break;
+            case 2:
+                slimeColor = new Color(0.427f, 0.620f, 0.922f, 0.9f);
+                break;
+            case 3:
+                slimeColor = new Color(0.557f, 0.486f, 0.765f, 0.9f);
+                break;
+            case 4:
+                slimeColor = new Color(0.651f, 0.302f, 0.475f, 0.9f);
+                break;
+            case 5:
+                slimeColor = new Color(0.945f, 0.761f, 0.196f, 0.9f);
+                break;
+        }
+
+        m_slimeModel.GetComponent<MeshRenderer>().material.color = slimeColor;
+        m_health = 5 * m_size;
     }
 
     public int GetSize()
@@ -60,7 +85,7 @@ public class Slime : MonoBehaviour
         if (m_health <= 0)
         {
             DropLoot();
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 
@@ -75,14 +100,16 @@ public class Slime : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<Slime>().GetSize() == m_size)
             {
+                // Create greater slime.
+                GameObject newSlime = Instantiate(Resources.Load<GameObject>("Prefabs/Slime"), 
+                    (transform.position + collision.transform.position) / 2.0f , transform.rotation);
+                newSlime.GetComponent<Slime>().SetSize(m_size + 1);
+
                 // Destroy other slime.
                 Destroy(collision.gameObject);
 
-                // Create greater slime.
-
-
                 // Destroy this slime.
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
     }

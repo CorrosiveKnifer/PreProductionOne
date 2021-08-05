@@ -153,6 +153,7 @@ public class PlayerMovement : MonoBehaviour
             if (enemy.GetComponentInParent<Slime>())
             {
                 enemy.GetComponentInParent<Slime>().Knockback((enemy.transform.position - transform.position).normalized, 10.0f);
+                enemy.GetComponentInParent<Slime>().DamageEnemy(2);
                 Debug.Log("Damage Enemy");
             }
         }
@@ -161,5 +162,20 @@ public class PlayerMovement : MonoBehaviour
     public void SlamAttack()
     {
         Debug.Log("Slam!");
+        // Play an attack anmation
+
+        // Detect enemies in range of attacks
+        Collider[] hits = Physics.OverlapSphere(m_attackPoint.position, m_attackRange, m_enemyLayer);
+
+        // Damage them
+        foreach (var enemy in hits)
+        {
+            Debug.Log("Detected!");
+            if (enemy.GetComponentInParent<Slime>())
+            {
+                enemy.GetComponentInParent<Slime>().DamageEnemy(5);
+                Debug.Log("Damage Enemy");
+            }
+        }
     }
 }
