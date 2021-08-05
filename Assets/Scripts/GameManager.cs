@@ -139,6 +139,6 @@ public class GameManager : MonoBehaviour
             player.GetComponent<PlayerInventory>().SaveToSlot(m_saveSlot);
         }
 
-        m_saveSlot.SaveToFile(Application.dataPath + "/SaveSlot1.json");
+        m_saveSlot?.SaveToFile(Application.dataPath + "/SaveSlot1.json");
     }
 }

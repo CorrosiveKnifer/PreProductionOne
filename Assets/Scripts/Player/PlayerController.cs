@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private PlayerMovement playerMovement;
     private PlayerPlacing m_playerPlacing;
     private PlayerInteractor m_playerInteractor;
+    private PlayerInventory m_playerInventory;
     private Vector2 movementInput;
     private bool jumpInput = false;
 
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         m_playerPlacing = GetComponent<PlayerPlacing>();
         m_playerInteractor = GetComponent<PlayerInteractor>();
+        m_playerInventory = GetComponent<PlayerInventory>();
     }
 
     // Start is called before the first frame update
@@ -67,6 +69,7 @@ public class PlayerController : MonoBehaviour
             if (InputManager.instance.IsKeyDown(KeyType.ALP_ONE + i))
             {
                 m_playerPlacing.SetSelectedIndex(i);
+                m_playerInventory.SelectItem(i);
             }
         }
     }

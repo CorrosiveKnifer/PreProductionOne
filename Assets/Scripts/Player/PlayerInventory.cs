@@ -144,6 +144,11 @@ class PlayerInventory : MonoBehaviour
         }
     }
 
+    public void SelectItem(int index)
+    {
+        m_hotbar.SelectItem(index, 0);
+    }
+
     public void AddItem(ItemObject addition)
     {
         ItemObject slot = null;
