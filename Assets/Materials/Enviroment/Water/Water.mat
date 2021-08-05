@@ -62,8 +62,8 @@ Material:
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Depth: -1.63
-    - _Displace: 1.92
+    - _Depth: -7.14
+    - _Displace: 2.43
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
@@ -74,7 +74,7 @@ Material:
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smooth: 0.524
+    - _Smooth: 0.761
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -86,9 +86,9 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.3066038, g: 0.9605157, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DeepColor: {r: 0, g: 0.8679245, b: 0.7784522, a: 0.14117648}
+    - _DeepColor: {r: 0.22352937, g: 0.5532526, b: 1, a: 0.83137256}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShallowColor: {r: 0.29592383, g: 0.33324727, b: 0.6603774, a: 0.8784314}
+    - _ShallowColor: {r: 0, g: 1, b: 0.980416, a: 0.21176471}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
 --- !u!114 &3656771440611709146
 MonoBehaviour:
