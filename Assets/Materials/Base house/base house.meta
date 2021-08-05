@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: ece0e4338a7f9074ab78ec2dc076003c
+<<<<<<< HEAD:Assets/Materials/Enviroment/RockGround2.meta
+guid: ba02a615d5daa9a42987e8231abe6f34
+=======
+guid: e74ebb4de7a1d1242a8f796985d388f9
+>>>>>>> origin/Petre:Assets/Materials/Base house/base house.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
