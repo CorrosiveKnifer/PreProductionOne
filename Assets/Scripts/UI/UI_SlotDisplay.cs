@@ -142,7 +142,7 @@ public class UI_SlotDisplay : UI_Element
     }
     public void Select()
     {
-        m_buttonImage.color = Color.blue;
+        m_buttonImage.color = new Color(0.75f, 0.75f, 0.75f, 1.0f);
     }
 
     public void Unselect()

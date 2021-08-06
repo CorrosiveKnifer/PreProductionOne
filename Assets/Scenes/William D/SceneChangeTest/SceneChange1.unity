@@ -298,7 +298,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 894939392}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6643d4f021d22af4799acecc2a419c7f, type: 3}
   m_Name: 
@@ -492,6 +492,10 @@ PrefabInstance:
       propertyPath: m_playerVitality
       value: 
       objectReference: {fileID: 1253047123}
+    - target: {fileID: 1435204454, guid: 7eb9afbf7f0ecd843a954ed4677fa798, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3314583152021699011, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
         type: 3}
       propertyPath: m_Pivot.x
@@ -601,6 +605,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314583152232971544, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3314583152676426963, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
         type: 3}
