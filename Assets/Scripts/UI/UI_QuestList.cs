@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class UI_QuestList: UI_Element
 {
-    public SunScript m_sunTimer;
-    public GameObject m_contentParent;
-
     [SerializeField] private GameObject m_item;
     public List<UI_QuestItem> m_list;
 
