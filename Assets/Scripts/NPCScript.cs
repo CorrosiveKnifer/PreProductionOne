@@ -6,7 +6,7 @@ public class NPCScript : MonoBehaviour
 {
     public void GiveQuestToPlayer()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerQuests>().AddQuest(new Quest(0, 5, 7));
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerQuests>().AddQuest(new Quest(Random.Range(0, 3), 5, 7));
     }
 
 }

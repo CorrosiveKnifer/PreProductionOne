@@ -23,11 +23,14 @@ public class Quest
 
 public class PlayerQuests : MonoBehaviour
 {
+    [SerializeField] private UI_QuestList m_display;
+
     public List<Quest> m_playerQuests;
 
     public void AddQuest(Quest quest)
     {
         m_playerQuests.Add(quest);
+        Debug.Log("Quest Added.");
     }
 
     // Start is called before the first frame update
@@ -43,5 +46,9 @@ public class PlayerQuests : MonoBehaviour
         
     }
 
-
+    public void GenerateOnDisplay(bool isActive)
+    {
+        m_display.Generate(m_playerQuests);
+        m_display.gameObject.SetActive(isActive);
+    }
 }

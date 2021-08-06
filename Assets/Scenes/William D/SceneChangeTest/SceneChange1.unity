@@ -133,6 +133,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13cffe0a679034448a866f0c3e6c05d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &253497603 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4204589088792432490, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
+    type: 3}
+  m_PrefabInstance: {fileID: 894939392}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4fecc0ce37a344889c6820745a0e48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &370186460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -304,6 +316,7 @@ GameObject:
   - component: {fileID: 794859497}
   - component: {fileID: 794859496}
   - component: {fileID: 794859495}
+  - component: {fileID: 794859500}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -331,10 +344,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 794859494}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 5, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &794859497
 MeshRenderer:
@@ -397,6 +410,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &794859500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794859494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 634555c9d5d25cd49bb5ca885461a7b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_interactFunction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 794859495}
+        m_MethodName: GiveQuestToPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &819438988 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3314583152232971544, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
@@ -1358,6 +1397,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8760120777926636015, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
+        type: 3}
+      propertyPath: m_ChildControlWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8760120777926636015, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
+        type: 3}
+      propertyPath: m_ChildControlHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9045823425382954738, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1610,6 +1659,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1579761005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5719981923431411092, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
+    type: 3}
+  m_PrefabInstance: {fileID: 894939392}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1733717462
 GameObject:
   m_ObjectHideFlags: 0
@@ -2013,6 +2068,16 @@ PrefabInstance:
       propertyPath: m_TargetingArea
       value: 
       objectReference: {fileID: 1917355133}
+    - target: {fileID: 1934213775106266968, guid: 1d57402e9ddb91241acabb26c8f7b94a,
+        type: 3}
+      propertyPath: m_display
+      value: 
+      objectReference: {fileID: 253497603}
+    - target: {fileID: 4574658800959128101, guid: 1d57402e9ddb91241acabb26c8f7b94a,
+        type: 3}
+      propertyPath: m_menu
+      value: 
+      objectReference: {fileID: 1579761005}
     - target: {fileID: 4574658800959128103, guid: 1d57402e9ddb91241acabb26c8f7b94a,
         type: 3}
       propertyPath: m_Name

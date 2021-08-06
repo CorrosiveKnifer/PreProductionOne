@@ -8,21 +8,27 @@ public class PlayerController : MonoBehaviour
     private PlayerPlacing m_playerPlacing;
     private PlayerInteractor m_playerInteractor;
     private PlayerInventory m_playerInventory;
+    private PlayerQuests m_playerQuests;
+
     private Vector2 movementInput;
     private bool jumpInput = false;
 
+    private float m_inputDelay;
+    private bool m_showInventory = false;
+    [SerializeField] private GameObject m_menu;
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
         m_playerPlacing = GetComponent<PlayerPlacing>();
         m_playerInteractor = GetComponent<PlayerInteractor>();
         m_playerInventory = GetComponent<PlayerInventory>();
+        m_playerQuests = GetComponent<PlayerQuests>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        m_menu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,7 +37,9 @@ public class PlayerController : MonoBehaviour
         MovementInput();
         HotbarInput();
         InteractInput();
+        HUDInput();
     }
+
     private void FixedUpdate()
     {
         // Call movement function
@@ -79,6 +87,42 @@ public class PlayerController : MonoBehaviour
         if (InputManager.instance.IsKeyDown(KeyType.E))
         {
             m_playerInteractor.InteractWithObject();
+        }
+    }
+
+    private void HUDInput()
+    {
+        if (m_inputDelay > 0.0f)
+        {
+            m_inputDelay -= Time.deltaTime;
+            return;
+        }
+
+        if (InputManager.instance.IsKeyDown(KeyType.I) && m_inputDelay <= 0)
+        {
+            m_inputDelay = 0.25f;
+            m_showInventory = !m_showInventory;
+
+            if(m_showInventory)
+            {
+                m_playerInventory.GenerateOnDisplay(true);
+                m_playerQuests.GenerateOnDisplay(false);
+            }
+
+            m_menu.SetActive(m_showInventory);
+        }
+        if (InputManager.instance.IsKeyDown(KeyType.O) && m_inputDelay <= 0)
+        {
+            m_inputDelay = 0.25f;
+            m_showInventory = !m_showInventory;
+
+            if (m_showInventory)
+            {
+                m_playerInventory.GenerateOnDisplay(false);
+                m_playerQuests.GenerateOnDisplay(true);
+            }
+
+            m_menu.SetActive(m_showInventory);
         }
     }
 }

@@ -27,8 +27,8 @@ class PlayerInventory : MonoBehaviour
     [SerializeField] private UI_GridDisplay m_hotbar;
 
     private Vector2Int m_size;
-    private float m_inputDelay;
-    private bool m_show = false;
+    
+    
     public void Start()
     {
         int columns = GameManager.instance.m_saveSlot.GetPlayerIntegerData("backpack_column");
@@ -59,34 +59,11 @@ class PlayerInventory : MonoBehaviour
         }
 
         m_hotbar.Generate(m_hotbarItem, new Vector2Int(5, 1));
-        m_display.transform.parent.gameObject.SetActive(m_show);
+        //m_display.transform.parent.gameObject.SetActive(m_show);
     }
 
     private void Update()
     {
-        if(m_inputDelay > 0.0f)
-        {
-            m_inputDelay -= Time.deltaTime;
-            return;
-        }
-
-        if(InputManager.instance.IsKeyDown(KeyType.I))
-        {
-            m_inputDelay = 0.25f;
-
-            m_show = !m_show;
-            m_display.transform.parent.gameObject.SetActive(m_show);
-
-            if (m_show)
-            {
-                m_display.Generate(m_itemGrid, m_size);
-            }
-            else
-            {
-                m_display.UpdateInventory(m_itemGrid);
-            }
-        }
-
         if(m_display.m_hasUpdated)
         {
             m_display.UpdateInventory(m_itemGrid);
@@ -95,6 +72,12 @@ class PlayerInventory : MonoBehaviour
         {
             m_hotbar.UpdateInventory(m_hotbarItem);
         }
+    }
+
+    public void GenerateOnDisplay(bool isActive)
+    {
+        m_display.Generate(m_itemGrid, m_size);
+        m_display.gameObject.SetActive(isActive);
     }
 
     public void OnDestroy()
