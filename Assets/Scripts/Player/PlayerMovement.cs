@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
     private PlayerVitality m_playerVitality;
 
     private CharacterController characterController;
-    private Camera playerCamera;
     private float yVelocity = 0.0f;
     private Vector3 storedMovement;
     private Vector3 lastMovement;
@@ -23,9 +22,6 @@ public class PlayerMovement : MonoBehaviour
     public float ledgeForgiveDelay = 0.0f;
     private float ledgeForgiveTimer = 0.0f;
 
-    public float cameraZoomSpeed = 1.0f;
-    public float cameraZoomMax = 5.0f;
-
     [Header("Combat")]
     public Transform m_attackPoint;
     public float m_attackRange = 0.5f;
@@ -34,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        playerCamera = GetComponentInChildren<Camera>();
         m_playerVitality = GetComponent<PlayerVitality>();
     }
 
@@ -49,8 +44,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Camera zoom
-        playerCamera.orthographicSize = Mathf.Clamp(playerCamera.orthographicSize - InputManager.instance.GetMouseScrollDelta() * cameraZoomSpeed * Time.deltaTime, 1, cameraZoomMax);
     }
 
     private void FixedUpdate()
@@ -83,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    public void Move(Vector2 _move, bool _jump)
+    public void Move(Vector2 _move)
     {
         float speed = movementSpeed;
         if (m_playerVitality.IsStatusActive(statusType.OVER_FILLED))
@@ -98,16 +91,8 @@ public class PlayerMovement : MonoBehaviour
         normalizedMove += _move.x * transform.right;
 
         // Apply movement
-        Vector3 movement = normalizedMove.normalized * speed * Time.fixedDeltaTime;
+        Vector3 movement = normalizedMove.normalized * speed * Time.deltaTime;
         lastMovement = movement;
-
-        // Jump
-        if (grounded && _jump)
-        {
-            yVelocity = jumpSpeed;
-            grounded = false;
-            storedMovement = lastMovement;
-        }
 
         if (!grounded)
         {
@@ -115,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Apply Y velocity
-        movement.y += yVelocity * Time.fixedDeltaTime;
+        movement.y += yVelocity * Time.deltaTime;
 
         // Apply movement to character controller
         characterController.Move(movement);
@@ -133,8 +118,8 @@ public class PlayerMovement : MonoBehaviour
             //angle *= Mathf.Sign(direction.x);
 
             m_playerModel.transform.rotation = Quaternion.Lerp(m_playerModel.transform.rotation, 
-                Quaternion.Euler(0, angle, 0), 
-                0.35f);
+                Quaternion.Euler(0, angle, 0),
+                1 - Mathf.Pow(2.0f, -Time.deltaTime * 20.0f));
         }
     }
 

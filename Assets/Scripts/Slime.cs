@@ -42,7 +42,7 @@ public class Slime : MonoBehaviour
         }
         else if (m_spawning)
         {
-            float targetScale = 1.0f + (m_size - 1.0f) * 0.25f;
+            float targetScale = 1.0f + (m_size - 1.0f) * 0.75f;
             transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1.0f, 1.0f, 1.0f) * targetScale, 1 - Mathf.Pow(2.0f, -Time.deltaTime * 5.0f));
             if (Mathf.Abs(targetScale - transform.localScale.x) < 0.2f)
             {

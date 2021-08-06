@@ -18,6 +18,8 @@ public class LootDrop : MonoBehaviour
     private void Awake()
     {
         Physics.IgnoreLayerCollision(10, 11, true);
+        Physics.IgnoreLayerCollision(10, 10, true);
+        Physics.IgnoreLayerCollision(10, 9, true);
     }
 
     // Start is called before the first frame update

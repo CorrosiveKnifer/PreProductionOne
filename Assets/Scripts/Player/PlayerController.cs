@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject m_cameraContainer;
+
+    public float cameraZoomSpeed = 1.0f;
+    public float cameraZoomMax = 5.0f;
+
     private PlayerMovement playerMovement;
     private PlayerPlacing m_playerPlacing;
     private PlayerInteractor m_playerInteractor;
@@ -13,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        m_cameraContainer.transform.parent = null;
+
         playerMovement = GetComponent<PlayerMovement>();
         m_playerPlacing = GetComponent<PlayerPlacing>();
         m_playerInteractor = GetComponent<PlayerInteractor>();
@@ -28,18 +35,30 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CameraControl();
         MovementInput();
         HotbarInput();
         InteractInput();
         CombatInput();
+
+        // Call movement function
+        playerMovement.Move(movementInput);
     }
     private void FixedUpdate()
     {
-        // Call movement function
-        playerMovement.Move(movementInput, jumpInput);
 
         // Set jump input to off
         jumpInput = false;
+    }
+
+    private void CameraControl()
+    {
+        m_cameraContainer.transform.position = Vector3.Lerp(m_cameraContainer.transform.position, transform.position, 1 - Mathf.Pow(2.0f, -Time.deltaTime * 5.0f));
+
+        Camera playerCamera = m_cameraContainer.GetComponentInChildren<Camera>();
+
+        // Camera zoom
+        playerCamera.orthographicSize = Mathf.Clamp(playerCamera.orthographicSize - InputManager.instance.GetMouseScrollDelta() * cameraZoomSpeed * Time.deltaTime, 1, cameraZoomMax);
     }
 
     private void MovementInput()
