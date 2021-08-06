@@ -12,7 +12,6 @@ public class Slime : MonoBehaviour
     private bool m_combining = false;
     private bool m_spawning = true;
 
-    private float m_sizeChangeSpeed = 0.005f;
     private int m_size = 1;
     private int m_health = 5;
 
@@ -22,8 +21,6 @@ public class Slime : MonoBehaviour
     private float m_attackTimer = 0.0f;
     private float m_attackCooldown = 1.0f;
 
-    private float m_invincibleTimer = 0.0f;
-    private float m_invincibleCooldown = 1.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +34,7 @@ public class Slime : MonoBehaviour
     {
         if (m_combining)
         {
-            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 1 - Mathf.Pow(2.0f, -Time.deltaTime * 5.0f));
+            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 1 - Mathf.Pow(2.0f, -Time.deltaTime * 10.0f));
             if (transform.localScale.x < 0.2f)
             {
                 Destroy(gameObject);
@@ -81,13 +78,25 @@ public class Slime : MonoBehaviour
         }
     }
 
+
     public void SetSize(int _size)
     {
         m_size = _size;
 
-        Color slimeColor;
+        SetColorViaSize(_size);
 
-        switch (m_size)
+        m_health = 5 * m_size;
+    }
+
+    public int GetSize()
+    {
+        return m_size;
+    }
+
+    public void SetColorViaSize(int _size)
+    {
+        Color slimeColor;
+        switch (_size)
         {
             default:
                 slimeColor = new Color(0.812f, 0.886f, 0.953f, 0.9f);
@@ -105,15 +114,10 @@ public class Slime : MonoBehaviour
                 slimeColor = new Color(0.945f, 0.761f, 0.196f, 0.9f);
                 break;
         }
-
         m_slimeModel.GetComponent<MeshRenderer>().material.color = slimeColor;
-        m_health = 5 * m_size;
+
     }
 
-    public int GetSize()
-    {
-        return m_size;
-    }
 
     public void Knockback(Vector3 _dir, float _power)
     {
@@ -131,14 +135,7 @@ public class Slime : MonoBehaviour
 
     public void DamageEnemy(int _damage)
     {
-        if (m_invincibleTimer > 0.0f)
-        {
-            return;
-        }
-        else
-        {
-
-        }
+        StartCoroutine(DamageFlash());
 
         m_health -= _damage;
 
@@ -150,6 +147,12 @@ public class Slime : MonoBehaviour
         }
     }
 
+    IEnumerator DamageFlash()
+    {
+        m_slimeModel.GetComponent<MeshRenderer>().material.color = new Color(1.0f, 0.2f, 0.2f, 1.0f);
+        yield return new WaitForSecondsRealtime(0.05f);
+        SetColorViaSize(m_size);
+    }
     private void DropLoot()
     {
 
