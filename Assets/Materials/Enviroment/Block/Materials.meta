@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Materials/Base house.meta
+guid: e3430ed2df2cd664da4c80f5e0c334b6
+=======
 guid: 31093393bae4bd144b47d1ffdefb2f99
+>>>>>>> origin/Michael:Assets/Materials/Enviroment/Block/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
