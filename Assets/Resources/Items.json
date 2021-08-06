@@ -39,6 +39,70 @@
       "inventoryImageName": "Sprites/Berries",
       "dropPrefabName": "",
       "itemType": "Crop"
+    },
+	{
+      "id": 5,
+      "name": "Shovel",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/Shovel",
+      "dropPrefabName": "",
+      "itemType": "Tool"
+    },
+	{
+      "id": 6,
+      "name": "Hoe",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/Hoe",
+      "dropPrefabName": "",
+      "itemType": "Tool"
+    },
+	{
+      "id": 7,
+      "name": "Watering Can",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/Can",
+      "dropPrefabName": "",
+      "itemType": "Tool"
+    },
+	{
+      "id": 8,
+      "name": "Common Mulch",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/CommonMulch",
+      "dropPrefabName": "",
+      "itemType": "CropUtil"
+    },
+	{
+      "id": 9,
+      "name": "Uncommon Mulch",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/UncommonMulch",
+      "dropPrefabName": "",
+      "itemType": "CropUtil"
+    },
+	{
+      "id": 10,
+      "name": "Rare Mulch",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/RareMulch",
+      "dropPrefabName": "",
+      "itemType": "CropUtil"
+    },
+	{
+      "id": 11,
+      "name": "Epic Mulch",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/EpicMulch",
+      "dropPrefabName": "",
+      "itemType": "CropUtil"
+    },
+	{
+      "id": 12,
+      "name": "Legendary Mulch",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/LegendaryMulch",
+      "dropPrefabName": "",
+      "itemType": "CropUtil"
     }
   ]
 }

@@ -145,48 +145,52 @@ class PlayerInventory : MonoBehaviour
         ItemObject nullSlot = null;
         ref ItemObject slot = ref nullSlot;
         bool foundDupe = false;
-        for (int c = 0; c < m_size.x; c++)
-        {
-            if (foundDupe)
-                break;
 
-            for (int r = 0; r < m_size.y; r++)
-            { 
-                if(m_itemGrid[c, r] == null || m_itemGrid[c, r].m_id == -1)
-                {
-                    slot = ref m_itemGrid[c, r];
-                    continue;
-                }
-                if(m_itemGrid[c, r].m_id == addition.m_id)
-                {
-                    slot = ref m_itemGrid[c, r];
-                    foundDupe = true;
-                    break;
-                }
+        for (int c = 0; c < m_hotbarItem.Length; c++)
+        {
+            if (m_hotbarItem[c, 0] == null || m_hotbarItem[c, 0].m_id == -1)
+            {
+                slot = ref m_hotbarItem[c, 0];
+                continue;
+            }
+            if (m_hotbarItem[c, 0].m_id == addition.m_id)
+            {
+                slot = ref m_hotbarItem[c, 0];
+                foundDupe = true;
+                break;
             }
         }
 
         if(!foundDupe)
         {
-            for (int c = 0; c < m_hotbarItem.Length; c++)
+            for (int c = 0; c < m_size.x; c++)
             {
-                if (m_hotbarItem[c, 0] == null || m_hotbarItem[c, 0].m_id == -1)
-                {
-                    slot = ref m_hotbarItem[c, 0];
-                    continue;
-                }
-                if (m_hotbarItem[c, 0].m_id == addition.m_id)
-                {
-                    slot = ref m_hotbarItem[c, 0];
-                    foundDupe = true;
+                if (foundDupe)
                     break;
+
+                for (int r = 0; r < m_size.y; r++)
+                {
+                    if (m_itemGrid[c, r] == null || m_itemGrid[c, r].m_id == -1)
+                    {
+                        slot = ref m_itemGrid[c, r];
+                        continue;
+                    }
+                    if (m_itemGrid[c, r].m_id == addition.m_id)
+                    {
+                        slot = ref m_itemGrid[c, r];
+                        foundDupe = true;
+                        break;
+                    }
                 }
             }
         }
 
         if (slot != nullSlot && slot.m_id == addition.m_id)
         {
-            slot.m_amount += addition.m_amount;
+            if(addition.m_type != ItemType.Tool)
+            {
+                slot.m_amount += addition.m_amount;
+            }
         }
         else
         {

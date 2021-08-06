@@ -39,7 +39,11 @@ public class UI_SlotDisplay : UI_Element
         m_itemImage.gameObject.SetActive(m_currentItem != null);
         m_amountText.gameObject.SetActive(m_currentItem != null);
 
-        if(m_amountText.isActiveAndEnabled)
+        if(m_currentItem != null && m_currentItem.m_type == ItemType.Tool)
+        {
+            m_amountText.text = "";
+        }
+        else if(m_amountText.isActiveAndEnabled)
         {
             m_amountText.text = m_currentItem.m_amount.ToString();
         }
