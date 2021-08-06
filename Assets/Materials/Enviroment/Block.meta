@@ -1,14 +1,8 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Animations/Corn/Corn.controller.meta
-guid: 0f27e2251925b9440811f1eaba980359
-NativeFormatImporter:
-=======
-guid: 92b04ab1ab65cf843a78076118878e08
+guid: df15a1369668d3243965e8c9636f77bd
 folderAsset: yes
 DefaultImporter:
->>>>>>> origin/Roger:Assets/Materials/Enviroment/Block.meta
   externalObjects: {}
-  mainObjectFileID: 9100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

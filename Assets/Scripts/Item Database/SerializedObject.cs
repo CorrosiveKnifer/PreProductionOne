@@ -8,7 +8,6 @@ public class SerializedData
 {
     public int m_itemID; //In ItemDB
     public int m_age = -1; //In Days
-    public int m_nextHarvest = -1;
 
     public float cx, cy, cz;
     //Transform
@@ -40,8 +39,7 @@ public class SerializedObject : MonoBehaviour
         data = new SerializedData();
         data.m_itemID = item.m_itemID;
         data.m_age = item.m_age;
-        data.m_nextHarvest = item.m_nextHarvest;
-
+        
         data.x = item.x;
         data.y = item.y;
         data.z = item.z;
