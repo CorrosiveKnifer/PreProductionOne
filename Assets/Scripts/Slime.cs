@@ -155,7 +155,7 @@ public class Slime : MonoBehaviour
     }
     private void DropLoot()
     {
-
+        LootDrop.CreateLoot(0, (uint)m_size, transform.position);
     }
 
     private void Attack()

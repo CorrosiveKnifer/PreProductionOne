@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 161103162}
   - component: {fileID: 1841691188748609179}
   - component: {fileID: 1253047123}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 4574658801071179560}
   - component: {fileID: 4574658801071179561}
   - component: {fileID: 4574658801071179566}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1129382016408976058}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HitPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,10 +374,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7235015103121818086, guid: 3989fcff728081749b18d3a10a5cc859,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: -6588137646990983289, guid: 3989fcff728081749b18d3a10a5cc859,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3989fcff728081749b18d3a10a5cc859,
         type: 3}
       propertyPath: m_Name
       value: Player_RoughModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3989fcff728081749b18d3a10a5cc859,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4340423644140328716, guid: 3989fcff728081749b18d3a10a5cc859,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3989fcff728081749b18d3a10a5cc859, type: 3}
