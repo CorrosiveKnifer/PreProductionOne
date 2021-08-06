@@ -62,7 +62,7 @@ public class SceneDoorManager : MonoBehaviour
         if (m_Doors[0] != null)
         {
             Debug.LogWarning("The door trying to be obtained does not exist. Will use default instead.");
-            return m_Doors[0].transform.position + transform.up;
+            return m_Doors[0].transform.position + transform.forward;
         }
         else
         {
