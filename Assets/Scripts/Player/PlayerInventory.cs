@@ -28,7 +28,7 @@ class PlayerInventory : MonoBehaviour
 
     private Vector2Int m_size;
     private float m_inputDelay;
-
+    private bool m_show = false;
     public void Start()
     {
         int columns = GameManager.instance.m_saveSlot.GetPlayerIntegerData("backpack_column");
@@ -52,8 +52,14 @@ class PlayerInventory : MonoBehaviour
             m_hotbarItem[c, 0] = GameManager.instance.m_saveSlot.GetPlayerHotbarData(c);
         }
 
-        m_hotbarItem[0, 0] = ItemObject.CreateItem(0, 5);
+        //Remove me
+        for (int i = 0; i < GameManager.instance.m_items.list.Length; i++)
+        {
+            AddItem(ItemObject.CreateItem(i, 1));
+        }
+
         m_hotbar.Generate(m_hotbarItem, new Vector2Int(5, 1));
+        m_display.transform.parent.gameObject.SetActive(m_show);
     }
 
     private void Update()
@@ -67,7 +73,11 @@ class PlayerInventory : MonoBehaviour
         if(InputManager.instance.IsKeyDown(KeyType.I))
         {
             m_inputDelay = 0.25f;
-            if (!m_display.enabled)
+
+            m_show = !m_show;
+            m_display.transform.parent.gameObject.SetActive(m_show);
+
+            if (m_show)
             {
                 m_display.Generate(m_itemGrid, m_size);
             }
@@ -75,8 +85,6 @@ class PlayerInventory : MonoBehaviour
             {
                 m_display.UpdateInventory(m_itemGrid);
             }
-
-            m_display.enabled = !m_display.enabled;
         }
 
         if(m_display.m_hasUpdated)
@@ -151,7 +159,8 @@ class PlayerInventory : MonoBehaviour
 
     public void AddItem(ItemObject addition)
     {
-        ItemObject slot = null;
+        ItemObject nullSlot = null;
+        ref ItemObject slot = ref nullSlot;
         bool foundDupe = false;
         for (int c = 0; c < m_size.x; c++)
         {
@@ -162,12 +171,12 @@ class PlayerInventory : MonoBehaviour
             { 
                 if(m_itemGrid[c, r] == null || m_itemGrid[c, r].m_id == -1)
                 {
-                    slot = m_itemGrid[c, r];
+                    slot = ref m_itemGrid[c, r];
                     continue;
                 }
                 if(m_itemGrid[c, r].m_id == addition.m_id)
                 {
-                    slot = m_itemGrid[c, r];
+                    slot = ref m_itemGrid[c, r];
                     foundDupe = true;
                     break;
                 }
@@ -180,19 +189,19 @@ class PlayerInventory : MonoBehaviour
             {
                 if (m_hotbarItem[c, 0] == null || m_hotbarItem[c, 0].m_id == -1)
                 {
-                    slot = m_hotbarItem[c, 0];
+                    slot = ref m_hotbarItem[c, 0];
                     continue;
                 }
                 if (m_hotbarItem[c, 0].m_id == addition.m_id)
                 {
-                    slot = m_hotbarItem[c, 0];
+                    slot = ref m_hotbarItem[c, 0];
                     foundDupe = true;
                     break;
                 }
             }
         }
 
-        if (slot != null && slot.m_id == addition.m_id)
+        if (slot != nullSlot && slot.m_id == addition.m_id)
         {
             slot.m_amount += addition.m_amount;
         }
