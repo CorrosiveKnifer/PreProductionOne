@@ -15,6 +15,34 @@ public class SaveSlot
         public int m_id = -1;
         public int m_quantity = 0;
     }
+    [Serializable]
+    public class Save_NPC
+    {
+        public int m_id;
+        public int m_scene;
+        public string m_prefab;
+        public float x;
+        public float y;
+        public float z;
+        public float rx;
+        public float ry;
+        public float rz;
+        public string m_extraData;
+
+        public Save_NPC(NPCScript npc)
+        {
+            m_id = npc.id;
+            m_scene = SceneManager.GetActiveScene().buildIndex;
+            m_prefab = npc.gameObject.name;
+            x = npc.transform.position.x;
+            y = npc.transform.position.y;
+            z = npc.transform.position.z;
+            rx = npc.transform.rotation.eulerAngles.x;
+            ry = npc.transform.rotation.eulerAngles.y;
+            rz = npc.transform.rotation.eulerAngles.z;
+            m_extraData = npc.GetExtraData();
+        }
+    }
 
     [Serializable]
     public class Save_Player
@@ -54,7 +82,25 @@ public class SaveSlot
         public int m_id;
         public int m_objectCount;
         public SerializedData[] m_objects;
+    }
 
+    [Serializable]
+    public class Save_Quest
+    {
+        public int m_dueDay;
+        public int m_itemId;
+        public int m_itemAmount;
+
+        public Save_Quest(Quest _data)
+        {
+            m_dueDay = _data.m_dueDay;
+            m_itemId = _data.m_itemId;
+            m_itemAmount = _data.m_amount;
+        }
+        public bool IsEqual(Quest _data)
+        {
+            return m_dueDay == _data.m_dueDay && m_itemId == _data.m_itemId && m_itemAmount == _data.m_amount;
+        }
     }
 
     [Serializable]
@@ -62,6 +108,8 @@ public class SaveSlot
     {
         public Save_Player m_player;
         public Save_Scene[] m_scenes;
+        public List<Save_Quest> m_quests;
+        public List<Save_NPC> m_npcs;
 
         public int m_day = 0;
         public float m_hour = 6.0f;
@@ -71,6 +119,8 @@ public class SaveSlot
             m_player = new Save_Player();
 
             m_scenes = new Save_Scene[SceneManager.sceneCountInBuildSettings];
+            m_quests = new List<Save_Quest>();
+            m_npcs = new List<Save_NPC>();
             for (int i = 0; i < m_scenes.Length; i++)
             {
                 m_scenes[i] = new Save_Scene();
@@ -217,5 +267,63 @@ public class SaveSlot
     {
         savedData.m_day = day;
         savedData.m_hour = hour;
+    }
+
+    public void AddQuest(Quest quest)
+    {
+        savedData.m_quests.Add(new Save_Quest(quest));
+    }
+
+    public void RemoveQuest(Quest quest)
+    {
+        for (int i = 0; i < savedData.m_quests.Count; i++)
+        {
+            if(savedData.m_quests[i].IsEqual(quest))
+            {
+                savedData.m_quests.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
+    public List<Quest> GetQuests()
+    {
+        List<Quest> list = new List<Quest>();
+        foreach (var item in savedData.m_quests)
+        {
+            list.Add(new Quest(item.m_itemId, item.m_itemAmount, item.m_dueDay));
+        }
+        return list;
+    }
+
+    public void InstansiateNPCs(int sceneIndex)
+    {
+        List<Save_NPC> toRemove = new List<Save_NPC>();
+        foreach (var npc in savedData.m_npcs)
+        {
+            if(npc.m_scene == sceneIndex)
+            {
+                Vector3 pos = new Vector3(npc.x, npc.y, npc.z);
+                Quaternion rotation = Quaternion.Euler(npc.rx, npc.ry, npc.rz);
+                GameObject prefab = Resources.Load<GameObject>($"prefab/{npc.m_prefab}");
+
+                if (prefab != null)
+                {
+                    NPCScript script = GameObject.Instantiate(prefab, pos, rotation).GetComponentInChildren<NPCScript>();
+                    script.SetExtraData(npc.m_extraData);
+                }
+                toRemove.Add(npc);
+            }
+        }
+        foreach (var item in toRemove)
+        {
+            savedData.m_npcs.Remove(item);
+        }
+    }
+
+    public void AddNPC(NPCScript script)
+    {
+        if(script != null)
+            savedData.m_npcs.Add(new Save_NPC(script));
     }
 }

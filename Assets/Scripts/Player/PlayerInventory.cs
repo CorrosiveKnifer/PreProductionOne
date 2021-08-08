@@ -62,6 +62,82 @@ class PlayerInventory : MonoBehaviour
         //m_display.transform.parent.gameObject.SetActive(m_show);
     }
 
+    public void RemoveItem(int m_itemId, int m_amount)
+    {
+        for (int c = 0; c < m_size.x; c++)
+        {
+            for (int r = 0; r < m_size.y; r++)
+            {
+                if(m_itemGrid[c, r] != null && m_itemGrid[c, r].m_id == m_itemId)
+                {
+                    if (m_itemGrid[c, r].m_amount < m_amount)
+                    {
+                        m_amount -= (int)m_itemGrid[c, r].m_amount;
+                        m_itemGrid[c, r] = null;
+                    }
+                    else if (m_itemGrid[c, r].m_amount > m_amount)
+                    {
+                        m_itemGrid[c, r].m_amount -= (uint)m_amount;
+                        return;
+                    }
+                    else
+                    {
+                        m_itemGrid[c, r] = null;
+                        return;
+                    }
+                }
+            }
+        }
+        for (int c = 0; c < m_hotbarItem.GetLength(0); c++)
+        {
+            if (m_hotbarItem[c, 0] != null && m_hotbarItem[c, 0].m_id == m_itemId)
+            {
+                if (m_hotbarItem[c, 0].m_amount < m_amount)
+                {
+                    m_amount -= (int)m_hotbarItem[c, 0].m_amount;
+                    m_hotbarItem[c, 0] = null;
+                }
+                else if (m_hotbarItem[c, 0].m_amount > m_amount)
+                {
+                    m_hotbarItem[c, 0].m_amount -= (uint)m_amount;
+                    return;
+                }
+                else
+                {
+                    m_hotbarItem[c, 0] = null;
+                    return;
+                }
+            }
+        }
+    }
+
+    public bool ContainsItem(int m_itemId, int m_amount)
+    {
+        foreach (var item in m_itemGrid)
+        {
+            if(item != null && item.m_id == m_itemId)
+            {
+                m_amount -= (int)item.m_amount;
+
+                if (m_amount <= 0)
+                    return true;
+            }
+        }
+
+        foreach (var item in m_hotbarItem)
+        {
+            if (item != null && item.m_id == m_itemId)
+            {
+                m_amount -= (int)item.m_amount;
+
+                if (m_amount <= 0)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
     private void Update()
     {
         if(m_display.m_hasUpdated)

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 161103162}
   - component: {fileID: 1841691188748609179}
   - component: {fileID: 1253047123}
+  - component: {fileID: 8247789444242203816}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -73,6 +74,7 @@ MonoBehaviour:
   m_cameraContainer: {fileID: 2534253976193366327}
   cameraZoomSpeed: 1
   cameraZoomMax: 5
+  m_menu: {fileID: 0}
 --- !u!114 &4574658800959128102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +153,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_hungerBar: {fileID: 0}
   m_hunger: 0
+--- !u!114 &8247789444242203816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4574658800959128103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 383175f416fb52243ac027b8085824ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_display: {fileID: 0}
 --- !u!1 &4684361713239100783
 GameObject:
   m_ObjectHideFlags: 0

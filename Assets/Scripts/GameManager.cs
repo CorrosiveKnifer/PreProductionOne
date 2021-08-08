@@ -67,7 +67,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(GameObject.FindGameObjectsWithTag("SerializedObject").Length == 0)
+        //m_saveSlot.InstansiateNPCs(SceneManager.GetActiveScene().buildIndex);
+        if (GameObject.FindGameObjectsWithTag("SerializedObject").Length == 0)
         {
             var objects = m_saveSlot.GetSceneData(SceneManager.GetActiveScene().buildIndex);
 
@@ -138,7 +139,7 @@ public class GameManager : MonoBehaviour
         {
             player.GetComponent<PlayerInventory>().SaveToSlot(m_saveSlot);
         }
-
+        LevelLoader.instance.SaveSceneToSlot(m_saveSlot);
         m_saveSlot?.SaveToFile(Application.dataPath + "/SaveSlot1.json");
     }
 }

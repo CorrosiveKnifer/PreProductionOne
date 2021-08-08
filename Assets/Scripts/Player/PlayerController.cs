@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
             m_inputDelay = 0.25f;
             m_showInventory = !m_showInventory;
 
-            if(m_showInventory)
+            if (m_showInventory)
             {
                 m_playerInventory.GenerateOnDisplay(true);
                 m_playerQuests.GenerateOnDisplay(false);
@@ -143,7 +143,8 @@ public class PlayerController : MonoBehaviour
             }
 
             m_menu.SetActive(m_showInventory);
-
+        }
+    }
     private void CombatInput()
     {
         if (InputManager.instance.GetMouseButtonDown(MouseButton.LEFT))
