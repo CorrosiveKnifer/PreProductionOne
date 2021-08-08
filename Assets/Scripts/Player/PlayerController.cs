@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float cameraZoomSpeed = 1.0f;
     public float cameraZoomMax = 5.0f;
 
+    public bool m_functionalityEnabled = true;
+
     private PlayerMovement playerMovement;
     private PlayerPlacing m_playerPlacing;
     private PlayerInteractor m_playerInteractor;
@@ -36,13 +38,18 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         CameraControl();
-        MovementInput();
         HotbarInput();
         InteractInput();
-        CombatInput();
 
-        // Call movement function
-        playerMovement.Move(movementInput);
+        if (m_functionalityEnabled)
+        {
+            MovementInput();
+            CombatInput();
+
+            // Call movement function
+            playerMovement.Move(movementInput);
+        }
+
     }
     private void FixedUpdate()
     {

@@ -6,14 +6,16 @@ using UnityEngine.AI;
 public class Slime : MonoBehaviour
 {
     public GameObject m_target;
-
     public GameObject m_slimeModel;
+
+    private EnemyHealthbar m_healthbar;
 
     private bool m_combining = false;
     private bool m_spawning = true;
 
     private int m_size = 1;
     private int m_health = 5;
+    private int m_maxHealth = 5;
 
     private float m_knockbackTimer = 0.0f;
     private float m_knockbackDuration = 1.0f;
@@ -27,6 +29,7 @@ public class Slime : MonoBehaviour
     {
         transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
         m_target = FindObjectOfType<PlayerController>().gameObject;
+        m_healthbar = GetComponentInChildren<EnemyHealthbar>();
     }
 
     // Update is called once per frame
@@ -74,8 +77,9 @@ public class Slime : MonoBehaviour
             {
                 m_attackTimer -= Time.deltaTime;
             }
-            
         }
+        m_healthbar.SetHealthPercentage((float)m_health / (float)m_maxHealth);
+        m_healthbar.transform.position = Camera.main.WorldToScreenPoint(transform.position + transform.up);
     }
 
 
@@ -86,6 +90,7 @@ public class Slime : MonoBehaviour
         SetColorViaSize(_size);
 
         m_health = 5 * m_size;
+        m_maxHealth = m_health;
     }
 
     public int GetSize()
@@ -115,7 +120,6 @@ public class Slime : MonoBehaviour
                 break;
         }
         m_slimeModel.GetComponent<MeshRenderer>().material.color = slimeColor;
-
     }
 
 
