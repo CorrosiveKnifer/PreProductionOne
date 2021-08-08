@@ -157,6 +157,11 @@ public class UI_GridDisplay : UI_Element
         return false;
     }
 
+    public ItemObject GetSelectItem()
+    {
+        return m_selectSlot.m_currentItem;
+    }
+
     public override void OnMouseDownEvent()
     {
         if (m_grid == null || m_heldItem != null)
@@ -191,6 +196,7 @@ public class UI_GridDisplay : UI_Element
                     m_heldItem.OnMouseUpEvent();
                     m_heldItem = null;
                     m_hasUpdated = true;
+                    FindObjectOfType<PlayerController>().GetComponent<PlayerPlacing>().SetSelectedIndex(-1);
                     return;
                 }
             }
@@ -200,6 +206,7 @@ public class UI_GridDisplay : UI_Element
         if(otherSystem != null)
         {
             (otherSystem as UI_GridDisplay).SwitchItem(m_heldItem);
+            FindObjectOfType<PlayerController>().GetComponent<PlayerPlacing>().SetSelectedIndex(-1);
             m_hasUpdated = true;
         }
 
@@ -225,6 +232,13 @@ public class UI_GridDisplay : UI_Element
     }
     public void SelectItem(int column, int row)
     {
+        if(column <= -1 || row <= -1)
+        {
+            m_selectSlot?.Unselect();
+            m_selectSlot = null;
+            return;
+        }
+
         m_selectSlot?.Unselect();
         m_selectSlot = m_grid[column, row];
         m_selectSlot.Select();

@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 public class UI_SlotDisplay : UI_Element
 {
-    [SerializeField] private ItemObject m_currentItem = null;
+    public ItemObject m_currentItem { get; protected set; }
     
     [Header("Dependencies")]
     public bool m_isShowingDependencies = true;

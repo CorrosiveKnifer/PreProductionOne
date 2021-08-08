@@ -16,7 +16,7 @@ public class CropScript : MonoBehaviour
     [Header("ReadOnly")]
     public int m_birthDay = -1;
     public int m_nextHarvest = 0;
-
+    public float m_waterValue = 0.0f;
     private int m_age = 0;
     private int m_lastRecordedDay = 0;
 
@@ -58,6 +58,8 @@ public class CropScript : MonoBehaviour
             m_lastRecordedDay = GameManager.instance.m_day;
             Grow();
         }
+
+        GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.white, new Color(0.5f, 0.25f, 0), m_waterValue);
 
         GetComponent<SerializedObject>().data.m_age = m_age;
         GetComponent<SerializedObject>().data.m_nextHarvest = m_nextHarvest;
@@ -113,5 +115,10 @@ public class CropScript : MonoBehaviour
         }
         objectToScale.transform.localScale = target;
         yield return null;
+    }
+
+    public void Water(float val)
+    {
+        m_waterValue = Mathf.Clamp(m_waterValue+val, 0.0f, 1.0f);
     }
 }

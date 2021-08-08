@@ -8,6 +8,13 @@ public enum ItemType
     Tool,
     CropUtil,
 };
+public enum ToolType
+{
+    Null,
+    Hoe,
+    Shovel,
+    WaterCan,
+}
 
 public class ItemObject : ScriptableObject
 {
@@ -63,5 +70,20 @@ public class ItemObject : ScriptableObject
     public GameObject GetDropObject()
     {
         return Resources.Load<GameObject>(m_dropPrefabName);
+    }
+
+    public ToolType GetToolType()
+    {
+        switch (GameManager.instance.m_items.list[m_id].name.ToLower())
+        {
+            case "hoe":
+                return ToolType.Hoe;
+            case "shovel":
+                return ToolType.Shovel;
+            case "Watering Can":
+                return ToolType.WaterCan;
+            default:
+                return ToolType.Null;
+        }
     }
 }

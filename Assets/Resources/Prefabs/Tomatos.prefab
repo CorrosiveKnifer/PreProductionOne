@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 3038825264625846793}
   - component: {fileID: 4657598610298389409}
   m_Layer: 0
-  m_Name: Corn Test
+  m_Name: Tomatos
   m_TagString: SerializedObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,7 +163,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 6d3d3203343e6b84897e776b0b0abc23, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_dropAmount: 1
   m_birthDay: 0
   m_nextHarvest: 0
+  m_waterValue: 0
 --- !u!135 &4975931497945739485
 SphereCollider:
   m_ObjectHideFlags: 0

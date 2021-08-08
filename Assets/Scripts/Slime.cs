@@ -6,14 +6,17 @@ using UnityEngine.AI;
 public class Slime : MonoBehaviour
 {
     public GameObject m_target;
-
     public GameObject m_slimeModel;
+
+    private EnemyHealthbar m_healthbar;
 
     private bool m_combining = false;
     private bool m_spawning = true;
+    private bool m_dead = false;
 
     private int m_size = 1;
     private int m_health = 5;
+    private int m_maxHealth = 5;
 
     private float m_knockbackTimer = 0.0f;
     private float m_knockbackDuration = 1.0f;
@@ -27,12 +30,13 @@ public class Slime : MonoBehaviour
     {
         transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
         m_target = FindObjectOfType<PlayerController>().gameObject;
+        m_healthbar = GetComponentInChildren<EnemyHealthbar>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_combining)
+        if (m_combining && !m_dead)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 1 - Mathf.Pow(2.0f, -Time.deltaTime * 10.0f));
             if (transform.localScale.x < 0.2f)
@@ -50,32 +54,23 @@ public class Slime : MonoBehaviour
             }
         }
 
-
         if (m_knockbackTimer >= 0.0f)
         {
             m_knockbackTimer -= Time.deltaTime;
         }
-        else if (!m_combining && !m_spawning)
+        else if (!m_combining && !m_spawning && !m_dead)
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<NavMeshAgent>().enabled = true;
             GetComponent<NavMeshAgent>().destination = m_target.transform.position;
 
-            if (m_attackTimer <= 0.0f)
-            {
-                Vector3 distance = transform.position - m_target.transform.position;
-                distance.y = 0;
-                if (distance.magnitude < 1.0f)
-                {
-                    Attack();
-                }
-            }
-            else
+            if (m_attackTimer > 0.0f)
             {
                 m_attackTimer -= Time.deltaTime;
             }
-            
         }
+        m_healthbar.SetHealthPercentage((float)m_health / (float)m_maxHealth);
+        m_healthbar.transform.position = Camera.main.WorldToScreenPoint(transform.position + transform.up);
     }
 
 
@@ -86,6 +81,7 @@ public class Slime : MonoBehaviour
         SetColorViaSize(_size);
 
         m_health = 5 * m_size;
+        m_maxHealth = m_health;
     }
 
     public int GetSize()
@@ -95,27 +91,27 @@ public class Slime : MonoBehaviour
 
     public void SetColorViaSize(int _size)
     {
+        float alpha = m_slimeModel.GetComponentInChildren<SkinnedMeshRenderer>().material.color.a;
         Color slimeColor;
         switch (_size)
         {
             default:
-                slimeColor = new Color(0.812f, 0.886f, 0.953f, 0.9f);
+                slimeColor = new Color(0.812f, 0.886f, 0.953f, alpha);
                 break;
             case 2:
-                slimeColor = new Color(0.427f, 0.620f, 0.922f, 0.9f);
+                slimeColor = new Color(0.427f, 0.620f, 0.922f, alpha);
                 break;
             case 3:
-                slimeColor = new Color(0.557f, 0.486f, 0.765f, 0.9f);
+                slimeColor = new Color(0.557f, 0.486f, 0.765f, alpha);
                 break;
             case 4:
-                slimeColor = new Color(0.651f, 0.302f, 0.475f, 0.9f);
+                slimeColor = new Color(0.651f, 0.302f, 0.475f, alpha);
                 break;
             case 5:
-                slimeColor = new Color(0.945f, 0.761f, 0.196f, 0.9f);
+                slimeColor = new Color(0.945f, 0.761f, 0.196f, alpha);
                 break;
         }
-        m_slimeModel.GetComponent<MeshRenderer>().material.color = slimeColor;
-
+        m_slimeModel.GetComponentInChildren<SkinnedMeshRenderer>().material.color = slimeColor;
     }
 
 
@@ -139,29 +135,36 @@ public class Slime : MonoBehaviour
 
         m_health -= _damage;
 
-
         if (m_health <= 0)
         {
-            DropLoot();
-            Destroy(gameObject);
+            StartCoroutine(Death());
         }
     }
 
     IEnumerator DamageFlash()
     {
-        m_slimeModel.GetComponent<MeshRenderer>().material.color = new Color(1.0f, 0.2f, 0.2f, 1.0f);
+        m_slimeModel.GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Color(1.0f, 0.2f, 0.2f, 1.0f);
         yield return new WaitForSecondsRealtime(0.05f);
         SetColorViaSize(m_size);
     }
+    IEnumerator Death()
+    {
+        m_dead = true;
+        GetComponent<NavMeshAgent>().enabled = false;
+        yield return new WaitForSecondsRealtime(2.0f);
+        DropLoot();
+        Destroy(gameObject);
+    }
     private void DropLoot()
     {
-        LootDrop.CreateLoot(0, (uint)m_size, transform.position);
+        LootDrop.CreateLoot(0, (uint)m_size, transform.position + transform.up);
     }
 
     private void Attack()
     {
         m_target.GetComponent<PlayerVitality>().Damage(m_size * 5.0f);
         m_attackTimer = m_attackCooldown;
+        GetComponentInChildren<Animator>().SetTrigger("Attack");
     }
 
     public void SetToCombine()
@@ -195,6 +198,14 @@ public class Slime : MonoBehaviour
                 // Destroy this slime.
                 SetToCombine();
             }
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<PlayerController>() && m_attackTimer <= 0.0f && !m_dead)
+        {
+            Attack();
         }
     }
 }

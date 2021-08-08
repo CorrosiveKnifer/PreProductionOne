@@ -138,6 +138,11 @@ class PlayerInventory : MonoBehaviour
         return false;
     }
 
+    public ItemObject GetSelectItem()
+    {
+        return m_hotbar.GetSelectItem();
+    }
+
     private void Update()
     {
         if(m_display.m_hasUpdated)
