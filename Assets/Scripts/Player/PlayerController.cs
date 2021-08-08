@@ -62,10 +62,15 @@ public class PlayerController : MonoBehaviour
     {
         m_cameraContainer.transform.position = Vector3.Lerp(m_cameraContainer.transform.position, transform.position, 1 - Mathf.Pow(2.0f, -Time.deltaTime * 5.0f));
 
-        Camera playerCamera = m_cameraContainer.GetComponentInChildren<Camera>();
+        Camera playerCamera = GetCamera();
 
         // Camera zoom
         playerCamera.orthographicSize = Mathf.Clamp(playerCamera.orthographicSize - InputManager.instance.GetMouseScrollDelta() * cameraZoomSpeed * Time.deltaTime, 1, cameraZoomMax);
+    }
+
+    public Camera GetCamera()
+    {
+        return m_cameraContainer.GetComponentInChildren<Camera>();
     }
 
     private void MovementInput()

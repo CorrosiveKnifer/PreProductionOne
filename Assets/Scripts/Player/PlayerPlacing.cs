@@ -16,7 +16,7 @@ public class PlayerPlacing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_PlayerCamera = GetComponentInChildren<Camera>();
+        m_PlayerCamera = GetComponent<PlayerController>().GetCamera();
         m_PlayerInventory = GetComponent<PlayerInventory>();
     }
 

@@ -24,7 +24,7 @@ public class UI_QuestList: UI_Element
     {
         foreach (var item in _quests)
         {
-            m_list.Add(Instantiate(m_item, m_contentParent.transform).GetComponent<UI_QuestItem>());
+            //m_list.Add(Instantiate(m_item, m_contentParent.transform).GetComponent<UI_QuestItem>());
         }
     }
 

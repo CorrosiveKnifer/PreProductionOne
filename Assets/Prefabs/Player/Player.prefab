@@ -73,6 +73,7 @@ MonoBehaviour:
   m_cameraContainer: {fileID: 2534253976193366327}
   cameraZoomSpeed: 1
   cameraZoomMax: 5
+  m_functionalityEnabled: 1
 --- !u!114 &4574658800959128102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_validMaterial: {fileID: 2100000, guid: 9de31f9a3bfdf4c479f222656a5623c2, type: 2}
   m_invalidMaterial: {fileID: 2100000, guid: 62b67ddeccebdb949911603d69f340ef, type: 2}
-  m_TargetingArea: {fileID: 0}
+  m_TargetingArea: {fileID: 6235358543251951011}
 --- !u!114 &161103162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +269,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 989bb3bedb8265447b527ad271669326, type: 3}
+--- !u!1 &6235358543251951011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6911501958061179588, guid: 989bb3bedb8265447b527ad271669326,
+    type: 3}
+  m_PrefabInstance: {fileID: 676357871421460327}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6235358543251950942 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6911501958061179449, guid: 989bb3bedb8265447b527ad271669326,

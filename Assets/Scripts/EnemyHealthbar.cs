@@ -7,7 +7,7 @@ public class EnemyHealthbar : MonoBehaviour
 {
     public Image m_healthFill;
     public Image m_healthDamageBack;
-    private float m_barChaseRate = 0.5f;
+    private float m_barChaseRate = 2.0f;
 
     // Start is called before the first frame update
     void Start()
