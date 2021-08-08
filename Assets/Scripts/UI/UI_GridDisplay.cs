@@ -220,7 +220,7 @@ public class UI_GridDisplay : UI_Element
     }
     public void SelectItem(int column, int row)
     {
-        m_selectSlot.Unselect();
+        m_selectSlot?.Unselect();
         m_selectSlot = m_grid[column, row];
         m_selectSlot.Select();
     }
