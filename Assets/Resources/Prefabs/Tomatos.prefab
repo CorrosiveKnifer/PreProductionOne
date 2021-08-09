@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2884fe8e150b5418d11bb196bb231d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_growthPeriod: 7
+  m_growthPeriod: 6
   m_plant: {fileID: 8969933956098927742}
   m_harvest: {fileID: 617124128803903110}
   m_finalSize: {x: 3, y: 3, z: 3}
