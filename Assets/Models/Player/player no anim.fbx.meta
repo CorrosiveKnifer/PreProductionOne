@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Models/Player/player no animation.fbx.meta
-guid: e84f580efd90f054a96cac2600497e76
-=======
-guid: 3813e80fa226669499a19cfb468deae0
->>>>>>> origin/Michael:Assets/BlueDragon.fbx.meta
+guid: c6648b27d00a35e47838aca98d5fad85
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
