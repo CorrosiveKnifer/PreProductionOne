@@ -16,14 +16,14 @@ public class CropScript : MonoBehaviour
     private float m_age = 1.0f;
     private int m_lastRecordedDay = 0;
     private Vector3 m_thisMaxHeight;
+    private Animator m_anim;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        m_harvest.GetComponent<Animator>().SetBool("IsHarvested", true);
-
         //Adjusting for variance
         m_thisMaxHeight = m_data.m_maxHeight * Random.Range(m_data.m_minVariance, m_data.m_maxVariance);
+        m_anim = GetComponentInChildren<Animator>();
     }
 
     void Start()
@@ -41,6 +41,7 @@ public class CropScript : MonoBehaviour
         }
         else
         {
+            m_plant.transform.localScale = Vector3.zero;
             m_nextHarvest = m_data.m_timeRequired;
         }
         m_lastRecordedDay = GameManager.instance.m_day;
@@ -66,8 +67,9 @@ public class CropScript : MonoBehaviour
 
         GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.white, new Color(0.5f, 0.25f, 0), m_waterValue);
 
-        m_harvest.GetComponent<Animator>().SetBool("IsHarvested", m_nextHarvest != 0);
-
+        m_harvest.SetActive(m_nextHarvest == 0);
+        m_anim.SetBool("IsActive", m_nextHarvest == 0);
+        
         GetComponent<SerializedObject>().data.m_age = m_age;
         GetComponent<SerializedObject>().data.m_water = m_waterValue;
         GetComponent<SerializedObject>().data.m_nextHarvest = m_nextHarvest;

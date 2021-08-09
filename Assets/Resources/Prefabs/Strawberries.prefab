@@ -5102,9 +5102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2884fe8e150b5418d11bb196bb231d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_data: {fileID: 0}
-  m_plant: {fileID: 0}
-  m_harvest: {fileID: 0}
+  m_data: {fileID: 11400000, guid: 34c657ccf840ee04f90489608ce22bda, type: 2}
+  m_plant: {fileID: 3643340773478795014}
+  m_harvest: {fileID: 5735964705414456620}
   m_birthDay: 0
   m_waterValue: 0
 --- !u!135 &4975931497945739485
@@ -5133,7 +5133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    m_itemID: 0
+    m_itemID: 1
     m_age: -1
     m_nextHarvest: -1
     m_water: 0
