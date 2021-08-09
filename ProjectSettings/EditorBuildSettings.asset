@@ -6,12 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/William D/SceneChangeTest/SceneChange1.unity
-    guid: 14d8bb3c9389a334882d2cc50da10013
+    path: Assets/Scenes/MainMenu.unity
+    guid: b882f36a568168d4896d37e48bf6823c
   - enabled: 1
-    path: Assets/Scenes/William D/SceneChangeTest/SceneChange2.unity
-    guid: 37c39d0ff51f36247868326ebf600bdc
-  - enabled: 1
-    path: Assets/Scenes/William D/SceneChangeTest/SceneChange3.unity
-    guid: 2f730e352de14c54cb85cfed9e493661
+    path: Assets/Scenes/MainGameScene.unity
+    guid: d48080c4aee28684cb2efd7467ab28b7
   m_configObjects: {}

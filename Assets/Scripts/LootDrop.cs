@@ -58,10 +58,12 @@ public class LootDrop : MonoBehaviour
                 }
                 newScale = Mathf.Lerp(m_targetScale, 0.0f, 1.0f - (distance / 2.0f));
                 GetComponent<Rigidbody>().AddForce((m_targetPlayer.transform.position - transform.position).normalized * 0.5f);
+                GetComponent<Rigidbody>().useGravity = false;
             }
             else
             {
                 newScale = 1.0f;
+                GetComponent<Rigidbody>().useGravity = true;
             }
             transform.localScale = new Vector3(1.0f, 1.0f, 1.0f) * newScale;
         }

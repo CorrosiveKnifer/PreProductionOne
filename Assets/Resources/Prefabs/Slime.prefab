@@ -510,7 +510,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -744.3, y: -124.2}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6041446755444278485
@@ -564,6 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_healthFill: {fileID: 8171571240888326938}
   m_healthDamageBack: {fileID: 5720435551870789754}
+  m_healthBackground: {fileID: 8705039264298344475}
 --- !u!95 &1876151811161200736
 Animator:
   serializedVersion: 3
