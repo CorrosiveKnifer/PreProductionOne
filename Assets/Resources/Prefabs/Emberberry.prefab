@@ -5071,15 +5071,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2884fe8e150b5418d11bb196bb231d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_growthPeriod: 4
+  m_data: {fileID: 0}
   m_plant: {fileID: 0}
   m_harvest: {fileID: 0}
-  m_finalSize: {x: 3, y: 3, z: 3}
-  m_itemID: 01000000
-  m_dropAmount: fcffffff
-  m_renewable: 1
   m_birthDay: 0
-  m_nextHarvest: 0
   m_waterValue: 0
 --- !u!135 &4975931497945739485
 SphereCollider:
@@ -5110,6 +5105,7 @@ MonoBehaviour:
     m_itemID: 0
     m_age: -1
     m_nextHarvest: -1
+    m_water: 0
     cx: 0
     cy: 0
     cz: 0
