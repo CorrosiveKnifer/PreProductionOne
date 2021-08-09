@@ -113,6 +113,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SpawnSlime(Vector3 _position, int _size = 1)
+    {
+        // Create greater slime.
+        GameObject newSlime = Instantiate(Resources.Load<GameObject>("Prefabs/Slime"), _position, transform.rotation);
+        newSlime.GetComponent<Slime>().SetSize(_size);
+    }
     private void InteractInput()
     {
         if (InputManager.instance.IsKeyDown(KeyType.E))
