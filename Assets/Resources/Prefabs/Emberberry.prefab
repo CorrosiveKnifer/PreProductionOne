@@ -5072,7 +5072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_data: {fileID: 11400000, guid: 7cdec93db988bc54bae376ff532e3beb, type: 2}
-  m_plant: {fileID: 2751922503209014012}
+  m_plant: {fileID: 5126580740085493480}
   m_harvest: {fileID: 2242263079175499009}
   m_birthDay: 0
   m_waterValue: 0

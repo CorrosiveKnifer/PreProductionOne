@@ -5103,7 +5103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_data: {fileID: 11400000, guid: 34c657ccf840ee04f90489608ce22bda, type: 2}
-  m_plant: {fileID: 3643340773478795014}
+  m_plant: {fileID: 7644629314372964046}
   m_harvest: {fileID: 5735964705414456620}
   m_birthDay: 0
   m_waterValue: 0
