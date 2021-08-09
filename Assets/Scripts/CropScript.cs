@@ -8,9 +8,7 @@ public class CropScript : MonoBehaviour
     public CropData m_data;
     public GameObject m_plant;
     public GameObject m_harvest;
-    private Vector3 m_stepSize;
     
-
     [Header("ReadOnly")]
     public int m_birthDay = -1;
     private int m_nextHarvest = 0;
@@ -45,8 +43,7 @@ public class CropScript : MonoBehaviour
         {
             m_nextHarvest = m_data.m_timeRequired;
         }
-
-        m_stepSize = m_thisMaxHeight / m_data.m_maxAge;
+        m_lastRecordedDay = GameManager.instance.m_day;
     }
 
     // Update is called once per frame
@@ -80,7 +77,14 @@ public class CropScript : MonoBehaviour
     {
         ItemObject item = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().GetSelectItem();
 
-        if(item.GetToolType() == ToolType.WaterCan)
+        if (item?.m_type == ItemType.CropUtil)
+        {
+            ApplyUtility(Resources.Load<ScriptableObject>($"{item.m_placePrefabName}") as MulchData);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().RemoveItem(item.m_id, 1);
+            return;
+        }
+
+        if (item?.GetToolType() == ToolType.WaterCan)
         {
             float amount = Mathf.Clamp(item.m_amount-1, 0, 20.0f);
             Water(amount);
@@ -89,7 +93,7 @@ public class CropScript : MonoBehaviour
             return;
         }
 
-        if (item.GetToolType() == ToolType.Shovel)
+        if (item?.GetToolType() == ToolType.Shovel)
         {
             Destroy(gameObject);
             return;
@@ -100,7 +104,8 @@ public class CropScript : MonoBehaviour
             for (int i = 0; i < m_data.m_drops.Length; i++)
             {
                 int amount = (m_data.m_drops[i].m_isRandom) ? Random.Range(m_data.m_drops[i].m_minDropAmount, m_data.m_drops[i].m_maxDropAmount) : m_data.m_drops[i].m_minDropAmount;
-                LootDrop.CreateLoot(m_data.m_drops[i].m_itemDropID, (uint)amount, transform.position + transform.up);
+                Vector3 force = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized * 5.0f;
+                LootDrop.CreateLoot(m_data.m_drops[i].m_itemDropID, (uint)amount, transform.position + transform.up * 1.5f, force);
             }
 
             m_nextHarvest += m_data.m_timeRequired;
@@ -110,6 +115,18 @@ public class CropScript : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    public void ApplyUtility(MulchData data)
+    {
+        m_waterValue = Mathf.Clamp(m_waterValue + data.m_water, 0.0f, 1.0f);
+
+        if (m_age >= m_data.m_maxAge * 0.95f)
+        {
+            m_nextHarvest -= Mathf.RoundToInt(data.m_age * 0.25f);
+        }
+
+        m_age = Mathf.Clamp(m_age + data.m_age, 0, m_data.m_maxAge);
     }
 
     public void Grow(int daysPassed)
@@ -122,19 +139,24 @@ public class CropScript : MonoBehaviour
         }
         else
         {
-            growthRate = (m_data.m_waterRequirement - m_waterValue) / m_data.m_waterRequirement;
+            growthRate = (m_data.m_waterRequirement - m_waterValue) / -m_data.m_waterRequirement;
         }
        
         m_age = Mathf.Clamp(m_age + daysPassed * growthRate, 0.0f, m_data.m_maxAge);
         m_waterValue = Mathf.Clamp(m_waterValue - m_data.m_waterDecay, 0.0f, 1.0f);
 
-        StartCoroutine(GrowStep(m_plant, m_plant.transform.localScale + m_stepSize * m_age, 1.0f));
+        StartCoroutine(GrowStep(m_plant, m_thisMaxHeight * m_age/m_data.m_maxAge, 1.0f));
     }
 
     public IEnumerator GrowStep(GameObject objectToScale, Vector3 target, float seconds)
     {
         Vector3 start = objectToScale.transform.localScale;
-        
+
+        if(target.magnitude < 0)
+        {
+            target = Vector3.zero;
+        }
+
         float time = 0.0f;
         while(time != seconds)
         {

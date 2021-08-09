@@ -67,7 +67,7 @@
 	{
       "id": 8,
       "name": "Common Mulch",
-      "placePrefabName": "Null",
+      "placePrefabName": "Data/Common",
       "inventoryImageName": "Sprites/CommonMulch",
       "dropPrefabName": "",
       "itemType": "CropUtil"
@@ -75,7 +75,7 @@
 	{
       "id": 9,
       "name": "Uncommon Mulch",
-      "placePrefabName": "Null",
+      "placePrefabName": "Data/Uncommon",
       "inventoryImageName": "Sprites/UncommonMulch",
       "dropPrefabName": "",
       "itemType": "CropUtil"
@@ -83,7 +83,7 @@
 	{
       "id": 10,
       "name": "Rare Mulch",
-      "placePrefabName": "Null",
+      "placePrefabName": "Data/Rare",
       "inventoryImageName": "Sprites/RareMulch",
       "dropPrefabName": "",
       "itemType": "CropUtil"
@@ -91,7 +91,7 @@
 	{
       "id": 11,
       "name": "Epic Mulch",
-      "placePrefabName": "Null",
+      "placePrefabName": "Data/Epic",
       "inventoryImageName": "Sprites/EpicMulch",
       "dropPrefabName": "",
       "itemType": "CropUtil"
@@ -99,7 +99,7 @@
 	{
       "id": 12,
       "name": "Legendary Mulch",
-      "placePrefabName": "Null",
+      "placePrefabName": "Data/Legendary",
       "inventoryImageName": "Sprites/LegendaryMulch",
       "dropPrefabName": "",
       "itemType": "CropUtil"

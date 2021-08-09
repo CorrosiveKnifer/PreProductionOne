@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LootDrop : MonoBehaviour
 {
+    public bool m_spawnsWithForce = false;
     private ItemObject m_heldItem;
     private bool m_spawning = true;
     private float m_targetScale;
@@ -13,6 +14,14 @@ public class LootDrop : MonoBehaviour
     {
         GameObject newDrop = Instantiate(Resources.Load<GameObject>("Prefabs/LootDrop"), _position, Quaternion.Euler(new Vector3(0, Random.Range(0.0f, 360.0f), 0)));
         newDrop.GetComponent<LootDrop>().SetHeldItem(_id, _amount);
+    }
+
+    public static void CreateLoot(int _id, uint _amount, Vector3 _position, Vector3 _force)
+    {
+        GameObject newDrop = Instantiate(Resources.Load<GameObject>("Prefabs/LootDrop"), _position, Quaternion.Euler(new Vector3(0, Random.Range(0.0f, 360.0f), 0)));
+        newDrop.GetComponent<LootDrop>().m_spawnsWithForce = true;
+        newDrop.GetComponent<LootDrop>().SetHeldItem(_id, _amount);
+        newDrop.GetComponent<Rigidbody>().AddForce(_force);
     }
 
     private void Awake()
@@ -25,7 +34,7 @@ public class LootDrop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<Rigidbody>().isKinematic = !m_spawnsWithForce;
         m_targetPlayer = FindObjectOfType<PlayerInventory>();
         StartCoroutine(Spawning());
         m_targetScale = transform.localScale.x;

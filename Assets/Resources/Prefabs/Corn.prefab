@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 617124128803903110}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.88, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4982782252891761317}
   m_RootOrder: 0
@@ -196,15 +196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2884fe8e150b5418d11bb196bb231d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_growthPeriod: 7
+  m_data: {fileID: 11400000, guid: 665a8cf08440f3649802fd3d687b79f7, type: 2}
   m_plant: {fileID: 8969933956098927742}
   m_harvest: {fileID: 617124128803903110}
-  m_finalSize: {x: 3, y: 3, z: 3}
-  m_itemID: 00000000
-  m_dropAmount: 01000000
-  m_renewable: 1
   m_birthDay: 0
-  m_nextHarvest: 0
   m_waterValue: 0
 --- !u!135 &4975931497945739485
 SphereCollider:
@@ -235,6 +230,7 @@ MonoBehaviour:
     m_itemID: 0
     m_age: -1
     m_nextHarvest: -1
+    m_water: 0
     cx: 0
     cy: 0
     cz: 0
@@ -312,7 +308,7 @@ Transform:
   m_GameObject: {fileID: 8969933956098927742}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.505, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 5758435778965537944}
   m_Father: {fileID: 235418039582014302}
@@ -325,7 +321,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8969933956098927742}
-  m_Mesh: {fileID: 5605666816358592079, guid: e661acbc619637842b047dafa3f156b2, type: 3}
+  m_Mesh: {fileID: -5117935945906827132, guid: cb2ab2694a23e1d45a7ab3274660b554, type: 3}
 --- !u!23 &2066961381617204638
 MeshRenderer:
   m_ObjectHideFlags: 0
