@@ -6,7 +6,7 @@ public class QuestNPC : NPCScript
 {
     public GameObject m_questMarkerPrefab;
     public int m_hoursPerQuest;
-    public int m_nextQuest;
+    public float m_nextQuest;
 
     [Header("Dialog")]
     public Sprite m_myImage = null;
@@ -23,6 +23,7 @@ public class QuestNPC : NPCScript
     private Dialog m_questDialog;
     private Dialog m_noQuestDialog;
     private UI_DialogSystem m_system;
+    private SunScript m_timer;
 
     protected override void Start()
     {
@@ -31,12 +32,23 @@ public class QuestNPC : NPCScript
 
         m_questDialog = new Dialog(m_myImage, m_myName, m_questText);
         m_system = HUDManager.instance.GetElementByType(typeof(UI_DialogSystem)) as UI_DialogSystem;
+        m_timer = GameObject.FindObjectOfType<SunScript>();
         InitialiseGreetingDialog();
         GenerateRandomQuest();
     }
+
     protected override void Update()
     {
         m_questMarker.SetActive(m_myQuest != null);
+
+        if(m_nextQuest > 0)
+        {
+            m_nextQuest -= m_timer.GetTimePassed();
+        }
+        else if(m_nextQuest > 0)
+        {
+            GenerateRandomQuest();
+        }
     }
 
     public void NextDialog()
@@ -75,6 +87,7 @@ public class QuestNPC : NPCScript
         Dialog reply = new Dialog(m_myImage, m_myName, "Thank you, I can't wait.");
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerQuests>().AddQuest(m_myQuest);
         m_myQuest = null;
+        m_nextQuest = m_hoursPerQuest;
         m_system.LoadDialog(reply);
     }
 
@@ -82,6 +95,8 @@ public class QuestNPC : NPCScript
     {
         Dialog reply = new Dialog(m_myImage, m_myName, "Unfortunate.");
         m_system.LoadDialog(reply);
+        m_myQuest = null;
+        m_nextQuest = m_hoursPerQuest;
     }
 
     public void StopDialog()
