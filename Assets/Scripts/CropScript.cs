@@ -5,26 +5,27 @@ using UnityEngine;
 public class CropScript : MonoBehaviour
 {
     [Header("InputInfo")]
-    public int m_growthPeriod;
+    public CropData m_data;
     public GameObject m_plant;
     public GameObject m_harvest;
-    public Vector3 m_finalSize;
-    public int[] m_itemID;
-    public int[] m_dropAmount;
-    public bool m_renewable = true;
     private Vector3 m_stepSize;
+    
 
     [Header("ReadOnly")]
     public int m_birthDay = -1;
-    public int m_nextHarvest = 0;
+    private int m_nextHarvest = 0;
     public float m_waterValue = 0.0f;
-    private int m_age = 0;
+    private float m_age = 1.0f;
     private int m_lastRecordedDay = 0;
+    private Vector3 m_thisMaxHeight;
 
     // Start is called before the first frame update
     private void Awake()
     {
         m_harvest.GetComponent<Animator>().SetBool("IsHarvested", true);
+
+        //Adjusting for variance
+        m_thisMaxHeight = m_data.m_maxHeight * Random.Range(m_data.m_minVariance, m_data.m_maxVariance);
     }
 
     void Start()
@@ -35,20 +36,17 @@ public class CropScript : MonoBehaviour
 
             m_plant.transform.localScale = new Vector3(data.cx, data.cy, data.cz);
 
-            m_birthDay = (data.m_age == -1) ? GameManager.instance.m_day : data.m_age;
+            m_nextHarvest = data.m_nextHarvest;
 
-            m_nextHarvest = (data.m_age == -1) ? m_age + m_growthPeriod : data.m_nextHarvest;
-
-            m_age = GameManager.instance.m_day - m_birthDay;
+            m_age = data.m_age;
+            m_waterValue = data.m_water;
         }
         else
         {
-            m_nextHarvest = m_age + m_growthPeriod;
+            m_nextHarvest = m_data.m_timeRequired;
         }
 
-        m_stepSize = m_finalSize / m_growthPeriod;
-
-        Grow();
+        m_stepSize = m_thisMaxHeight / m_data.m_maxAge;
     }
 
     // Update is called once per frame
@@ -56,13 +54,25 @@ public class CropScript : MonoBehaviour
     {
         if(m_lastRecordedDay < GameManager.instance.m_day)
         {
+            Grow(GameManager.instance.m_day - m_lastRecordedDay);
             m_lastRecordedDay = GameManager.instance.m_day;
-            Grow();
+            if(m_age >= m_data.m_maxAge * 0.95f)
+            {
+                m_nextHarvest = Mathf.Clamp(m_nextHarvest - 1, 0, m_data.m_timeRequired);
+            }
+            else
+            {
+                if (m_nextHarvest != 0 || m_age <= m_data.m_maxAge * 0.5f)
+                    m_nextHarvest = m_data.m_timeRequired;
+            }
         }
 
         GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.white, new Color(0.5f, 0.25f, 0), m_waterValue);
 
+        m_harvest.GetComponent<Animator>().SetBool("IsHarvested", m_nextHarvest != 0);
+
         GetComponent<SerializedObject>().data.m_age = m_age;
+        GetComponent<SerializedObject>().data.m_water = m_waterValue;
         GetComponent<SerializedObject>().data.m_nextHarvest = m_nextHarvest;
     }
 
@@ -85,57 +95,40 @@ public class CropScript : MonoBehaviour
             return;
         }
 
-        if (m_nextHarvest <= GameManager.instance.m_day)
+        if (m_nextHarvest <= 0)
         {
-            for (int i = 0; i < m_itemID.Length; i++)
+            for (int i = 0; i < m_data.m_drops.Length; i++)
             {
-                if(i < m_dropAmount.Length)
-                {
-                    if (m_dropAmount[i] > 0)
-                    {
-                        LootDrop.CreateLoot(m_itemID[i], (uint)m_dropAmount[i], transform.position + transform.up);
-                    }
-                    else
-                    {
-                        LootDrop.CreateLoot(m_itemID[i], (uint)Random.Range(1, -1 * m_dropAmount[i]), transform.position + transform.up);
-                    }
-                }
+                int amount = (m_data.m_drops[i].m_isRandom) ? Random.Range(m_data.m_drops[i].m_minDropAmount, m_data.m_drops[i].m_maxDropAmount) : m_data.m_drops[i].m_minDropAmount;
+                LootDrop.CreateLoot(m_data.m_drops[i].m_itemDropID, (uint)amount, transform.position + transform.up);
             }
-            m_harvest.GetComponent<Animator>().SetBool("IsHarvested", true);
 
-            m_nextHarvest += m_growthPeriod;
+            m_nextHarvest += m_data.m_timeRequired;
 
-            if (!m_renewable)
+            if (!m_data.m_isRenewable)
             {
                 Destroy(gameObject);
             }
         }
     }
 
-    public void Grow()
+    public void Grow(int daysPassed)
     {
-        int diff = GameManager.instance.m_day - m_age;
+        float growthRate = 0.0f;
 
-        if (diff > 0 && m_plant.transform.localScale != m_finalSize)
+        if(m_waterValue >= m_data.m_waterRequirement)
         {
-            if((m_plant.transform.localScale + m_stepSize * diff).magnitude >= m_finalSize.magnitude)
-            {
-                StartCoroutine(GrowStep(m_plant, m_finalSize, 1.0f));
-            }
-            else
-            {
-                StartCoroutine(GrowStep(m_plant, m_plant.transform.localScale + m_stepSize * diff, 1.0f));
-            }
+            growthRate = m_waterValue;
         }
         else
         {
-            if (m_nextHarvest <= GameManager.instance.m_day && m_harvest.transform.position != new Vector3(1.0f, 1.0f, 1.0f))
-            {
-                m_harvest.GetComponent<Animator>().SetBool("IsHarvested", false);
-            }
+            growthRate = (m_data.m_waterRequirement - m_waterValue) / m_data.m_waterRequirement;
         }
+       
+        m_age = Mathf.Clamp(m_age + daysPassed * growthRate, 0.0f, m_data.m_maxAge);
+        m_waterValue = Mathf.Clamp(m_waterValue - m_data.m_waterDecay, 0.0f, 1.0f);
 
-        m_age += diff;
+        StartCoroutine(GrowStep(m_plant, m_plant.transform.localScale + m_stepSize * m_age, 1.0f));
     }
 
     public IEnumerator GrowStep(GameObject objectToScale, Vector3 target, float seconds)
