@@ -19,7 +19,7 @@
 	{
       "id": 2,
       "name": "Sunflower",
-      "placePrefabName": "Prefabs/Sunflower",
+      "placePrefabName": "Null",
       "inventoryImageName": "Sprites/Sunflower",
       "dropPrefabName": "",
       "itemType": "Crop"
@@ -42,17 +42,17 @@
     },
 	{
       "id": 5,
-      "name": "Shovel",
-      "placePrefabName": "Null",
-      "inventoryImageName": "Sprites/Shovel",
+      "name": "Sunflower Seeds",
+      "placePrefabName": "Prefabs/Sunflower",
+      "inventoryImageName": "Sprites/SunflowerSeeds",
       "dropPrefabName": "",
-      "itemType": "Tool"
+      "itemType": "Crop"
     },
 	{
       "id": 6,
-      "name": "Hoe",
+      "name": "Shovel",
       "placePrefabName": "Null",
-      "inventoryImageName": "Sprites/Hoe",
+      "inventoryImageName": "Sprites/Shovel",
       "dropPrefabName": "",
       "itemType": "Tool"
     },

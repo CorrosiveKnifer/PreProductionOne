@@ -24,8 +24,11 @@ public class UI_SlotDisplay : UI_Element
     [ShowIf("m_isShowingDependencies")]
     public Text m_amountText;
     [ShowIf("m_isShowingDependencies")]
+    public Image m_amountBar;
+    [ShowIf("m_isShowingDependencies")]
     public Canvas m_itemCanvas;
 
+    private bool m_showbar = false;
     // Start is called before the first frame update
     private void Start()
     {
@@ -36,18 +39,26 @@ public class UI_SlotDisplay : UI_Element
     private void Update()
     {
         UpdateDimentions();
-        m_itemImage.gameObject.SetActive(m_currentItem != null);
-        m_amountText.gameObject.SetActive(m_currentItem != null);
 
-        if(m_currentItem != null && m_currentItem.m_type == ItemType.Tool)
+        m_showbar = m_currentItem != null && m_currentItem.GetToolType() == ToolType.WaterCan;
+
+        m_itemImage.gameObject.SetActive(m_currentItem != null);
+        m_amountText.gameObject.SetActive(!m_showbar);
+        m_amountBar.gameObject.SetActive(m_showbar);
+
+        if (m_currentItem != null && m_currentItem.m_type == ItemType.Tool)
         {
             m_amountText.text = "";
+            m_amountBar.fillAmount = 0;
         }
         else if(m_amountText.isActiveAndEnabled)
         {
             m_amountText.text = m_currentItem.m_amount.ToString();
         }
-        
+        if(m_amountBar.isActiveAndEnabled)
+        {
+            m_amountBar.fillAmount = Mathf.Clamp((m_currentItem.m_amount - 1) / (ItemObject.MAX_AMOUNT - 1), 0, 1.0f);
+        }
     }
 
     /*
@@ -104,7 +115,6 @@ public class UI_SlotDisplay : UI_Element
             m_itemImage.sprite = null;
             m_amountText.text = "0";
         }
-
     }
 
     public override void OnMouseDownEvent()
@@ -128,10 +138,17 @@ public class UI_SlotDisplay : UI_Element
         
         if(uI_SlotDisplay.m_currentItem != null && m_currentItem != null)
         {
-            if (uI_SlotDisplay.m_currentItem.m_id == m_currentItem.m_id)
+            if (uI_SlotDisplay.m_currentItem.m_id == m_currentItem.m_id && uI_SlotDisplay.m_currentItem.m_amount + m_currentItem.m_amount <= ItemObject.MAX_AMOUNT)
             {
                 uI_SlotDisplay.m_currentItem.m_amount += m_currentItem.m_amount;
                 this.SetItem(null);
+                return;
+            }
+            else if(uI_SlotDisplay.m_currentItem.m_id == m_currentItem.m_id)
+            {
+                uint diff = (uI_SlotDisplay.m_currentItem.m_amount + m_currentItem.m_amount) - (uint)ItemObject.MAX_AMOUNT;
+                uI_SlotDisplay.m_currentItem.m_amount = (uint)ItemObject.MAX_AMOUNT;
+                this.SetItem(ItemObject.CreateItem(uI_SlotDisplay.m_currentItem.m_id, diff));
                 return;
             }
         }

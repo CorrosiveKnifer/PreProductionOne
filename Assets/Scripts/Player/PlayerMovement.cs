@@ -125,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void SwingAttack()
     {
-        if(GetComponent<PlayerInventory>().GetSelectItem().GetToolType() != ToolType.Hoe)
+        if(GetComponent<PlayerInventory>().GetSelectItem()?.GetToolType() != ToolType.Shovel)
         {
             return;
         }
@@ -154,11 +154,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void SlamAttack()
     {
-        if (GetComponent<PlayerInventory>().GetSelectItem().GetToolType() != ToolType.Hoe)
+        if (GetComponent<PlayerInventory>().GetSelectItem()?.GetToolType() != ToolType.Shovel)
         {
             return;
         }
-
+        
         Debug.Log("Slam!");
         // Play an attack anmation
 

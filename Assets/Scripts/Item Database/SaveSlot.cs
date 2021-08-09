@@ -121,6 +121,7 @@ public class SaveSlot
             m_scenes = new Save_Scene[SceneManager.sceneCountInBuildSettings];
             m_quests = new List<Save_Quest>();
             m_npcs = new List<Save_NPC>();
+
             for (int i = 0; i < m_scenes.Length; i++)
             {
                 m_scenes[i] = new Save_Scene();
@@ -139,6 +140,12 @@ public class SaveSlot
 
     public SaveSlot(string jsonText)
     {
+        if (jsonText == string.Empty)
+        {
+            savedData = new Save();
+            return;
+        }
+
         savedData = JsonUtility.FromJson<Save>(jsonText);
     }
 

@@ -67,7 +67,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //m_saveSlot.InstansiateNPCs(SceneManager.GetActiveScene().buildIndex);
         if (GameObject.FindGameObjectsWithTag("SerializedObject").Length == 0)
         {
             var objects = m_saveSlot.GetSceneData(SceneManager.GetActiveScene().buildIndex);

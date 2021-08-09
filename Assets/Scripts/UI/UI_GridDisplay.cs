@@ -31,7 +31,7 @@ public class UI_GridDisplay : UI_Element
     private UI_SlotDisplay m_selectSlot = null;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if(generateOnAwake)
         {
@@ -67,15 +67,7 @@ public class UI_GridDisplay : UI_Element
 
     private void OnDisable()
     {
-        if(m_grid != null)
-            for (int c = 0; c < m_columnCount; c++)
-            {
-                for (int r = 0; r < m_rowCount; r++)
-                {
-                    Destroy(m_grid[c,r].gameObject);
-                }
-            }
-        m_grid = null;
+        Clear();
     }
 
     public void Generate(ItemObject[,] _itemGrid, Vector2Int _size)
@@ -107,6 +99,9 @@ public class UI_GridDisplay : UI_Element
 
     public void SetSlotItem(ItemObject _itemGrid, int column, int row)
     {
+        if (m_grid == null)
+            return;
+
         m_grid[column, row].SetItem(_itemGrid);
     }
 
@@ -159,6 +154,9 @@ public class UI_GridDisplay : UI_Element
 
     public ItemObject GetSelectItem()
     {
+        if (m_selectSlot == null)
+            return null;
+
         return m_selectSlot.m_currentItem;
     }
 
@@ -207,9 +205,25 @@ public class UI_GridDisplay : UI_Element
         {
             (otherSystem as UI_GridDisplay).SwitchItem(m_heldItem);
             FindObjectOfType<PlayerController>().GetComponent<PlayerPlacing>().SetSelectedIndex(-1);
+            m_heldItem.OnMouseUpEvent();
+            m_heldItem = null;
             m_hasUpdated = true;
+            return;
         }
 
+        //Drop
+        if(m_heldItem.m_currentItem.GetToolType() == ToolType.Null)
+        {
+            Transform trans = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().m_playerModel.transform;
+            LootDrop.CreateLoot(m_heldItem.m_currentItem.m_id, m_heldItem.m_currentItem.m_amount, trans.position + trans.forward * 2.0f + trans.up);
+            FindObjectOfType<PlayerController>().GetComponent<PlayerPlacing>().SetSelectedIndex(-1);
+            m_heldItem.SetItem(null);
+            m_heldItem.OnMouseUpEvent();
+            m_heldItem = null;
+            m_hasUpdated = true;
+            return;
+        }
+        
         m_heldItem.OnMouseUpEvent();
         m_heldItem = null;
     }
@@ -242,5 +256,17 @@ public class UI_GridDisplay : UI_Element
         m_selectSlot?.Unselect();
         m_selectSlot = m_grid[column, row];
         m_selectSlot.Select();
+    }
+    public void Clear()
+    {
+        if (m_grid != null)
+            for (int c = 0; c < m_columnCount; c++)
+            {
+                for (int r = 0; r < m_rowCount; r++)
+                {
+                    Destroy(m_grid[c, r].gameObject);
+                }
+            }
+        m_grid = null;
     }
 }

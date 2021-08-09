@@ -45,6 +45,10 @@ class PlayerInventory : MonoBehaviour
             for (int r = 0; r < rows; r++)
             {
                 m_itemGrid[c, r] = GameManager.instance.m_saveSlot.GetPlayerBackpackData(c, r);
+                if(m_itemGrid[c, r] != null)
+                {
+                    m_itemGrid[c, r].m_amount = (uint)Mathf.Clamp(m_itemGrid[c, r].m_amount, 0, ItemObject.MAX_AMOUNT);
+                }
             }
         }
         for (int c = 0; c < hotbarCount; c++)
@@ -59,11 +63,13 @@ class PlayerInventory : MonoBehaviour
         }
 
         m_hotbar.Generate(m_hotbarItem, new Vector2Int(5, 1));
-        //m_display.transform.parent.gameObject.SetActive(m_show);
     }
 
     public void RemoveItem(int m_itemId, int m_amount)
     {
+        if (m_itemId == -1 || m_amount == 0)
+            return;
+
         for (int c = 0; c < m_size.x; c++)
         {
             for (int r = 0; r < m_size.y; r++)
@@ -234,7 +240,7 @@ class PlayerInventory : MonoBehaviour
                 slot = ref m_hotbarItem[c, 0];
                 continue;
             }
-            if (m_hotbarItem[c, 0].m_id == addition.m_id)
+            if (m_hotbarItem[c, 0].m_id == addition.m_id && m_hotbarItem[c, 0].m_amount != ItemObject.MAX_AMOUNT)
             {
                 slot = ref m_hotbarItem[c, 0];
                 foundDupe = true;
@@ -256,7 +262,7 @@ class PlayerInventory : MonoBehaviour
                         slot = ref m_itemGrid[c, r];
                         continue;
                     }
-                    if (m_itemGrid[c, r].m_id == addition.m_id)
+                    if (m_itemGrid[c, r].m_id == addition.m_id && m_itemGrid[c, r].m_amount != ItemObject.MAX_AMOUNT)
                     {
                         slot = ref m_itemGrid[c, r];
                         foundDupe = true;
@@ -270,13 +276,50 @@ class PlayerInventory : MonoBehaviour
         {
             if(addition.m_type != ItemType.Tool)
             {
-                slot.m_amount += addition.m_amount;
+                if(addition.m_amount + slot.m_amount > ItemObject.MAX_AMOUNT)
+                {
+                    uint diff = (addition.m_amount + slot.m_amount) - (uint)ItemObject.MAX_AMOUNT;
+                    slot.m_amount = (uint)ItemObject.MAX_AMOUNT;
+                    AddItem(ItemObject.CreateItem(addition.m_id, (uint)diff));
+                }
+                else
+                {
+                    slot.m_amount += addition.m_amount;
+                }
+            }
+            else if(addition.GetToolType() == ToolType.WaterCan)
+            {
+                slot.m_amount = (uint)Mathf.Clamp(addition.m_amount + slot.m_amount, 0, ItemObject.MAX_AMOUNT);
             }
         }
         else
         {
-            slot = addition;
+            if (addition.m_type != ItemType.Tool || !this.ContainsItem(addition.m_id, 1))
+            {
+                slot = addition;
+            }            
         }
+
+        UpdateDisplay();
         return;
+    }
+
+    public void UpdateDisplay()
+    {
+        if(m_display.isActiveAndEnabled)
+        {
+            for (int c = 0; c < m_itemGrid.GetLength(0); c++)
+            {
+                for (int r = 0; r < m_itemGrid.GetLength(1); r++)
+                {
+                    m_display.SetSlotItem(m_itemGrid[c, r], c, r);
+                }
+            }
+        }
+        
+        for (int c = 0; c < m_hotbarItem.GetLength(0); c++)
+        {
+            m_hotbar.SetSlotItem(m_hotbarItem[c, 0], c, 0);
+        }
     }
 }

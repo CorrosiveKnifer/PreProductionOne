@@ -65,9 +65,26 @@ public class CropScript : MonoBehaviour
         GetComponent<SerializedObject>().data.m_nextHarvest = m_nextHarvest;
     }
 
-    public void Harvest()
+    public void Interact()
     {
-        if(m_nextHarvest <= GameManager.instance.m_day)
+        ItemObject item = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().GetSelectItem();
+
+        if(item.GetToolType() == ToolType.WaterCan)
+        {
+            float amount = Mathf.Clamp(item.m_amount-1, 0, 20.0f);
+            Water(amount);
+
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().RemoveItem(7, (int)amount);
+            return;
+        }
+
+        if (item.GetToolType() == ToolType.Shovel)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        if (m_nextHarvest <= GameManager.instance.m_day)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().AddItem(ItemObject.CreateItem(m_itemID, (uint)m_dropAmount));
             m_harvest.GetComponent<Animator>().SetBool("IsHarvested", true);
@@ -119,6 +136,6 @@ public class CropScript : MonoBehaviour
 
     public void Water(float val)
     {
-        m_waterValue = Mathf.Clamp(m_waterValue+val, 0.0f, 1.0f);
+        m_waterValue = Mathf.Clamp(m_waterValue+(val/20.0f), 0.0f, 1.0f);
     }
 }
