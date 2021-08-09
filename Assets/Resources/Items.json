@@ -103,6 +103,14 @@
       "inventoryImageName": "Sprites/LegendaryMulch",
       "dropPrefabName": "",
       "itemType": "CropUtil"
+    },
+	{
+      "id": 13,
+      "name": "Emberberry",
+      "placePrefabName": "Prefabs/Emberberry",
+      "inventoryImageName": "Sprites/EmberberryIcon",
+      "dropPrefabName": "",
+      "itemType": "Crop"
     }
   ]
 }
