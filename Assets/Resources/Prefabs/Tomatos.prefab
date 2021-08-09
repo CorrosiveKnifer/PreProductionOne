@@ -200,8 +200,9 @@ MonoBehaviour:
   m_plant: {fileID: 8969933956098927742}
   m_harvest: {fileID: 617124128803903110}
   m_finalSize: {x: 3, y: 3, z: 3}
-  m_itemID: 0
-  m_dropAmount: 1
+  m_itemID: 03000000
+  m_dropAmount: fdffffff
+  m_renewable: 1
   m_birthDay: 0
   m_nextHarvest: 0
   m_waterValue: 0

@@ -9,8 +9,9 @@ public class CropScript : MonoBehaviour
     public GameObject m_plant;
     public GameObject m_harvest;
     public Vector3 m_finalSize;
-    public int m_itemID = -1;
-    public int m_dropAmount = 0;
+    public int[] m_itemID;
+    public int[] m_dropAmount;
+    public bool m_renewable = true;
     private Vector3 m_stepSize;
 
     [Header("ReadOnly")]
@@ -86,10 +87,28 @@ public class CropScript : MonoBehaviour
 
         if (m_nextHarvest <= GameManager.instance.m_day)
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().AddItem(ItemObject.CreateItem(m_itemID, (uint)m_dropAmount));
+            for (int i = 0; i < m_itemID.Length; i++)
+            {
+                if(i < m_dropAmount.Length)
+                {
+                    if (m_dropAmount[i] > 0)
+                    {
+                        LootDrop.CreateLoot(m_itemID[i], (uint)m_dropAmount[i], transform.position + transform.up);
+                    }
+                    else
+                    {
+                        LootDrop.CreateLoot(m_itemID[i], (uint)Random.Range(1, -1 * m_dropAmount[i]), transform.position + transform.up);
+                    }
+                }
+            }
             m_harvest.GetComponent<Animator>().SetBool("IsHarvested", true);
 
             m_nextHarvest += m_growthPeriod;
+
+            if (!m_renewable)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

@@ -4,7 +4,7 @@
       "id": 0,
       "name": "Corn",
       "placePrefabName": "Prefabs/Corn",
-      "inventoryImageName": "Sprites/Corn",
+      "inventoryImageName": "Sprites/CornIcon",
       "dropPrefabName": "",
       "itemType": "Crop"
     },
@@ -44,7 +44,7 @@
       "id": 5,
       "name": "Sunflower Seeds",
       "placePrefabName": "Prefabs/Sunflower",
-      "inventoryImageName": "Sprites/SunflowerSeeds",
+      "inventoryImageName": "Sprites/SunflowerSeedIcon",
       "dropPrefabName": "",
       "itemType": "Crop"
     },
@@ -52,7 +52,7 @@
       "id": 6,
       "name": "Shovel",
       "placePrefabName": "Null",
-      "inventoryImageName": "Sprites/Shovel",
+      "inventoryImageName": "Sprites/ShovelIcon",
       "dropPrefabName": "",
       "itemType": "Tool"
     },
@@ -60,7 +60,7 @@
       "id": 7,
       "name": "Watering Can",
       "placePrefabName": "Null",
-      "inventoryImageName": "Sprites/Can",
+      "inventoryImageName": "Sprites/WateringCanIcon",
       "dropPrefabName": "",
       "itemType": "Tool"
     },
