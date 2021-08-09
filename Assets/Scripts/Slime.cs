@@ -24,18 +24,24 @@ public class Slime : MonoBehaviour
     private float m_attackTimer = 0.0f;
     private float m_attackCooldown = 1.0f;
 
-
+    private void Awake()
+    {
+        m_healthbar = GetComponentInChildren<EnemyHealthbar>();
+        m_healthbar.transform.position = Camera.main.WorldToScreenPoint(transform.position + transform.up);
+    }
     // Start is called before the first frame update
     void Start()
     {
         transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
         m_target = FindObjectOfType<PlayerController>().gameObject;
-        m_healthbar = GetComponentInChildren<EnemyHealthbar>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!m_spawning)
+            m_healthbar.HideHealth(m_combining);
+
         if (m_combining && !m_dead)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 1 - Mathf.Pow(2.0f, -Time.deltaTime * 10.0f));
