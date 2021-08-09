@@ -27,8 +27,8 @@ class PlayerInventory : MonoBehaviour
     [SerializeField] private UI_GridDisplay m_hotbar;
 
     private Vector2Int m_size;
-    private float m_inputDelay;
-    private bool m_show = false;
+    
+    
     public void Start()
     {
         int columns = GameManager.instance.m_saveSlot.GetPlayerIntegerData("backpack_column");
@@ -59,34 +59,11 @@ class PlayerInventory : MonoBehaviour
         }
 
         m_hotbar.Generate(m_hotbarItem, new Vector2Int(5, 1));
-        m_display.transform.parent.gameObject.SetActive(m_show);
+        //m_display.transform.parent.gameObject.SetActive(m_show);
     }
 
     private void Update()
     {
-        if(m_inputDelay > 0.0f)
-        {
-            m_inputDelay -= Time.deltaTime;
-            return;
-        }
-
-        if(InputManager.instance.IsKeyDown(KeyType.I))
-        {
-            m_inputDelay = 0.25f;
-
-            m_show = !m_show;
-            m_display.transform.parent.gameObject.SetActive(m_show);
-
-            if (m_show)
-            {
-                m_display.Generate(m_itemGrid, m_size);
-            }
-            else
-            {
-                m_display.UpdateInventory(m_itemGrid);
-            }
-        }
-
         if(m_display.m_hasUpdated)
         {
             m_display.UpdateInventory(m_itemGrid);
@@ -95,6 +72,12 @@ class PlayerInventory : MonoBehaviour
         {
             m_hotbar.UpdateInventory(m_hotbarItem);
         }
+    }
+
+    public void GenerateOnDisplay(bool isActive)
+    {
+        m_display.Generate(m_itemGrid, m_size);
+        m_display.gameObject.SetActive(isActive);
     }
 
     public void OnDestroy()
@@ -162,48 +145,52 @@ class PlayerInventory : MonoBehaviour
         ItemObject nullSlot = null;
         ref ItemObject slot = ref nullSlot;
         bool foundDupe = false;
-        for (int c = 0; c < m_size.x; c++)
-        {
-            if (foundDupe)
-                break;
 
-            for (int r = 0; r < m_size.y; r++)
-            { 
-                if(m_itemGrid[c, r] == null || m_itemGrid[c, r].m_id == -1)
-                {
-                    slot = ref m_itemGrid[c, r];
-                    continue;
-                }
-                if(m_itemGrid[c, r].m_id == addition.m_id)
-                {
-                    slot = ref m_itemGrid[c, r];
-                    foundDupe = true;
-                    break;
-                }
+        for (int c = 0; c < m_hotbarItem.Length; c++)
+        {
+            if (m_hotbarItem[c, 0] == null || m_hotbarItem[c, 0].m_id == -1)
+            {
+                slot = ref m_hotbarItem[c, 0];
+                continue;
+            }
+            if (m_hotbarItem[c, 0].m_id == addition.m_id)
+            {
+                slot = ref m_hotbarItem[c, 0];
+                foundDupe = true;
+                break;
             }
         }
 
         if(!foundDupe)
         {
-            for (int c = 0; c < m_hotbarItem.Length; c++)
+            for (int c = 0; c < m_size.x; c++)
             {
-                if (m_hotbarItem[c, 0] == null || m_hotbarItem[c, 0].m_id == -1)
-                {
-                    slot = ref m_hotbarItem[c, 0];
-                    continue;
-                }
-                if (m_hotbarItem[c, 0].m_id == addition.m_id)
-                {
-                    slot = ref m_hotbarItem[c, 0];
-                    foundDupe = true;
+                if (foundDupe)
                     break;
+
+                for (int r = 0; r < m_size.y; r++)
+                {
+                    if (m_itemGrid[c, r] == null || m_itemGrid[c, r].m_id == -1)
+                    {
+                        slot = ref m_itemGrid[c, r];
+                        continue;
+                    }
+                    if (m_itemGrid[c, r].m_id == addition.m_id)
+                    {
+                        slot = ref m_itemGrid[c, r];
+                        foundDupe = true;
+                        break;
+                    }
                 }
             }
         }
 
         if (slot != nullSlot && slot.m_id == addition.m_id)
         {
-            slot.m_amount += addition.m_amount;
+            if(addition.m_type != ItemType.Tool)
+            {
+                slot.m_amount += addition.m_amount;
+            }
         }
         else
         {

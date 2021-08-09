@@ -80,6 +80,11 @@ public class UI_GridDisplay : UI_Element
 
     public void Generate(ItemObject[,] _itemGrid, Vector2Int _size)
     {
+        if(m_grid != null)
+        {
+            return;
+        }
+
         if (_itemGrid == null)
         {
             GenerateCleared();

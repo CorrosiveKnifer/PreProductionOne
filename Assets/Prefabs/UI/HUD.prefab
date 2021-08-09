@@ -1143,9 +1143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d4fecc0ce37a344889c6820745a0e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_sunTimer: {fileID: 0}
-  m_contentParent: {fileID: 0}
-  m_item: {fileID: 0}
+  m_contentParent: {fileID: 2576017784270489207}
+  m_item: {fileID: 1580479417297659111, guid: 437d9f52af7acc846910fc27ef9ea4d9, type: 3}
   m_list: []
 --- !u!1 &6255491566485020957
 GameObject:

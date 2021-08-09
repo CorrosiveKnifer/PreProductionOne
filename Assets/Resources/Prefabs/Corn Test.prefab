@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1351716561397745282}
   - component: {fileID: 4975931497945739485}
   - component: {fileID: -5908922326195584753}
+  - component: {fileID: 6714429312950041697}
   m_Layer: 0
   m_Name: Corn Test
   m_TagString: SerializedObject
@@ -137,6 +138,22 @@ MonoBehaviour:
     rx: 0
     ry: 0
     rz: 0
+--- !u!208 &6714429312950041697
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8691799465482203243}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8969933956098927742
 GameObject:
   m_ObjectHideFlags: 0
