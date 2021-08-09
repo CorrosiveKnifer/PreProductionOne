@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    public string m_sceneName = "MainGameScene";
+
     [Header("Settings")]
     public GameObject m_settings;
     public Slider m_masterVolume;
@@ -45,11 +47,11 @@ public class MainMenu : MonoBehaviour
     {
         // Delete current save.
         GameManager.instance.ClearGameFile();
-        LevelLoader.instance.LoadNewLevel("SceneChange2");
+        LevelLoader.instance.LoadNewLevel(m_sceneName);
     }
     public void ContinueGame()
     {
-        LevelLoader.instance.LoadNewLevel("SceneChange2");
+        LevelLoader.instance.LoadNewLevel(m_sceneName);
     }
     public void Settings()
     {
