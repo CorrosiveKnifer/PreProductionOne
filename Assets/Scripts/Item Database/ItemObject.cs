@@ -8,15 +8,22 @@ public enum ItemType
     Tool,
     CropUtil,
 };
+public enum ToolType
+{
+    Null,
+    Shovel,
+    WaterCan,
+}
 
 public class ItemObject : ScriptableObject
 {
+    public static int MAX_AMOUNT = 99;
+
     public int m_id = -1;
     public string m_placePrefabName;
     public string m_inventoryImageName;
     public string m_dropPrefabName;
     public ItemType m_type;
-
     public uint m_amount = 0;
 
     public static ItemObject CreateItem(int index, uint amount)
@@ -63,5 +70,18 @@ public class ItemObject : ScriptableObject
     public GameObject GetDropObject()
     {
         return Resources.Load<GameObject>(m_dropPrefabName);
+    }
+
+    public ToolType GetToolType()
+    {
+        switch (GameManager.instance.m_items.list[m_id].name.ToLower())
+        {
+            case "shovel":
+                return ToolType.Shovel;
+            case "watering can":
+                return ToolType.WaterCan;
+            default:
+                return ToolType.Null;
+        }
     }
 }

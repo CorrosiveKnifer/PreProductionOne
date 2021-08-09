@@ -28,9 +28,15 @@ public class UI_QuestItem : UI_Element
     {
 
     }
+
     public void SetQuest(Quest _quest)
     {
         m_quest = _quest;
+
+        if (m_quest == null)
+        {
+            return;
+        }
 
         string name = GameManager.instance.m_items.list[m_quest.m_itemId].inventoryImageName;
         m_itemIcon.sprite = Resources.Load<Sprite>(name);

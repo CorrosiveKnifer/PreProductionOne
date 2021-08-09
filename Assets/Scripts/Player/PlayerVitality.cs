@@ -41,15 +41,24 @@ public class PlayerVitality : MonoBehaviour
         if (InputManager.instance.IsKeyDown(KeyType.F))
             Eat(30.0f);
 
-        if (!IsStatusActive(statusType.OVER_FILLED))
-            m_hunger -= Time.deltaTime;
+        if (IsStatusActive(statusType.OVER_FILLED))
+            m_hunger += Time.deltaTime * 2.0f;
 
-        if (m_hunger < 0)
-            m_hunger = 0;
+        if (m_hunger <= 0)
+            PlayerDeath();
 
         StatusUpdate();
     }
 
+    public void Damage(float _damage)
+    {
+        m_hunger -= _damage;
+    }
+
+    public void PlayerDeath()
+    {
+
+    }
     public float GetHunger()
     {
         return m_hunger;

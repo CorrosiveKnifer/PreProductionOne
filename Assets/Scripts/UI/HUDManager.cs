@@ -75,4 +75,16 @@ public class HUDManager : MonoBehaviour
         }
         return null;
     }
+
+    public UI_Element GetElementByType(System.Type type)
+    {
+        foreach (var item in m_UIElements)
+        {
+            if(item.GetComponent<UI_Element>().GetType() == type)
+            {
+                return item.GetComponent<UI_Element>();
+            }
+        }
+        return null;
+    }
 }

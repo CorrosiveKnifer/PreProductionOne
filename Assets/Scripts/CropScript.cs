@@ -9,14 +9,15 @@ public class CropScript : MonoBehaviour
     public GameObject m_plant;
     public GameObject m_harvest;
     public Vector3 m_finalSize;
-    public int m_itemID = -1;
-    public int m_dropAmount = 0;
+    public int[] m_itemID;
+    public int[] m_dropAmount;
+    public bool m_renewable = true;
     private Vector3 m_stepSize;
 
     [Header("ReadOnly")]
     public int m_birthDay = -1;
     public int m_nextHarvest = 0;
-
+    public float m_waterValue = 0.0f;
     private int m_age = 0;
     private int m_lastRecordedDay = 0;
 
@@ -59,18 +60,55 @@ public class CropScript : MonoBehaviour
             Grow();
         }
 
+        GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.white, new Color(0.5f, 0.25f, 0), m_waterValue);
+
         GetComponent<SerializedObject>().data.m_age = m_age;
         GetComponent<SerializedObject>().data.m_nextHarvest = m_nextHarvest;
     }
 
-    public void Harvest()
+    public void Interact()
     {
-        if(m_nextHarvest <= GameManager.instance.m_day)
+        ItemObject item = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().GetSelectItem();
+
+        if(item.GetToolType() == ToolType.WaterCan)
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().AddItem(ItemObject.CreateItem(m_itemID, (uint)m_dropAmount));
+            float amount = Mathf.Clamp(item.m_amount-1, 0, 20.0f);
+            Water(amount);
+
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().RemoveItem(7, (int)amount);
+            return;
+        }
+
+        if (item.GetToolType() == ToolType.Shovel)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        if (m_nextHarvest <= GameManager.instance.m_day)
+        {
+            for (int i = 0; i < m_itemID.Length; i++)
+            {
+                if(i < m_dropAmount.Length)
+                {
+                    if (m_dropAmount[i] > 0)
+                    {
+                        LootDrop.CreateLoot(m_itemID[i], (uint)m_dropAmount[i], transform.position + transform.up);
+                    }
+                    else
+                    {
+                        LootDrop.CreateLoot(m_itemID[i], (uint)Random.Range(1, -1 * m_dropAmount[i]), transform.position + transform.up);
+                    }
+                }
+            }
             m_harvest.GetComponent<Animator>().SetBool("IsHarvested", true);
 
             m_nextHarvest += m_growthPeriod;
+
+            if (!m_renewable)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -113,5 +151,10 @@ public class CropScript : MonoBehaviour
         }
         objectToScale.transform.localScale = target;
         yield return null;
+    }
+
+    public void Water(float val)
+    {
+        m_waterValue = Mathf.Clamp(m_waterValue+(val/20.0f), 0.0f, 1.0f);
     }
 }
