@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     private void FixedUpdate()
@@ -89,6 +90,9 @@ public class PlayerMovement : MonoBehaviour
         // Movement
         normalizedMove += _move.y * transform.forward;
         normalizedMove += _move.x * transform.right;
+
+        //Player Animation
+        m_playerModel.GetComponent<Animator>().SetBool("IsMoving", _move != Vector2.zero);
 
         // Apply movement
         Vector3 movement = normalizedMove.normalized * speed * Time.deltaTime;

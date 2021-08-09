@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: EmberBerry
   m_EditorClassIdentifier: 
   m_maxAge: 7
-  m_timeRequired: 0
-  m_maxHeight: {x: 0, y: 0, z: 0}
+  m_timeRequired: 2
+  m_maxHeight: {x: 1.3, y: 1.3, z: 1.3}
   m_minVariance: 0.85
   m_maxVariance: 1.15
-  m_isRenewable: 0
-  m_waterRequirement: 0.25
-  m_waterDecay: 0.5
-  m_drops: []
+  m_isRenewable: 1
+  m_waterRequirement: 0.15
+  m_waterDecay: 0.8
+  m_drops:
+  - m_itemDropID: 13
+    m_isRandom: 0
+    m_minDropAmount: 1
+    m_maxDropAmount: 1
