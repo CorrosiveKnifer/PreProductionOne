@@ -39,4 +39,8 @@ public class SunScript : MonoBehaviour
         
         transform.rotation = Quaternion.Euler(new Vector3(rotationVal, 0, 0));
     }
+    public float GetTimePassed()
+    {
+        return (m_secondsPerDay / 24.0f) / Time.deltaTime;
+    }
 }

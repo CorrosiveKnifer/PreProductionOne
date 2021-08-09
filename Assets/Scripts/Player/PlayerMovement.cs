@@ -37,13 +37,14 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         characterController.enabled = false;
-        transform.position = FindObjectOfType<SceneDoorManager>().GetDoorSpawnPosition(GameManager.instance.m_TargetDoor);
+        //transform.position = FindObjectOfType<SceneDoorManager>().GetDoorSpawnPosition(GameManager.instance.m_TargetDoor);
         characterController.enabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+
     }
 
     private void FixedUpdate()
@@ -89,6 +90,9 @@ public class PlayerMovement : MonoBehaviour
         // Movement
         normalizedMove += _move.y * transform.forward;
         normalizedMove += _move.x * transform.right;
+
+        //Player Animation
+        m_playerModel.GetComponent<Animator>().SetBool("IsMoving", _move != Vector2.zero);
 
         // Apply movement
         Vector3 movement = normalizedMove.normalized * speed * Time.deltaTime;
