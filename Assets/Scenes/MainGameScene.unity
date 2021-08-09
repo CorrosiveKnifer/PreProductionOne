@@ -3255,7 +3255,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9445a9892c2fd9d4098a82185f255edd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.03
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9445a9892c2fd9d4098a82185f255edd,
         type: 3}
@@ -8250,6 +8250,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 3108147027990260894, guid: c89136e84ecf7324db35c858474c18b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3896173894283091672, guid: c89136e84ecf7324db35c858474c18b3,
         type: 3}
       propertyPath: m_RootOrder
@@ -10007,17 +10012,17 @@ PrefabInstance:
     - target: {fileID: 4574658800959128121, guid: 1d57402e9ddb91241acabb26c8f7b94a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.762016
+      value: 11.14
       objectReference: {fileID: 0}
     - target: {fileID: 4574658800959128121, guid: 1d57402e9ddb91241acabb26c8f7b94a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.4845495
+      value: 7.94
       objectReference: {fileID: 0}
     - target: {fileID: 4574658800959128121, guid: 1d57402e9ddb91241acabb26c8f7b94a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.326418
+      value: -4.93
       objectReference: {fileID: 0}
     - target: {fileID: 4574658800959128121, guid: 1d57402e9ddb91241acabb26c8f7b94a,
         type: 3}

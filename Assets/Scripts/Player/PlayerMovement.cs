@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         characterController.enabled = false;
-        transform.position = FindObjectOfType<SceneDoorManager>().GetDoorSpawnPosition(GameManager.instance.m_TargetDoor);
+        //transform.position = FindObjectOfType<SceneDoorManager>().GetDoorSpawnPosition(GameManager.instance.m_TargetDoor);
         characterController.enabled = true;
     }
 
