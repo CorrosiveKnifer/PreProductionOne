@@ -51,7 +51,7 @@ public class AudioManager
     public List<ListenerAgent> listeners { get; private set; }
 
     //private array of volumes
-    private float[] volumes;
+    public float[] volumes;
     
     //Volume types: 
     //(Add more to dynamically expand the above array)

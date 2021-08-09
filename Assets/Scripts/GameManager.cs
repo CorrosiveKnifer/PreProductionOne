@@ -121,6 +121,11 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void ClearGameFile()
+    {
+        m_saveSlot = new SaveSlot();
+    }
+
     public void SkipTime(float hoursIncreased)
     {
         m_currentHour += hoursIncreased;
