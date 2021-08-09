@@ -15,8 +15,13 @@ public class PlayerController : MonoBehaviour
     private PlayerPlacing m_playerPlacing;
     private PlayerInteractor m_playerInteractor;
     private PlayerInventory m_playerInventory;
+    private PlayerQuests m_playerQuests;
     private Vector2 movementInput;
     private bool jumpInput = false;
+
+    private float m_inputDelay;
+    private bool m_showInventory = false;
+    [SerializeField] private GameObject m_menu;
 
     private void Awake()
     {
@@ -26,26 +31,29 @@ public class PlayerController : MonoBehaviour
         m_playerPlacing = GetComponent<PlayerPlacing>();
         m_playerInteractor = GetComponent<PlayerInteractor>();
         m_playerInventory = GetComponent<PlayerInventory>();
+        m_playerQuests = GetComponent<PlayerQuests>();
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        m_menu = HUDManager.instance.GetElementByType(typeof(UI_QuestList)).transform.parent.gameObject;
+        m_menu.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        CameraControl();
-        HotbarInput();
-        InteractInput();
+        HUDInput();
 
         if (m_functionalityEnabled)
         {
+            CameraControl();
+            InteractInput();
             MovementInput();
             CombatInput();
-
+            HotbarInput();
             // Call movement function
             playerMovement.Move(movementInput);
         }
@@ -101,7 +109,6 @@ public class PlayerController : MonoBehaviour
             if (InputManager.instance.IsKeyDown(KeyType.ALP_ONE + i))
             {
                 m_playerPlacing.SetSelectedIndex(i);
-                m_playerInventory.SelectItem(i);
             }
         }
     }
@@ -123,6 +130,51 @@ public class PlayerController : MonoBehaviour
         if (InputManager.instance.GetMouseButtonDown(MouseButton.RIGHT))
         {
             playerMovement.SwingAttack();
+        }
+    }
+    private void HUDInput()
+    {
+        if (m_inputDelay > 0.0f)
+        {
+            m_inputDelay -= Time.deltaTime;
+            return;
+        }
+
+        if (InputManager.instance.IsKeyDown(KeyType.I) && m_inputDelay <= 0)
+        {
+            m_inputDelay = 0.25f;
+            m_showInventory = !m_showInventory;
+
+            if (m_showInventory)
+            {
+                m_functionalityEnabled = false;
+                m_playerInventory.GenerateOnDisplay(true);
+                m_playerQuests.GenerateOnDisplay(false);
+            }
+            else
+            {
+                m_functionalityEnabled = true;
+            }
+
+            m_menu.SetActive(m_showInventory);
+        }
+        if (InputManager.instance.IsKeyDown(KeyType.O) && m_inputDelay <= 0)
+        {
+            m_inputDelay = 0.25f;
+            m_showInventory = !m_showInventory;
+
+            if (m_showInventory)
+            {
+                m_playerInventory.GenerateOnDisplay(false);
+                m_playerQuests.GenerateOnDisplay(true);
+                m_functionalityEnabled = false;
+            }
+            else
+            {
+                m_functionalityEnabled = true;
+            }
+
+            m_menu.SetActive(m_showInventory);
         }
     }
 }

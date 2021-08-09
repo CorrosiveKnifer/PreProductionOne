@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UI_QuestList: UI_Element
 {
+    public GameObject m_contentParent;
+
     [SerializeField] private GameObject m_item;
     public List<UI_QuestItem> m_list;
 
@@ -20,11 +22,17 @@ public class UI_QuestList: UI_Element
         
     }
 
+    private void OnDisable()
+    {
+        ClearList();
+    }
+
     public void Generate(List<Quest> _quests)
     {
         foreach (var item in _quests)
         {
-            //m_list.Add(Instantiate(m_item, m_contentParent.transform).GetComponent<UI_QuestItem>());
+            m_list.Add(Instantiate(m_item, m_contentParent.transform).GetComponent<UI_QuestItem>());
+            m_list[m_list.Count - 1].SetQuest(item);
         }
     }
 
