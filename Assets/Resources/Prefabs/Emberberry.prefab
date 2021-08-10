@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5771061581043610488, guid: f408c40ebaea3ac4cab6c61571d84e89, type: 3}
+  - {fileID: 2100000, guid: 7b8d4de9517e8a9468c9bce479e5aba5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,7 +137,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1771410289475553467, guid: f408c40ebaea3ac4cab6c61571d84e89, type: 3}
+  - {fileID: 2100000, guid: 7b8d4de9517e8a9468c9bce479e5aba5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -259,7 +259,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -5071,9 +5071,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2884fe8e150b5418d11bb196bb231d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_data: {fileID: 0}
-  m_plant: {fileID: 0}
-  m_harvest: {fileID: 0}
+  m_data: {fileID: 11400000, guid: 7cdec93db988bc54bae376ff532e3beb, type: 2}
+  m_plant: {fileID: 5126580740085493480}
+  m_harvest: {fileID: 2242263079175499009}
   m_birthDay: 0
   m_waterValue: 0
 --- !u!135 &4975931497945739485
@@ -5102,7 +5102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    m_itemID: 0
+    m_itemID: 13
     m_age: -1
     m_nextHarvest: -1
     m_water: 0

@@ -33,6 +33,7 @@ public class UI_SlotDisplay : UI_Element
     private void Start()
     {
         m_isShowingDependencies = false;
+        m_buttonImage.color = new Color(0.75f, 0.75f, 0.75f, 1.0f);
     }
 
     // Update is called once per frame
@@ -163,11 +164,11 @@ public class UI_SlotDisplay : UI_Element
     }
     public void Select()
     {
-        m_buttonImage.color = new Color(0.75f, 0.75f, 0.75f, 1.0f);
+        m_buttonImage.color = Color.white;
     }
 
     public void Unselect()
     {
-        m_buttonImage.color = Color.white;
+        m_buttonImage.color = new Color(0.75f, 0.75f, 0.75f, 1.0f);
     }
 }

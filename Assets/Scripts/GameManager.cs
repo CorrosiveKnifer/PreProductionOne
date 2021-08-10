@@ -63,7 +63,6 @@ public class GameManager : MonoBehaviour
     public float m_hunger = 100.0f;
     public float m_currentHour = 8;
     public int m_day = 0;
-
     // Start is called before the first frame update
     void Start()
     {
