@@ -186,10 +186,10 @@ public class Slime : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (m_combining)
+        if (m_combining || m_knockbackTimer < 0.0f)
             return;
 
-        if (collision.gameObject.GetComponent<Slime>() && m_knockbackTimer >= 0.0f)
+        if (collision.gameObject.GetComponent<Slime>() && m_size < 5)
         {
             if (collision.gameObject.GetComponent<Slime>().GetSize() == m_size && !collision.gameObject.GetComponent<Slime>().GetCombining())
             {
@@ -204,6 +204,14 @@ public class Slime : MonoBehaviour
                 // Destroy this slime.
                 SetToCombine();
             }
+        }
+        else if (collision.gameObject.GetComponent<CropScript>())
+        {
+            // Call crop grow function.
+            collision.gameObject.GetComponent<CropScript>().Grow(m_size);
+
+            // Destroy this slime.
+            SetToCombine();
         }
     }
 
