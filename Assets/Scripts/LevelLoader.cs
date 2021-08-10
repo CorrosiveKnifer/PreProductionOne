@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -196,11 +197,17 @@ public class LevelLoader : MonoBehaviour
                     inWorld.GetComponent<SerializedObject>().UpdateTo(item);
                 }
             }
+
+            GameManager.instance.m_saveSlot.InstansiateNPCs(scene.buildIndex);
         }
     }
 
-    private void SaveSceneToSlot(SaveSlot slot)
+    public void SaveSceneToSlot(SaveSlot slot)
     {
         slot.SaveObjects(GameObject.FindGameObjectsWithTag("SerializedObject"));
+        foreach (var item in GameObject.FindGameObjectsWithTag("NPC"))
+        {
+            slot.AddNPC(item.GetComponent<NPCScript>());
+        }
     }
 }

@@ -3,15 +3,15 @@
     {
       "id": 0,
       "name": "Corn",
-      "placePrefabName": "Prefabs/Corn Test",
-      "inventoryImageName": "Sprites/Corn",
+      "placePrefabName": "Prefabs/Corn",
+      "inventoryImageName": "Sprites/CornIcon",
       "dropPrefabName": "",
       "itemType": "Crop"
     },
     {
       "id": 1,
       "name": "Strawberries",
-      "placePrefabName": "Strawberries",
+      "placePrefabName": "Prefabs/Strawberries",
       "inventoryImageName": "Sprites/Strawberries",
       "dropPrefabName": "",
       "itemType": "Crop"
@@ -19,7 +19,7 @@
 	{
       "id": 2,
       "name": "Sunflower",
-      "placePrefabName": "Sunflower",
+      "placePrefabName": "Null",
       "inventoryImageName": "Sprites/Sunflower",
       "dropPrefabName": "",
       "itemType": "Crop"
@@ -27,7 +27,7 @@
 	{
       "id": 3,
       "name": "Tomato",
-      "placePrefabName": "Tomato",
+      "placePrefabName": "Prefabs/Tomatos",
       "inventoryImageName": "Sprites/Tomato",
       "dropPrefabName": "",
       "itemType": "Crop"
@@ -37,6 +37,78 @@
       "name": "Berries",
       "placePrefabName": "Null",
       "inventoryImageName": "Sprites/Berries",
+      "dropPrefabName": "",
+      "itemType": "Crop"
+    },
+	{
+      "id": 5,
+      "name": "Sunflower Seeds",
+      "placePrefabName": "Prefabs/Sunflower",
+      "inventoryImageName": "Sprites/SunflowerSeedIcon",
+      "dropPrefabName": "",
+      "itemType": "Crop"
+    },
+	{
+      "id": 6,
+      "name": "Shovel",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/ShovelIcon",
+      "dropPrefabName": "",
+      "itemType": "Tool"
+    },
+	{
+      "id": 7,
+      "name": "Watering Can",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/WateringCanIcon",
+      "dropPrefabName": "",
+      "itemType": "Tool"
+    },
+	{
+      "id": 8,
+      "name": "Common Mulch",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/CommonMulch",
+      "dropPrefabName": "",
+      "itemType": "CropUtil"
+    },
+	{
+      "id": 9,
+      "name": "Uncommon Mulch",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/UncommonMulch",
+      "dropPrefabName": "",
+      "itemType": "CropUtil"
+    },
+	{
+      "id": 10,
+      "name": "Rare Mulch",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/RareMulch",
+      "dropPrefabName": "",
+      "itemType": "CropUtil"
+    },
+	{
+      "id": 11,
+      "name": "Epic Mulch",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/EpicMulch",
+      "dropPrefabName": "",
+      "itemType": "CropUtil"
+    },
+	{
+      "id": 12,
+      "name": "Legendary Mulch",
+      "placePrefabName": "Null",
+      "inventoryImageName": "Sprites/LegendaryMulch",
+      "dropPrefabName": "",
+      "itemType": "CropUtil"
+    },
+	{
+      "id": 13,
+      "name": "Emberberry",
+      "placePrefabName": "Prefabs/Emberberry",
+      "inventoryImageName": "Sprites/EmberberryIcon",
       "dropPrefabName": "",
       "itemType": "Crop"
     }

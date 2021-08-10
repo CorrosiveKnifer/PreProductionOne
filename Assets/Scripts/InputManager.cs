@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
@@ -84,7 +85,6 @@ public class InputManager : MonoBehaviour
         if (_instance == this)
             _instance = null;
     }
-
     #endregion
 
     protected Mouse mouse;
@@ -239,6 +239,29 @@ public class InputManager : MonoBehaviour
     public bool IsAnyKeyPressed()
     {
         return keyboard.anyKey.isPressed;
+    }
+    public bool IsAnyKeyDown()
+    {
+        foreach (var keyType in Enum.GetValues(typeof(KeyType)).Cast<KeyType>())
+        {
+            if(IsKeyDown(keyType))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool IsAnyMouseButtonDown()
+    {
+        foreach (var mouseButton in Enum.GetValues(typeof(MouseButton)).Cast<MouseButton>())
+        {
+            if (GetMouseButtonDown(mouseButton))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public KeyControl GetKey(KeyType key)

@@ -13,10 +13,11 @@ public class PlayerPlacing : MonoBehaviour
     private PlayerInventory m_PlayerInventory;
     private float m_CurrentRotation = 0;
     private int m_SelectedIndex = -1;
+
     // Start is called before the first frame update
     void Start()
     {
-        m_PlayerCamera = GetComponentInChildren<Camera>();
+        m_PlayerCamera = GetComponent<PlayerController>().GetCamera();
         m_PlayerInventory = GetComponent<PlayerInventory>();
     }
 
@@ -82,9 +83,18 @@ public class PlayerPlacing : MonoBehaviour
 
     public void SetSelectedIndex(int _index)
     {
+        if(_index == -1)
+        {
+            m_SelectedIndex = -1;
+            m_SelectedObject = null;
+            m_PlayerInventory.SelectItem(-1);
+            return;
+        }
+
         if (m_SelectedIndex != _index)
         {
             m_SelectedIndex = _index;
+            m_PlayerInventory.SelectItem(_index);
             ItemObject item = m_PlayerInventory.GetItemFromHotbar(_index);
             if (item != null)
                 m_SelectedObject = item.GetPlaceObject();
@@ -93,6 +103,7 @@ public class PlayerPlacing : MonoBehaviour
         }
         else
         {
+            m_PlayerInventory.SelectItem(-1);
             m_SelectedIndex = -1;
             m_SelectedObject = null;
         }
