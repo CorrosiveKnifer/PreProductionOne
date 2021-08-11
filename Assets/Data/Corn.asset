@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Corn
   m_EditorClassIdentifier: 
   m_maxAge: 5
-  m_timeRequired: 0
+  m_timeRequired: 4
   m_maxHeight: {x: 2.5, y: 2.5, z: 2.5}
   m_minVariance: 0.85
   m_maxVariance: 1.15

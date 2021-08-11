@@ -28,11 +28,11 @@ public class CropData : ScriptableObject
     [Tooltip("If the plant is not destroyed upon harvesting.")]
     public Vector3 m_maxHeight;
 
-    [Range(0.0f, 1.0f)]
+    [Range(0.0f, 2.0f)]
     [Tooltip("Min variance to the max height.")]
     public float m_minVariance = 0.85f;
 
-    [Range(0.0f, 1.0f)]
+    [Range(0.0f, 2.0f)]
     [Tooltip("Max variance to the max height.")]
     public float m_maxVariance = 1.15f;
 
