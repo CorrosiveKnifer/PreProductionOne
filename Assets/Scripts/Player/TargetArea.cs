@@ -20,7 +20,7 @@ public class TargetArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.gameObject.layer != 8)
+        if (other.transform.gameObject.layer != 8 && !other.isTrigger)
         {
             m_obstructions.Add(other.gameObject);
         }
