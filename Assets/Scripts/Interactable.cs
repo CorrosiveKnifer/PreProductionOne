@@ -23,7 +23,7 @@ public class Interactable : MonoBehaviour
     {
         if (other.GetComponent<PlayerInteractor>())
         {
-            other.GetComponent<PlayerInteractor>().SetSelected(this, true);
+            other.GetComponent<PlayerInteractor>().AddCollider(gameObject);
         }
     }
 
@@ -31,7 +31,7 @@ public class Interactable : MonoBehaviour
     {
         if (other.GetComponent<PlayerInteractor>())
         {
-            other.GetComponent<PlayerInteractor>().SetSelected(this, false);
+            other.GetComponent<PlayerInteractor>().RemoveCollider(gameObject);
         }
     }
 

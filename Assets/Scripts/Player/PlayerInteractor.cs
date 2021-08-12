@@ -1,12 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInteractor : MonoBehaviour
 {
     private Camera m_PlayerCamera;
-    Interactable m_selectedInteractable;
-
+    public Interactable m_selectedInteractable;
+    public List<GameObject> m_interactables = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -35,9 +36,23 @@ public class PlayerInteractor : MonoBehaviour
         }
     }
 
+    public void AddCollider(GameObject toAdd)
+    {
+        m_interactables.Add(toAdd);
+    }
+    public void RemoveCollider(GameObject toRemove)
+    {
+        m_interactables.Remove(toRemove);
+    }
+
     public void InteractWithObject()
     {
         if (m_selectedInteractable != null)
             m_selectedInteractable.Interact();
+    }
+
+    public bool Contains(GameObject gameObject)
+    {
+        return m_interactables.Contains(gameObject);
     }
 }
