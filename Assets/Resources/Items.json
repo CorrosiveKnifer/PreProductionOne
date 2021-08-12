@@ -12,7 +12,7 @@
       "id": 1,
       "name": "Strawberries",
       "placePrefabName": "Prefabs/Strawberries",
-      "inventoryImageName": "Sprites/Strawberries",
+      "inventoryImageName": "Sprites/StrawberryIcon",
       "dropPrefabName": "",
       "itemType": "Crop"
     },
@@ -28,7 +28,7 @@
       "id": 3,
       "name": "Tomato",
       "placePrefabName": "Prefabs/Tomatos",
-      "inventoryImageName": "Sprites/Tomato",
+      "inventoryImageName": "Sprites/TomatoIcon",
       "dropPrefabName": "",
       "itemType": "Crop"
     },
