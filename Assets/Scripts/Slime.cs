@@ -140,6 +140,7 @@ public class Slime : MonoBehaviour
         StartCoroutine(DamageFlash());
 
         m_health -= _damage;
+        DamageNumberManager.instance.CreateDamageNumber(transform.position, _damage);
 
         if (m_health <= 0)
         {
@@ -207,8 +208,13 @@ public class Slime : MonoBehaviour
         }
         else if (collision.gameObject.GetComponent<CropScript>())
         {
+            // Growth data
+            MulchData data = new MulchData();
+            data.m_age = 0.5f * m_size;
+            data.m_water = 0.4f * m_size;
+
             // Call crop grow function.
-            collision.gameObject.GetComponent<CropScript>().Grow(m_size);
+            collision.gameObject.GetComponent<CropScript>().ApplyUtility(data);
 
             // Destroy this slime.
             SetToCombine();
