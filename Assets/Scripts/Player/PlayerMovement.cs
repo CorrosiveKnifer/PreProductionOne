@@ -91,8 +91,6 @@ public class PlayerMovement : MonoBehaviour
         normalizedMove += _move.y * transform.forward;
         normalizedMove += _move.x * transform.right;
 
-        //Player Animation
-        m_playerModel.GetComponent<Animator>().SetBool("IsMoving", _move != Vector2.zero);
 
         // Apply movement
         Vector3 movement = normalizedMove.normalized * speed * Time.deltaTime;
