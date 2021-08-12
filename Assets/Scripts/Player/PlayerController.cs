@@ -11,11 +11,17 @@ public class PlayerController : MonoBehaviour
 
     public bool m_functionalityEnabled = true;
 
+    public Texture2D DefaultCursor;
+    public Texture2D HandCursor;
+    public Texture2D AttackCursor;
+    public Texture2D TalkCursor;
+
     private PlayerMovement playerMovement;
     private PlayerPlacing m_playerPlacing;
     private PlayerInteractor m_playerInteractor;
     private PlayerInventory m_playerInventory;
     private PlayerQuests m_playerQuests;
+    private Camera m_playerCamera;
     private Vector2 movementInput;
     private bool jumpInput = false;
 
@@ -32,7 +38,8 @@ public class PlayerController : MonoBehaviour
         m_playerInteractor = GetComponent<PlayerInteractor>();
         m_playerInventory = GetComponent<PlayerInventory>();
         m_playerQuests = GetComponent<PlayerQuests>();
-
+        m_playerCamera = GetCamera();
+        Cursor.SetCursor(DefaultCursor, Vector2.zero, CursorMode.Auto);
     }
 
     // Start is called before the first frame update
@@ -45,6 +52,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CursorUpdate();
         HUDInput();
 
         if (m_functionalityEnabled)
@@ -57,13 +65,62 @@ public class PlayerController : MonoBehaviour
             // Call movement function
             playerMovement.Move(movementInput);
         }
-
     }
+
     private void FixedUpdate()
     {
-
         // Set jump input to off
         jumpInput = false;
+    }
+
+    public void CursorUpdate()
+    {
+        RaycastHit hit;
+        Ray ray = m_playerCamera.ScreenPointToRay(InputManager.instance.GetMousePositionInScreen());
+        if (Physics.Raycast(ray, out hit, 1000))
+        {
+            if (hit.collider.tag == "Interactable" || hit.collider.tag == "SerializedObject")
+            {
+                if (hit.collider.GetComponent<WaterFiller>() != null && m_playerInventory.GetSelectItem()?.GetToolType() == ToolType.WaterCan)
+                {
+                    if(m_playerInteractor.Contains(hit.collider.gameObject))
+                    {
+                        Cursor.SetCursor(HandCursor, Vector2.zero, CursorMode.Auto);
+                        return;
+                    }
+                    return;
+                }
+                if (hit.collider.GetComponent<CropScript>() != null && m_playerInventory.GetSelectItem()?.GetToolType() != ToolType.Null)
+                {
+                    if(m_playerInteractor.Contains(hit.collider.gameObject))
+                    {
+                        Cursor.SetCursor(HandCursor, Vector2.zero, CursorMode.Auto);
+                        return;
+                    }
+                    return;
+                }
+            }
+            if (hit.collider.tag == "NPC")
+            {
+                if (m_playerInteractor.Contains(hit.collider.gameObject))
+                {
+                    Cursor.SetCursor(TalkCursor, Vector2.zero, CursorMode.Auto);
+                    return;
+                }
+            }
+
+            if (hit.collider.tag == "Enemy")
+            {
+                if (m_playerInventory.GetSelectItem()?.GetToolType() == ToolType.Shovel)
+                {
+                    Cursor.SetCursor(AttackCursor, Vector2.zero, CursorMode.Auto);
+                    return;
+                }
+            }
+        }
+
+        Cursor.SetCursor(DefaultCursor, Vector2.zero, CursorMode.Auto);
+        return;
     }
 
     private void CameraControl()
@@ -115,9 +172,31 @@ public class PlayerController : MonoBehaviour
 
     private void InteractInput()
     {
-        if (InputManager.instance.IsKeyDown(KeyType.E))
+        if (InputManager.instance.GetMouseButtonDown(MouseButton.LEFT))
         {
-            m_playerInteractor.InteractWithObject();
+            RaycastHit hit;
+            Ray ray = m_playerCamera.ScreenPointToRay(InputManager.instance.GetMousePositionInScreen());
+            if (Physics.Raycast(ray, out hit, 1000)) 
+            {
+                if(m_playerInteractor.Contains(hit.collider.gameObject))
+                {
+                    hit.collider.GetComponent<Interactable>().Interact();
+                }
+
+                //if (hit.collider.tag == "Interactable" || hit.collider.tag == "SerializedObject")
+                //{
+                //    if (hit.collider.GetComponent<WaterFiller>() != null && m_playerInventory.GetSelectItem()?.GetToolType() == ToolType.WaterCan)
+                //    {
+                //        Cursor.SetCursor(HandCursor, Vector2.zero, CursorMode.Auto);
+                //        return;
+                //    }
+                //    if (hit.collider.GetComponent<CropScript>() != null && m_playerInventory.GetSelectItem()?.GetToolType() != ToolType.Null)
+                //    {
+                //        Cursor.SetCursor(HandCursor, Vector2.zero, CursorMode.Auto);
+                //        return;
+                //    }
+                //}
+            }
         }
     }
 

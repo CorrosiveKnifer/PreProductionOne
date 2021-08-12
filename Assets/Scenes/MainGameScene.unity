@@ -9987,6 +9987,26 @@ PrefabInstance:
       propertyPath: m_menu
       value: 
       objectReference: {fileID: 1585694310}
+    - target: {fileID: 4574658800959128101, guid: 1d57402e9ddb91241acabb26c8f7b94a,
+        type: 3}
+      propertyPath: HandCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 171526573e471f047a322b925086f8af, type: 3}
+    - target: {fileID: 4574658800959128101, guid: 1d57402e9ddb91241acabb26c8f7b94a,
+        type: 3}
+      propertyPath: TalkCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 07acca542947c724aa318c86c9592806, type: 3}
+    - target: {fileID: 4574658800959128101, guid: 1d57402e9ddb91241acabb26c8f7b94a,
+        type: 3}
+      propertyPath: AttackCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 6be37d9aacad9c341bc75f192a4a994e, type: 3}
+    - target: {fileID: 4574658800959128101, guid: 1d57402e9ddb91241acabb26c8f7b94a,
+        type: 3}
+      propertyPath: DefaultCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 16e9d831a4ba50646b54c14d79568a14, type: 3}
     - target: {fileID: 4574658800959128102, guid: 1d57402e9ddb91241acabb26c8f7b94a,
         type: 3}
       propertyPath: jumpSpeed
