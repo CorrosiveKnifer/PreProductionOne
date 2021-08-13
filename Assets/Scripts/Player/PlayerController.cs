@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
     private float m_inputDelay;
     private bool m_showInventory = false;
     [SerializeField] private GameObject m_menu;
+    private bool isAttacking = false;
 
     private void Awake()
     {
@@ -117,10 +118,19 @@ public class PlayerController : MonoBehaviour
         if (m_functionalityEnabled)
         {
             CameraControl();
-            InteractInput();
-            MovementInput();
-            CombatInput();
-            HotbarInput();
+            isAttacking = m_shovelplayerAnimator.GetBool("Mutex");
+            if (!isAttacking)
+            {
+                InteractInput();
+                MovementInput();
+                CombatInput();
+                HotbarInput();
+            }
+            else
+            {
+                movementInput = Vector2.zero;
+            }
+
             // Call movement function
             playerMovement.Move(movementInput);
 
