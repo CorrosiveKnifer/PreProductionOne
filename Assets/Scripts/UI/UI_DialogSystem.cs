@@ -169,4 +169,12 @@ public class UI_DialogSystem : UI_Element
     {
         //Do Nothing
     }
+    public void OnEnable()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().m_functionalityEnabled = false;
+    }
+    public void OnDisable()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().m_functionalityEnabled = true;
+    }
 }

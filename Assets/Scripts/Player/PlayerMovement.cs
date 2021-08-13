@@ -165,17 +165,8 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
-
     public void SwingAttack()
     {
-        if(GetComponent<PlayerInventory>().GetSelectItem()?.GetToolType() != ToolType.Shovel)
-        {
-            return;
-        }
-
-        Debug.Log("Swing!");
-        // Play an attack anmation
-
         // Detect enemies in range of attacks
         Collider[] hits = Physics.OverlapSphere(m_attackPoint.position, m_attackRange, m_enemyLayer);
 
@@ -197,14 +188,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void SlamAttack()
     {
-        if (GetComponent<PlayerInventory>().GetSelectItem()?.GetToolType() != ToolType.Shovel)
-        {
-            return;
-        }
-        
-        Debug.Log("Slam!");
-        // Play an attack anmation
-
         // Detect enemies in range of attacks
         Collider[] hits = Physics.OverlapSphere(m_attackPoint.position, m_attackRange, m_enemyLayer);
 

@@ -83,6 +83,8 @@ public class PlayerController : MonoBehaviour
     private float m_inputDelay;
     private bool m_showInventory = false;
     [SerializeField] private GameObject m_menu;
+    private bool isAttacking = false;
+    private GameObject m_digActionObject;
 
     private void Awake()
     {
@@ -120,10 +122,19 @@ public class PlayerController : MonoBehaviour
         if (m_functionalityEnabled)
         {
             CameraControl();
-            InteractInput();
-            MovementInput();
-            CombatInput();
-            HotbarInput();
+            isAttacking = m_shovelplayerAnimator.GetBool("Mutex");
+            if (!isAttacking)
+            {
+                InteractInput();
+                MovementInput();
+                CombatInput();
+                HotbarInput();
+            }
+            else
+            {
+                movementInput = Vector2.zero;
+            }
+
             // Call movement function
             playerMovement.Move(movementInput);
 
@@ -275,7 +286,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     private void MovementInput()
     {
         movementInput = new Vector2();
@@ -324,6 +334,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void StartDigActionOn(GameObject gameObject)
+    {
+        m_digActionObject = gameObject;
+
+        //TODO: Rotate player
+
+        m_shovelplayer.animator.SetTrigger("Dig");
+    }
+
+    public void DigAction()
+    {
+        Destroy(m_digActionObject);
+        m_digActionObject = null;
+    }
+
     private void CombatInput()
     {
         if (!m_canAttack)
@@ -336,12 +361,12 @@ public class PlayerController : MonoBehaviour
                 if (InputManager.instance.GetMouseButtonDown(MouseButton.LEFT))
                 {
                     m_shovelplayer.animator.SetTrigger("Slam");
-                    playerMovement.SlamAttack();
+                    //playerMovement.SlamAttack();
                 }
                 if (InputManager.instance.GetMouseButtonDown(MouseButton.RIGHT))
                 {
                     m_shovelplayer.animator.SetTrigger("Swing");
-                    playerMovement.SwingAttack();
+                    //playerMovement.SwingAttack();
                 }
             }
         }
