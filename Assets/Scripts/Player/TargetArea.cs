@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class TargetArea : MonoBehaviour
 {
+<<<<<<< HEAD
 
     public Dictionary<GameObject, int> m_obstructions;
+=======
+    public List<GameObject> m_obstructions;
+>>>>>>> origin/Michael
 
     // Start is called before the first frame update
     void Awake()
