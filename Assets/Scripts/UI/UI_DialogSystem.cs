@@ -58,6 +58,12 @@ public class UI_DialogSystem : UI_Element
     // Update is called once per frame
     void Update()
     {
+
+        if(InputManager.instance.IsKeyDown(KeyType.ESC))
+        {
+            gameObject.SetActive(false);
+        }
+
         if((InputManager.instance.IsAnyKeyDown() || InputManager.instance.IsAnyMouseButtonDown()) && m_currentRoutine != null)
         {
             StopCoroutine(m_currentRoutine);

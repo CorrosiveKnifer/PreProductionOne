@@ -1,10 +1,10 @@
 {
-	"myName" : "Perry the Mail Dragon",
+	"myName" : "Quest Board",
 	
 	"greeting" : 
 	[
-		{"text" : "Hello Child", "image" : "Perry/Happy"},
-		{"text" : "Oh boiiiii", "image" : "Perry/Happy"}
+		{"text" : "*Remember to water your crops every day!*", "image" : "QuestBoard"},
+		{"text" : "*Remember, you can knock slimes into eachother to make bigger slimes*", "image" : "Perry/Happy"}
 	],
 	
 	"questImage" : "Perry/Happy",
