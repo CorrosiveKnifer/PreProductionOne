@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TargetArea : MonoBehaviour
 {
-    Struct
-
     public List<GameObject> m_obstructions;
 
     // Start is called before the first frame update
