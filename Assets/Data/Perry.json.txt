@@ -1,0 +1,11 @@
+{
+	"greeting" : 
+	[
+		{"text" : "Hello Child", "image" : "Perry/Happy"},
+		{"text" : "Oh boiiiii", "image" : "Perry/Happy"}
+	],
+	
+	"noQuest" : {"text" : "Sorry but I have no quests.", "image" : "Perry/Neutral"},
+	
+	"failedQuest" : {"text" : "Unfortunate.", "image" : "Perry/Neutral"}
+}

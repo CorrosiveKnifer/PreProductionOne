@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
     private bool m_showInventory = false;
     [SerializeField] private GameObject m_menu;
     private bool isAttacking = false;
+    private GameObject m_digActionObject;
 
     private void Awake()
     {
@@ -267,7 +268,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     private void MovementInput()
     {
         movementInput = new Vector2();
@@ -316,6 +316,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void StartDigActionOn(GameObject gameObject)
+    {
+        m_digActionObject = gameObject;
+
+        //TODO: Rotate player
+
+        m_shovelplayer.animator.SetTrigger("Dig");
+    }
+
+    public void DigAction()
+    {
+        Destroy(m_digActionObject);
+        m_digActionObject = null;
+    }
+
     private void CombatInput()
     {
         if (!m_canAttack)
@@ -328,12 +343,12 @@ public class PlayerController : MonoBehaviour
                 if (InputManager.instance.GetMouseButtonDown(MouseButton.LEFT))
                 {
                     m_shovelplayer.animator.SetTrigger("Slam");
-                    playerMovement.SlamAttack();
+                    //playerMovement.SlamAttack();
                 }
                 if (InputManager.instance.GetMouseButtonDown(MouseButton.RIGHT))
                 {
                     m_shovelplayer.animator.SetTrigger("Swing");
-                    playerMovement.SwingAttack();
+                    //playerMovement.SwingAttack();
                 }
             }
         }
