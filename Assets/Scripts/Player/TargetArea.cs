@@ -20,7 +20,8 @@ public class TargetArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.gameObject.layer != 8 && !other.isTrigger)
+        if (other.transform.gameObject.layer != LayerMask.NameToLayer("Ground")  
+            && other.transform.gameObject.layer != 2 && !other.isTrigger)
         {
             m_obstructions.Add(other.gameObject);
         }
@@ -28,7 +29,7 @@ public class TargetArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.gameObject.layer != 8 && m_obstructions.Contains(other.gameObject))
+        if (m_obstructions.Contains(other.gameObject))
         {
             m_obstructions.Remove(other.gameObject);
         }

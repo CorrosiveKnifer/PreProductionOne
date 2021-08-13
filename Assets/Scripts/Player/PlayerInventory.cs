@@ -18,7 +18,7 @@ public struct Slot
 }
 
 class PlayerInventory : MonoBehaviour
-{
+{    
     private ItemObject[,] m_itemGrid;
     private ItemObject[,] m_hotbarItem;
 

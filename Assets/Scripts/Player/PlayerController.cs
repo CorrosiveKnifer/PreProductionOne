@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,6 +49,13 @@ public class PlayerController : MonoBehaviour
     public bool m_canAttack = true;
 
     [Header("Other")]
+    public enum DisplayState
+    {
+        NONE,
+        INVENTORY,
+        QUESTS,
+    }
+
     public GameObject m_cameraContainer;
 
     public float cameraZoomSpeed = 1.0f;
@@ -60,6 +68,7 @@ public class PlayerController : MonoBehaviour
     public Texture2D AttackCursor;
     public Texture2D TalkCursor;
 
+    private DisplayState m_state;
     private PlayerMovement playerMovement;
     private PlayerPlacing m_playerPlacing;
     private PlayerInteractor m_playerInteractor;
@@ -293,20 +302,6 @@ public class PlayerController : MonoBehaviour
                 {
                     hit.collider.GetComponent<Interactable>().Interact();
                 }
-
-                //if (hit.collider.tag == "Interactable" || hit.collider.tag == "SerializedObject")
-                //{
-                //    if (hit.collider.GetComponent<WaterFiller>() != null && m_playerInventory.GetSelectItem()?.GetToolType() == ToolType.WaterCan)
-                //    {
-                //        Cursor.SetCursor(HandCursor, Vector2.zero, CursorMode.Auto);
-                //        return;
-                //    }
-                //    if (hit.collider.GetComponent<CropScript>() != null && m_playerInventory.GetSelectItem()?.GetToolType() != ToolType.Null)
-                //    {
-                //        Cursor.SetCursor(HandCursor, Vector2.zero, CursorMode.Auto);
-                //        return;
-                //    }
-                //}
             }
         }
     }
@@ -342,41 +337,72 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        if (InputManager.instance.IsKeyDown(KeyType.ESC) && m_inputDelay <= 0)
+        {
+            switch (m_state)
+            {
+                case DisplayState.NONE:
+                    break;
+                case DisplayState.INVENTORY:
+                    OpenInventory();
+                    break;
+                case DisplayState.QUESTS:
+                    OpenQuests();
+                    break;
+                default:
+                    break;
+            }
+        }
+
         if (InputManager.instance.IsKeyDown(KeyType.I) && m_inputDelay <= 0)
         {
             m_inputDelay = 0.25f;
-            m_showInventory = !m_showInventory;
-
-            if (m_showInventory)
-            {
-                m_functionalityEnabled = false;
-                m_playerInventory.GenerateOnDisplay(true);
-                m_playerQuests.GenerateOnDisplay(false);
-            }
-            else
-            {
-                m_functionalityEnabled = true;
-            }
-
-            m_menu.SetActive(m_showInventory);
+            OpenInventory();
         }
+
         if (InputManager.instance.IsKeyDown(KeyType.O) && m_inputDelay <= 0)
         {
             m_inputDelay = 0.25f;
-            m_showInventory = !m_showInventory;
-
-            if (m_showInventory)
-            {
-                m_playerInventory.GenerateOnDisplay(false);
-                m_playerQuests.GenerateOnDisplay(true);
-                m_functionalityEnabled = false;
-            }
-            else
-            {
-                m_functionalityEnabled = true;
-            }
-
-            m_menu.SetActive(m_showInventory);
+            OpenQuests();
         }
+    }
+
+    public void OpenInventory()
+    {      
+        if(m_state != DisplayState.INVENTORY)
+        {
+            m_showInventory = true;
+            m_functionalityEnabled = false;
+            m_playerInventory.GenerateOnDisplay(true);
+            m_playerQuests.GenerateOnDisplay(false);
+            m_state = DisplayState.INVENTORY;
+        }
+        else
+        {
+            m_state = DisplayState.NONE;
+            m_showInventory = false;
+            m_functionalityEnabled = true;
+        }
+
+        m_menu.SetActive(m_showInventory);
+    }
+    public void OpenQuests()
+    {
+        if (m_state != DisplayState.QUESTS)
+        {
+            m_showInventory = true;
+            m_functionalityEnabled = false;
+            m_playerInventory.GenerateOnDisplay(false);
+            m_playerQuests.GenerateOnDisplay(true);
+            m_state = DisplayState.QUESTS;
+        }
+        else
+        {
+            m_state = DisplayState.NONE;
+            m_showInventory = false;
+            m_functionalityEnabled = true;
+        }
+
+        m_menu.SetActive(m_showInventory);
     }
 }
