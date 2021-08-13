@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8597942361121131763}
   - component: {fileID: 4683141712794059606}
   - component: {fileID: 7429017278411667356}
+  - component: {fileID: 66883957}
   m_Layer: 0
   m_Name: Questboard
   m_TagString: Untagged
@@ -79,3 +80,25 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &66883957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942415662737315401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0052190c40b56449c605bf075f6b09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dataFile: {fileID: 4900000, guid: eacb94cf24e0fd648b34139c4e60910b, type: 3}
+  m_questMarkerPrefab: {fileID: 2141866563025962265, guid: 746e9a5e4148f0f4eb8be1c614e02f00,
+    type: 3}
+  m_hoursPerQuest: 0
+  m_nextQuest: 0
+  m_myImage: {fileID: 0}
+  m_myName: 
+  m_questText: 
+  m_noQuestText: 
+  m_heightOffset: 0.5
