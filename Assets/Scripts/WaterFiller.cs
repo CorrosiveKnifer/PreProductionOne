@@ -6,6 +6,6 @@ public class WaterFiller : MonoBehaviour
 {
     public void FillWater()
     {
-        GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerInventory>()?.AddItem(ItemObject.CreateItem(7, 50));
+        GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerInventory>()?.AddItem(ItemObject.CreateItem(7, 25));
     }
 }
