@@ -234,21 +234,24 @@ public class PlayerController : MonoBehaviour
     }
 
     private void AnimationHandler()
-    { 
-        if (m_playerInventory.GetSelectItem() != null && m_currentState != PlayerState.DEAD)
+    {
+        if (m_currentState != PlayerState.DEAD)
         {
-            if (m_playerInventory.GetSelectItem().GetToolType() == ToolType.Shovel)
+            if (m_playerInventory.GetSelectItem() != null)
             {
-                m_currentState = PlayerState.ATTACKING;
+                if (m_playerInventory.GetSelectItem().GetToolType() == ToolType.Shovel)
+                {
+                    m_currentState = PlayerState.ATTACKING;
+                }
+                else
+                {
+                    m_currentState = PlayerState.CARRYING;
+                }
             }
             else
             {
-                m_currentState = PlayerState.CARRYING;
+                m_currentState = PlayerState.DEFAULT;
             }
-        }
-        else
-        {
-            m_currentState = PlayerState.DEFAULT;
         }
 
         switch (m_currentState)
