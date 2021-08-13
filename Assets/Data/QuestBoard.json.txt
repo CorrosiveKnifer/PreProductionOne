@@ -3,15 +3,15 @@
 	
 	"greeting" : 
 	[
-		{"text" : "*Remember to water your crops every day!*", "image" : "QuestBoard"},
-		{"text" : "*Remember, you can knock slimes into eachother to make bigger slimes*", "image" : "Perry/Happy"}
+		{"text" : "*Remember to water your crops every day!*", "image" : "QuestBoard/QuestBoard"},
+		{"text" : "*Remember, you can knock slimes into eachother to make bigger slimes*", "image" : "QuestBoard/QuestBoard"}
 	],
 	
-	"questImage" : "Perry/Happy",
+	"questImage" : "QuestBoard/QuestBoard",
 	
-	"acceptQuest" : {"text" : "Thank you! I can't wait.", "image" : "Perry/Happy"},
+	"acceptQuest" : {"text" : "", "image" : "QuestBoard/QuestBoard"},
 	
-	"noQuest" : {"text" : "Sorry but I have no quests.", "image" : "Perry/Neutral"},
+	"noQuest" : {"text" : "*No new quests available.*", "image" : "QuestBoard/QuestBoard"},
 	
-	"declineQuest" : {"text" : "Unfortunate.", "image" : "Perry/Neutral"}
+	"declineQuest" : {"text" : "", "image" : "QuestBoard/QuestBoard"}
 }
