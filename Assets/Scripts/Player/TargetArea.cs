@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class TargetArea : MonoBehaviour
 {
-<<<<<<< HEAD
 
     public Dictionary<GameObject, int> m_obstructions;
-=======
-    public List<GameObject> m_obstructions;
->>>>>>> origin/Michael
 
     // Start is called before the first frame update
     void Awake()
@@ -29,8 +25,6 @@ public class TargetArea : MonoBehaviour
         {
             m_obstructions[gameObject] = m_obstructions[gameObject] + 1;
         }
-
-
 
         List<GameObject> toDestroy = new List<GameObject>();
         foreach (var obstruction in m_obstructions)
