@@ -15,16 +15,23 @@ public class TargetArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        foreach (var obstruction in m_obstructions)
+        {
+
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.gameObject.layer != LayerMask.NameToLayer("Ground")  
-            && other.transform.gameObject.layer != 2 && !other.isTrigger)
+            && other.transform.gameObject.layer != 2 && !other.isTrigger && !m_obstructions.Contains(other.gameObject))
         {
             m_obstructions.Add(other.gameObject);
         }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        
     }
 
     private void OnTriggerExit(Collider other)

@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Materials/Enviroment/Block/Grass.mat.meta
 guid: a0de9c2359c403347a0fb8cffc61bb88
 NativeFormatImporter:
+=======
+guid: 0f27e2251925b9440811f1eaba980359
+folderAsset: yes
+DefaultImporter:
+>>>>>>> origin/Roger:Assets/Materials/Enviroment/Block.meta
   externalObjects: {}
   mainObjectFileID: 0
   userData: 

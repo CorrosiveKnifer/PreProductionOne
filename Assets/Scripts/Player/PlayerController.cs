@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour
 
     public bool m_canAttack = true;
 
-    [Header("Other")]
     public enum DisplayState
     {
         NONE,
@@ -56,6 +55,7 @@ public class PlayerController : MonoBehaviour
         QUESTS,
     }
 
+    [Header("Other")]
     public GameObject m_cameraContainer;
 
     public float cameraZoomSpeed = 1.0f;
