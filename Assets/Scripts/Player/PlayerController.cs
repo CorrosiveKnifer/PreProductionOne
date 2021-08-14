@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
         DEFAULT,
         ATTACKING,
         CARRYING,
+        WATERING,
     }
 
     public struct PlayerAnimationModel
@@ -39,9 +40,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator m_playerAnimator;
     [SerializeField] private Animator m_shovelplayerAnimator;
     [SerializeField] private Animator m_carryplayerAnimator;
+    [SerializeField] private Animator m_waterplayerAnimator;
     private PlayerAnimationModel m_player;
     private PlayerAnimationModel m_shovelplayer;
     private PlayerAnimationModel m_carryplayer;
+    private PlayerAnimationModel m_waterplayer;
     public GameObject m_carryItem;
 
     private PlayerState m_currentState = PlayerState.DEFAULT;
@@ -83,6 +86,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject m_menu;
     private bool isAttacking = false;
     private GameObject m_digActionObject;
+    private bool m_cancelAttack = false;
 
     private void Awake()
     {
@@ -103,6 +107,7 @@ public class PlayerController : MonoBehaviour
         m_player.SetAnimator(m_playerAnimator);
         m_shovelplayer.SetAnimator(m_shovelplayerAnimator);
         m_carryplayer.SetAnimator(m_carryplayerAnimator);
+        m_waterplayer.SetAnimator(m_waterplayerAnimator);
 
         m_player.SetActive(true);
 
@@ -113,13 +118,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        m_cancelAttack = false;
         CursorUpdate();
         HUDInput();
 
         if (m_functionalityEnabled)
         {
             CameraControl();
-            isAttacking = m_shovelplayerAnimator.GetBool("Mutex");
+            isAttacking = m_shovelplayerAnimator.GetBool("Mutex") || m_waterplayerAnimator.GetBool("Mutex");
             if (!isAttacking)
             {
                 InteractInput();
@@ -138,6 +144,7 @@ public class PlayerController : MonoBehaviour
             m_player.animator.SetBool("IsMoving", movementInput != Vector2.zero);
             m_shovelplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
             m_carryplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
+            m_waterplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
         }
         AnimationHandler();
     }
@@ -221,6 +228,10 @@ public class PlayerController : MonoBehaviour
             {
                 m_currentState = PlayerState.ATTACKING;
             }
+            else if(m_playerInventory.GetSelectItem().GetToolType() == ToolType.WaterCan)
+            {
+                m_currentState = PlayerState.WATERING;
+            }
             else
             {
                 m_currentState = PlayerState.CARRYING;
@@ -239,6 +250,7 @@ public class PlayerController : MonoBehaviour
                     m_carryItem.SetActive(false);
                     m_player.SetActive(true);
 
+                    m_waterplayer.SetActive(false);
                     m_shovelplayer.SetActive(false);
                     m_carryplayer.SetActive(false);
                 }
@@ -249,6 +261,7 @@ public class PlayerController : MonoBehaviour
                     m_carryItem.SetActive(false);
                     m_shovelplayer.SetActive(true);
 
+                    m_waterplayer.SetActive(false);
                     m_player.SetActive(false);
                     m_carryplayer.SetActive(false);
                 }
@@ -259,6 +272,18 @@ public class PlayerController : MonoBehaviour
                     m_carryItem.SetActive(true);
                     m_carryplayer.SetActive(true);
 
+                    m_waterplayer.SetActive(false);
+                    m_shovelplayer.SetActive(false);
+                    m_player.SetActive(false);
+                }
+                break;
+            case PlayerState.WATERING:
+                if (!m_waterplayer.isActive)
+                {
+                    m_waterplayer.SetActive(true);
+
+                    m_carryItem.SetActive(false);
+                    m_carryplayer.SetActive(false);
                     m_shovelplayer.SetActive(false);
                     m_player.SetActive(false);
                 }
@@ -311,6 +336,8 @@ public class PlayerController : MonoBehaviour
                 if(m_playerInteractor.Contains(hit.collider.gameObject))
                 {
                     hit.collider.GetComponent<Interactable>().Interact();
+                    //playerMovement;
+                    m_cancelAttack = true;
                 }
             }
         }
@@ -335,6 +362,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!m_canAttack)
             return;
+        if (m_cancelAttack)
+            return;
 
         if (m_playerInventory.GetSelectItem() != null)
         {
@@ -343,12 +372,10 @@ public class PlayerController : MonoBehaviour
                 if (InputManager.instance.GetMouseButtonDown(MouseButton.LEFT))
                 {
                     m_shovelplayer.animator.SetTrigger("Slam");
-                    //playerMovement.SlamAttack();
                 }
                 if (InputManager.instance.GetMouseButtonDown(MouseButton.RIGHT))
                 {
                     m_shovelplayer.animator.SetTrigger("Swing");
-                    //playerMovement.SwingAttack();
                 }
             }
         }
