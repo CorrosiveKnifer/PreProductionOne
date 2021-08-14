@@ -58,7 +58,7 @@ public class UI_SlotDisplay : UI_Element
         }
         if(m_amountBar.isActiveAndEnabled)
         {
-            m_amountBar.fillAmount = Mathf.Clamp((m_currentItem.m_amount - 1) / (ItemObject.MAX_AMOUNT - 1), 0, 1.0f);
+            m_amountBar.fillAmount = Mathf.Clamp((m_currentItem.m_amount - 1) / (float)(ItemObject.MAX_AMOUNT - 1), 0.0f, 1.0f);
         }
     }
 
