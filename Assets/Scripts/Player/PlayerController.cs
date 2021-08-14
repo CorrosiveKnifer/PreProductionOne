@@ -118,13 +118,17 @@ public class PlayerController : MonoBehaviour
     {
         CursorUpdate();
         HUDInput();
+        CameraControl();
 
         if (m_functionalityEnabled)
         {
-            CameraControl();
             isAttacking = m_shovelplayerAnimator.GetBool("Mutex");
             if (!isAttacking)
             {
+                // Camera zoom
+                Camera playerCamera = GetCamera();
+                playerCamera.orthographicSize = Mathf.Clamp(playerCamera.orthographicSize - InputManager.instance.GetMouseScrollDelta() * cameraZoomSpeed * Time.deltaTime, 1, cameraZoomMax);
+
                 InteractInput();
                 MovementInput();
                 CombatInput();
@@ -141,6 +145,10 @@ public class PlayerController : MonoBehaviour
             m_player.animator.SetBool("IsMoving", movementInput != Vector2.zero);
             m_shovelplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
             m_carryplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
+        }
+        else
+        {
+            movementInput = Vector2.zero;
         }
 
         if (m_playerVitality.m_hunger <= 0.0f && m_currentState != PlayerState.DEAD)
@@ -221,11 +229,6 @@ public class PlayerController : MonoBehaviour
     private void CameraControl()
     {
         m_cameraContainer.transform.position = Vector3.Lerp(m_cameraContainer.transform.position, transform.position, 1 - Mathf.Pow(2.0f, -Time.deltaTime * 5.0f));
-
-        Camera playerCamera = GetCamera();
-
-        // Camera zoom
-        playerCamera.orthographicSize = Mathf.Clamp(playerCamera.orthographicSize - InputManager.instance.GetMouseScrollDelta() * cameraZoomSpeed * Time.deltaTime, 1, cameraZoomMax);
     }
 
     public Camera GetCamera()
