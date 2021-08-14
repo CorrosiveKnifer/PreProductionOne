@@ -37,7 +37,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         characterController.enabled = false;
-        //transform.position = FindObjectOfType<SceneDoorManager>().GetDoorSpawnPosition(GameManager.instance.m_TargetDoor);
+        transform.position = FindObjectOfType<SceneDoorManager>().GetDoorSpawnPosition(DoorDirection.INTERIOR);
+        m_playerModel.transform.rotation = Quaternion.Euler(0.0f, 135.0f, 0.0f);
         characterController.enabled = true;
     }
 

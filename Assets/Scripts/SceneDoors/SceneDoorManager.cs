@@ -52,7 +52,7 @@ public class SceneDoorManager : MonoBehaviour
                         SpawnOffset = Vector3.right;
                         break;
                     case DoorDirection.INTERIOR:
-                        SpawnOffset = transform.forward;
+                        SpawnOffset = Door.transform.forward;
                         break;
                 }
 
