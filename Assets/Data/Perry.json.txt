@@ -3,7 +3,7 @@
 	
 	"greeting" : 
 	[
-		{"text" : "Hello Child", "image" : "Perry/Happy"},
+		{"text" : "Hello child", "image" : "Perry/Happy"},
 		{"text" : "Oh boiiiii", "image" : "Perry/Happy"}
 	],
 	
@@ -11,7 +11,7 @@
 	
 	"acceptQuest" : {"text" : "Thank you! I can't wait.", "image" : "Perry/Happy"},
 	
-	"noQuest" : {"text" : "Sorry but I have no quests.", "image" : "Perry/Neutral"},
+	"noQuest" : {"text" : "I'm sorry but I have no quests for you at the moment.", "image" : "Perry/Neutral"},
 	
-	"declineQuest" : {"text" : "Unfortunate.", "image" : "Perry/Neutral"}
+	"declineQuest" : {"text" : "Ah... I see. That is rather unfortunate.", "image" : "Perry/Neutral"}
 }
