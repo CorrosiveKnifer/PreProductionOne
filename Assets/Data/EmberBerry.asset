@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxAge: 7
   m_timeRequired: 2
-  m_maxHeight: {x: 1.3, y: 1.3, z: 1.3}
+  m_maxHeight: {x: 1.6, y: 1.6, z: 1.6}
   m_minVariance: 0.85
   m_maxVariance: 1.15
   m_isRenewable: 1
