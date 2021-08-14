@@ -8,7 +8,7 @@ public class SunScript : MonoBehaviour
     public float m_hourOfRise = 6;
     public float m_hourOfNoon = 12;
     public float m_hourOfSet = 20;
-
+    public bool m_isRaining = false;
     // Update is called once per frame
     void Update()
     {

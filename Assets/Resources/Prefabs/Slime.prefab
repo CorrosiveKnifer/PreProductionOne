@@ -84,7 +84,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2938100424309836002}
   - component: {fileID: 2938100424309836004}
-  - component: {fileID: 2938100424309836005}
   - component: {fileID: 2938100424309836006}
   - component: {fileID: 2938100424309836007}
   - component: {fileID: 7820541414466009325}
@@ -125,24 +124,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_target: {fileID: 0}
   m_slimeModel: {fileID: 7557748878799007053}
---- !u!114 &2938100424309836005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2938100424309836003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 4
-  outlineColor: {r: 0.7830189, g: 0.04801533, b: 0.04801533, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!195 &2938100424309836006
 NavMeshAgent:
   m_ObjectHideFlags: 0
