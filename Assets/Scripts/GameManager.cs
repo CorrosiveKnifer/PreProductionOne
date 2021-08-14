@@ -66,6 +66,8 @@ public class GameManager : MonoBehaviour
     public int m_questsDone;
     public int m_questsFailed;
 
+    public SunScript m_gameTimer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -92,6 +94,15 @@ public class GameManager : MonoBehaviour
             m_currentHour = m_saveSlot.GetSaveHour();
             m_questsDone = m_saveSlot.GetQuestsData(0);
             m_questsFailed = m_saveSlot.GetQuestsData(1);
+
+        }
+
+        m_gameTimer = FindObjectOfType<SunScript>();
+
+        if (m_gameTimer != null)
+        {
+            m_gameTimer.m_isRaining = m_saveSlot.IsRaining();
+            m_gameTimer.m_weatherTimer = m_saveSlot.GetWeatherTimer();
         }
     }
 
@@ -105,6 +116,8 @@ public class GameManager : MonoBehaviour
 
         m_saveSlot.SetTime(m_day, m_currentHour);
         m_saveSlot.SetQuests(m_questsDone, m_questsFailed);
+        m_saveSlot.SetRaining(m_gameTimer.m_isRaining);
+        m_saveSlot.SetWeatherTimer(m_gameTimer.m_weatherTimer);
     }
 
     private void InitialiseFunc()
@@ -134,7 +147,7 @@ public class GameManager : MonoBehaviour
     public void SkipTime(float hoursIncreased)
     {
         m_currentHour += hoursIncreased;
-        if (m_currentHour >= 24)
+        while (m_currentHour >= 24)
         {
             m_currentHour -= 24;
             m_day++;

@@ -130,12 +130,15 @@ public class SaveSlot
         public Save_Scene[] m_scenes;
         public List<Save_Quest> m_quests;
         public List<Save_NPC> m_npcs;
-
+        public int m_isRaining;
+        public float m_weatherTimer;
         public int m_day = 0;
         public float m_hour = 6.0f;
 
         public Save()
         {
+            m_isRaining = 0;
+            m_weatherTimer = 0.0f;
             m_player = new Save_Player();
 
             m_scenes = new Save_Scene[SceneManager.sceneCountInBuildSettings];
@@ -352,5 +355,24 @@ public class SaveSlot
     {
         if(script != null)
             savedData.m_npcs.Add(new Save_NPC(script));
+    }
+
+    public bool IsRaining()
+    {
+        return savedData.m_isRaining == 1;
+    }
+
+    public void SetRaining(bool isRaining)
+    {
+        savedData.m_isRaining = (isRaining) ? 1 : 0;
+    }
+    public float GetWeatherTimer()
+    {
+        return savedData.m_weatherTimer;
+    }
+
+    public void SetWeatherTimer(float time)
+    {
+        savedData.m_weatherTimer = time;
     }
 }

@@ -50,6 +50,11 @@ public class CropScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.instance.m_gameTimer.m_isRaining)
+        {
+            m_waterValue = Mathf.Clamp(m_waterValue + 0.10f * Time.deltaTime, 0.0f, 1.0f);
+        }
+
         if(m_lastRecordedDay < GameManager.instance.m_day)
         {
             Grow(GameManager.instance.m_day - m_lastRecordedDay);
