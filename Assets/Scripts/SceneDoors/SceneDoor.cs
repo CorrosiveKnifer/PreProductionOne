@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public enum DoorDirection
@@ -16,7 +17,8 @@ public class SceneDoor : MonoBehaviour
     public DoorDirection m_DoorDirection;
     public string m_TargetScene;
     private DoorDirection m_DirectionTarget;
-    
+
+    public UnityEvent m_optionalFunction;
 
     // Start is called before the first frame update
     void Awake()
@@ -53,14 +55,16 @@ public class SceneDoor : MonoBehaviour
         if (!other.GetComponent<PlayerController>())
             return;
 
-        // Begin scene transition.
-
         // Store other end of the door direction.
         GameManager.instance.m_TargetDoor = m_DirectionTarget;
 
-        // Prevent player movement.
+        // Prevent player movement & opening menus.
+        other.GetComponent<PlayerController>().m_functionalityEnabled = false;
 
-        // Prevent player from opening menus.
+        if (m_optionalFunction != null)
+        {
+            m_optionalFunction.Invoke();
+        }
 
         LevelLoader.instance.LoadNewLevel(m_TargetScene);
     }
@@ -70,4 +74,10 @@ public class SceneDoor : MonoBehaviour
         Gizmos.color = Color.magenta;
         Gizmos.DrawLine(transform.position, transform.position + transform.forward * 2.0f);
     }
+
+    public void Sleep()
+    {
+        GameManager.instance.SkipTime(8);
+        FindObjectOfType<PlayerVitality>().m_hunger = 100.0f;
+    }    
 }

@@ -18,7 +18,7 @@ public class Slime : MonoBehaviour
     private int m_health = 5;
     private int m_maxHealth = 5;
 
-    private float m_knockbackTimer = 0.0f;
+    private float m_knockbackTimer = -1.0f;
     private float m_knockbackDuration = 1.0f;
 
     private float m_attackTimer = 0.0f;

@@ -37,14 +37,19 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         characterController.enabled = false;
-        //transform.position = FindObjectOfType<SceneDoorManager>().GetDoorSpawnPosition(GameManager.instance.m_TargetDoor);
+        transform.position = FindObjectOfType<SceneDoorManager>().GetDoorSpawnPosition(DoorDirection.INTERIOR);
+        m_playerModel.transform.rotation = Quaternion.Euler(0.0f, 135.0f, 0.0f);
         characterController.enabled = true;
     }
 
+    public GameObject TEMPTEMPTEMPDELETE;
     // Update is called once per frame
     void Update()
     {
-
+        if (InputManager.instance.IsKeyDown(KeyType.K))
+        {
+            RotateToFaceTarget(TEMPTEMPTEMPDELETE.transform.position);
+        }
     }
 
     private void FixedUpdate()
@@ -123,6 +128,43 @@ public class PlayerMovement : MonoBehaviour
                 Quaternion.Euler(0, angle, 0),
                 1 - Mathf.Pow(2.0f, -Time.deltaTime * 20.0f));
         }
+    }
+
+    public void RotateToFaceTarget(Vector3 _point)
+    {
+        Vector3 direction = _point - transform.position;
+        direction.y = 0;
+        direction = direction.normalized;
+        if (direction != new Vector3(0, 0, 0) && m_playerModel != null)
+        {
+            direction = direction.normalized;
+            float angle = Vector3.SignedAngle(transform.right, direction, transform.up);
+
+            StartCoroutine(RotateCoroutine(angle));
+        }
+    }
+
+
+    IEnumerator RotateCoroutine(float _angle)
+    {
+        float frameLength = 0.01f;
+        float speed = 2.0f;
+        float time = 0.0f;
+
+        float maxTime = 0.3f;
+
+        Quaternion initalRotation = m_playerModel.transform.rotation;
+
+        while (time < maxTime)
+        {
+            yield return new WaitForSecondsRealtime(frameLength);
+            time += frameLength * speed;
+
+            m_playerModel.transform.rotation = Quaternion.Lerp(initalRotation,
+                Quaternion.Euler(0, _angle + 45.0f, 0),
+                time / maxTime);
+        }
+        
     }
     public void SwingAttack()
     {
