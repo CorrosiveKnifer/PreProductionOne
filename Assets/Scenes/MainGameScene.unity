@@ -10047,6 +10047,11 @@ PrefabInstance:
       propertyPath: m_menu
       value: 
       objectReference: {fileID: 1585694310}
+    - target: {fileID: 4574658800959128101, guid: 1d57402e9ddb91241acabb26c8f7b94a,
+        type: 3}
+      propertyPath: DefaultCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 5b4705d0d27efad47b1297a81fd43792, type: 3}
     - target: {fileID: 4574658800959128103, guid: 1d57402e9ddb91241acabb26c8f7b94a,
         type: 3}
       propertyPath: m_Name

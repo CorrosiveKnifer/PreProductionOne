@@ -51,6 +51,9 @@ public class SaveSlot
         public int m_columns;
         public int m_hotbarCount;
 
+        public int m_questsCompleted;
+        public int m_questsFailed;
+
         public Save_Item[] m_backpack;
         public Save_Item[] m_hotbar;
 
@@ -59,6 +62,8 @@ public class SaveSlot
             m_rows = 3;
             m_columns = 5;
             m_hotbarCount = 5;
+            m_questsCompleted = 0;
+            m_questsFailed = 0;
             m_backpack = new Save_Item[m_columns * m_rows];
 
             for (int i = 0; i < m_columns; i++)
@@ -100,6 +105,21 @@ public class SaveSlot
         public bool IsEqual(Quest _data)
         {
             return m_dueDay == _data.m_dueDay && m_itemId == _data.m_itemId && m_itemAmount == _data.m_amount;
+        }
+    }
+
+    public void SetQuests(int m_questsDone, int m_questsFailed)
+    {
+        savedData.m_player.m_questsCompleted = m_questsDone;
+        savedData.m_player.m_questsFailed = m_questsFailed;
+    }
+    public int GetQuestsData(int dataIndex)
+    {
+        switch (dataIndex)
+        {
+            default: return 0;
+            case 0: return savedData.m_player.m_questsCompleted;
+            case 1: return savedData.m_player.m_questsFailed;
         }
     }
 

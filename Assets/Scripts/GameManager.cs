@@ -63,6 +63,9 @@ public class GameManager : MonoBehaviour
     public float m_hunger = 100.0f;
     public float m_currentHour = 8;
     public int m_day = 0;
+    public int m_questsDone;
+    public int m_questsFailed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -87,6 +90,8 @@ public class GameManager : MonoBehaviour
 
             m_day = m_saveSlot.GetSaveDay();
             m_currentHour = m_saveSlot.GetSaveHour();
+            m_questsDone = m_saveSlot.GetQuestsData(0);
+            m_questsFailed = m_saveSlot.GetQuestsData(1);
         }
     }
 
@@ -99,6 +104,7 @@ public class GameManager : MonoBehaviour
         }
 
         m_saveSlot.SetTime(m_day, m_currentHour);
+        m_saveSlot.SetQuests(m_questsDone, m_questsFailed);
     }
 
     private void InitialiseFunc()

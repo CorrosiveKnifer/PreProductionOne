@@ -26,7 +26,7 @@ public class PlayerQuests : MonoBehaviour
     [SerializeField] private UI_QuestList m_display;
 
     public List<Quest> m_playerQuests;
-
+    public int m_lastDayChecked;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +41,28 @@ public class PlayerQuests : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        List<Quest> toRemove = null;
+        foreach (var quest in m_playerQuests)
+        {
+            if(quest.m_dueDay == GameManager.instance.m_day)
+            {
+                if(toRemove == null)
+                {
+                    toRemove = new List<Quest>();
+                }
+                toRemove.Add(quest);
+            }
+        }
+
+        if (toRemove != null)
+        {
+            foreach (var item in toRemove)
+            {
+                GameManager.instance.m_saveSlot.RemoveQuest(item);
+                m_playerQuests.Remove(item);
+                GameManager.instance.m_questsFailed += 1;
+            }
+        }
     }
 
     public void GenerateOnDisplay(bool isActive)
@@ -80,7 +101,7 @@ public class PlayerQuests : MonoBehaviour
             GameManager.instance.m_saveSlot.RemoveQuest(item);
             m_playerQuests.Remove(item);
         }
-
+        GameManager.instance.m_questsDone += result;
         return result;
     }
 }
