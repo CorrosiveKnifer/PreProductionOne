@@ -1,0 +1,17 @@
+{
+	"myName" : "Perry the Mail Dragon",
+	
+	"greeting" : 
+	[
+		{"text" : "Hello Child", "image" : "Perry/Happy"},
+		{"text" : "Oh boiiiii", "image" : "Perry/Happy"}
+	],
+	
+	"questImage" : "Perry/Happy",
+	
+	"acceptQuest" : {"text" : "Thank you! I can't wait.", "image" : "Perry/Happy"},
+	
+	"noQuest" : {"text" : "Sorry but I have no quests.", "image" : "Perry/Neutral"},
+	
+	"declineQuest" : {"text" : "Unfortunate.", "image" : "Perry/Neutral"}
+}

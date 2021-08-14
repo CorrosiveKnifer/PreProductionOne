@@ -1,0 +1,17 @@
+{
+	"myName" : "Quest Board",
+	
+	"greeting" : 
+	[
+		{"text" : "*Remember to water your crops every day!*", "image" : "QuestBoard/QuestBoard"},
+		{"text" : "*Remember, you can knock slimes into eachother to make bigger slimes*", "image" : "QuestBoard/QuestBoard"}
+	],
+	
+	"questImage" : "QuestBoard/QuestBoard",
+	
+	"acceptQuest" : {"text" : "", "image" : "QuestBoard/QuestBoard"},
+	
+	"noQuest" : {"text" : "*No new quests available.*", "image" : "QuestBoard/QuestBoard"},
+	
+	"declineQuest" : {"text" : "", "image" : "QuestBoard/QuestBoard"}
+}

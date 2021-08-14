@@ -98,6 +98,7 @@ public class CropScript : MonoBehaviour
         if (item?.GetToolType() == ToolType.Shovel)
         {
             Destroy(gameObject);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().StartDigActionOn(gameObject);
             return;
         }
 
