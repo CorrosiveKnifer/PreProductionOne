@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
     private bool m_showInventory = false;
     [SerializeField] private GameObject m_menu;
     private bool isAttacking = false;
-    private GameObject m_digActionObject;
+    private GameObject m_actionObject;
     private bool m_cancelAttack = false;
 
     private void Awake()
@@ -253,14 +253,14 @@ public class PlayerController : MonoBehaviour
                 {
                     m_currentState = PlayerState.ATTACKING;
                 }
+                else if (m_playerInventory.GetSelectItem().GetToolType() == ToolType.WaterCan)
+                {
+                    m_currentState = PlayerState.WATERING;
+                }
                 else
                 {
                     m_currentState = PlayerState.CARRYING;
                 }
-            }
-            else if(m_playerInventory.GetSelectItem().GetToolType() == ToolType.WaterCan)
-            {
-                m_currentState = PlayerState.WATERING;
             }
             else
             {
@@ -360,7 +360,7 @@ public class PlayerController : MonoBehaviour
                 if(m_playerInteractor.Contains(hit.collider.gameObject))
                 {
                     hit.collider.GetComponent<Interactable>().Interact();
-                    //playerMovement;
+                    playerMovement.RotateToFaceTarget(hit.collider.gameObject.transform.position);
                     m_cancelAttack = true;
                 }
             }
@@ -369,17 +369,38 @@ public class PlayerController : MonoBehaviour
 
     public void StartDigActionOn(GameObject gameObject)
     {
-        m_digActionObject = gameObject;
-
-        //TODO: Rotate player
+        m_actionObject = gameObject;
 
         m_shovelplayer.animator.SetTrigger("Dig");
+    }
+    public void StartWaterActionOn(GameObject gameObject)
+    {
+        m_actionObject = gameObject;
+
+        m_waterplayerAnimator.SetTrigger("Water");
     }
 
     public void DigAction()
     {
-        Destroy(m_digActionObject);
-        m_digActionObject = null;
+        Destroy(m_actionObject);
+        m_actionObject = null;
+    }
+
+    public void WaterAction()
+    {
+        
+        if(m_actionObject.GetComponent<CropScript>() != null)
+        {
+            float amount = Mathf.Clamp(m_playerInventory.GetSelectItem().m_amount - 1, 0, 20.0f);
+
+            m_playerInventory.RemoveItem(7, (int)amount);
+            m_actionObject.GetComponent<CropScript>().Water(amount);
+        }
+        else if(m_actionObject.GetComponent<WaterFiller>() != null)
+        {
+            m_actionObject.GetComponent<WaterFiller>().FillWater();
+        }
+        m_actionObject = null;
     }
 
     private void CombatInput()
