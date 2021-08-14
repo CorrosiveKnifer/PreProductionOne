@@ -4648,7 +4648,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29338
+  m_Name: pb_Mesh114832
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14355,6 +14355,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2690634958551036578, guid: 6de8a795ad02b6146b6d7458fee5d824,
+        type: 3}
+      propertyPath: m_interactFunction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Interact
+      objectReference: {fileID: 0}
     - target: {fileID: 6265815324295831049, guid: 6de8a795ad02b6146b6d7458fee5d824,
         type: 3}
       propertyPath: m_RootOrder

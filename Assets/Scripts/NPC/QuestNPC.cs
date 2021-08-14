@@ -145,7 +145,7 @@ public class QuestNPC : NPCScript
     public void InteractWith()
     {
         m_system.gameObject.SetActive(true);
-        Dialog greeting = m_greetingDialog[UnityEngine.Random.Range(0, m_greetingDialog.Count - 1)];
+        Dialog greeting = m_greetingDialog[UnityEngine.Random.Range(0, m_greetingDialog.Count)];
         m_system.LoadDialog(greeting);
     }
 

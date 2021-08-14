@@ -356,7 +356,7 @@ public class PlayerController : MonoBehaviour
             {
                 if(m_playerInteractor.Contains(hit.collider.gameObject))
                 {
-                    hit.collider.GetComponent<Interactable>().Interact();
+                    hit.collider.GetComponentInChildren<Interactable>().Interact();
                     playerMovement.RotateToFaceTarget(hit.collider.gameObject.transform.position);
                     m_cancelAttack = true;
                 }
