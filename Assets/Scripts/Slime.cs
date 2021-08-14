@@ -9,6 +9,7 @@ public class Slime : MonoBehaviour
     public GameObject m_slimeModel;
 
     private EnemyHealthbar m_healthbar;
+    private Camera m_camera;
 
     private bool m_combining = false;
     private bool m_spawning = true;
@@ -24,8 +25,13 @@ public class Slime : MonoBehaviour
     private float m_attackTimer = 0.0f;
     private float m_attackCooldown = 1.0f;
 
+    private float m_circleAngle = 0.0f;
+
+
+
     private void Awake()
     {
+        m_camera = Camera.main;
         m_healthbar = GetComponentInChildren<EnemyHealthbar>();
         m_healthbar.transform.position = Camera.main.WorldToScreenPoint(transform.position + transform.up);
     }
@@ -68,7 +74,14 @@ public class Slime : MonoBehaviour
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<NavMeshAgent>().enabled = true;
-            GetComponent<NavMeshAgent>().destination = m_target.transform.position;
+            if (Vector3.Distance(transform.position, m_target.transform.position) < 4.0f)
+            {
+                GetComponent<NavMeshAgent>().destination = m_target.transform.position;
+            }
+            else
+            {
+                GetComponent<NavMeshAgent>().destination = CreateRandomTargetPosition();
+            }
 
             if (m_attackTimer > 0.0f)
             {
@@ -79,6 +92,29 @@ public class Slime : MonoBehaviour
         m_healthbar.transform.position = Camera.main.WorldToScreenPoint(transform.position + transform.up);
     }
 
+
+    private Vector3 CreateRandomTargetPosition()
+    {
+        Vector3 circlePos = transform.position + transform.forward * 2.5f;
+
+        // Create random displacement
+        float randDisp = Random.Range(-180.0f, 180.0f);
+
+        // Random displacement added to target angle 
+        m_circleAngle += Time.deltaTime * randDisp * 150;
+        // Make sure angle doesn't get too large.
+        if (m_circleAngle >= 360)
+        {
+            m_circleAngle -= 360;
+        }
+        else if (m_circleAngle <= -360)
+        {
+            m_circleAngle += 360;
+        }
+
+        Debug.Log(m_circleAngle);
+        return circlePos + new Vector3(Mathf.Cos(m_circleAngle * 3.14f / 180.0f), 0, Mathf.Sin(m_circleAngle * 3.14f / 180.0f));
+    }
 
     public void SetSize(int _size)
     {
