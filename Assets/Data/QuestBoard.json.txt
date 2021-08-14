@@ -4,7 +4,7 @@
 	"greeting" : 
 	[
 		{"text" : "*Remember to water your crops every day!*", "image" : "QuestBoard/QuestBoard"},
-		{"text" : "*Remember, you can knock slimes into eachother to make bigger slimes*", "image" : "QuestBoard/QuestBoard"}
+		{"text" : "*Remember, you can knock slimes into each other to make bigger slimes!*", "image" : "QuestBoard/QuestBoard"}
 	],
 	
 	"questImage" : "QuestBoard/QuestBoard",
