@@ -88,16 +88,12 @@ public class CropScript : MonoBehaviour
 
         if (item?.GetToolType() == ToolType.WaterCan)
         {
-            float amount = Mathf.Clamp(item.m_amount-1, 0, 20.0f);
-            Water(amount);
-
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().RemoveItem(7, (int)amount);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().StartWaterActionOn(gameObject);
             return;
         }
 
         if (item?.GetToolType() == ToolType.Shovel)
         {
-            Destroy(gameObject);
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().StartDigActionOn(gameObject);
             return;
         }
