@@ -4,9 +4,10 @@
 	"greeting" : 
 	[
 		{"text" : "Hello Child", "image" : "Perry/Happy"},
+		{"text" : "Oh boiiiii", "image" : "Perry/Happy"},
 		{"text" : "Good to see you friend", "image" : "Perry/Happy"},
-		{"text" : "Oh boiiiii", "image" : "Perry/Happy"}
-		{"text" : "Bitch", "image" : "Perry/Neutral"}
+		{"text" : "What can I do for you?", "image" : "Perry/Happy"},
+		{"text" : "Hello there!", "image" : "Perry/Happy"}
 	],
 	
 	"questImage" : "Perry/Happy",

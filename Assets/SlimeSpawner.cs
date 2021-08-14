@@ -10,6 +10,7 @@ public class SlimeSpawner : MonoBehaviour
     private void Start()
     {
         m_sunScript = FindObjectOfType<SunScript>();
+        SlimeSpawner[] spawners = FindObjectsOfType<SlimeSpawner>();
     }
 
     private void Update()
