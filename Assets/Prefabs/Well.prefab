@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7011827089798610366}
   m_Layer: 0
   m_Name: Well
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7011827089798610367}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.9944682, y: 0.5, z: -5.131925}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -143,7 +143,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4566795283682207261, guid: ba6ed330b832145469d3e758bcce8593, type: 3}
+  - {fileID: 2100000, guid: 13efc44a29717174abf3fc0e59cfcbd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

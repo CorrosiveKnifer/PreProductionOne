@@ -6,6 +6,8 @@ TagManager:
   tags:
   - SerializedObject
   - NPC
+  - Enemy
+  - Interactable
   layers:
   - Default
   - TransparentFX
