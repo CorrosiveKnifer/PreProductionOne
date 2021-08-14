@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
         ATTACKING,
         CARRYING,
         WATERING,
+        DEAD
     }
 
     public struct PlayerAnimationModel
@@ -74,6 +75,7 @@ public class PlayerController : MonoBehaviour
     private DisplayState m_state;
     private PlayerMovement playerMovement;
     private PlayerPlacing m_playerPlacing;
+    private PlayerVitality m_playerVitality;
     private PlayerInteractor m_playerInteractor;
     private PlayerInventory m_playerInventory;
     private PlayerQuests m_playerQuests;
@@ -94,6 +96,7 @@ public class PlayerController : MonoBehaviour
 
         playerMovement = GetComponent<PlayerMovement>();
         m_playerPlacing = GetComponent<PlayerPlacing>();
+        m_playerVitality = GetComponent<PlayerVitality>();
         m_playerInteractor = GetComponent<PlayerInteractor>();
         m_playerInventory = GetComponent<PlayerInventory>();
         m_playerQuests = GetComponent<PlayerQuests>();
@@ -146,6 +149,10 @@ public class PlayerController : MonoBehaviour
             m_carryplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
             m_waterplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
         }
+
+        if (m_playerVitality.m_hunger <= 0.0f && m_currentState != PlayerState.DEAD)
+            StartCoroutine(Die());
+
         AnimationHandler();
     }
 
@@ -153,6 +160,19 @@ public class PlayerController : MonoBehaviour
     {
         // Set jump input to off
         jumpInput = false;
+    }
+
+    IEnumerator Die()
+    {
+        m_currentState = PlayerState.DEAD;
+        m_functionalityEnabled = false;
+        // Die animation here
+        yield return new WaitForSecondsRealtime(1.0f);
+        GameManager.instance.SkipTime(24);
+        GameManager.instance.SkipTime(24);
+        GameManager.instance.SkipTime(24);
+
+        LevelLoader.instance.ReloadLevel();
     }
 
     public void CursorUpdate()
@@ -221,12 +241,19 @@ public class PlayerController : MonoBehaviour
     }
 
     private void AnimationHandler()
-    { 
-        if (m_playerInventory.GetSelectItem() != null)
+    {
+        if (m_currentState != PlayerState.DEAD)
         {
-            if (m_playerInventory.GetSelectItem().GetToolType() == ToolType.Shovel)
+            if (m_playerInventory.GetSelectItem() != null)
             {
-                m_currentState = PlayerState.ATTACKING;
+                if (m_playerInventory.GetSelectItem().GetToolType() == ToolType.Shovel)
+                {
+                    m_currentState = PlayerState.ATTACKING;
+                }
+                else
+                {
+                    m_currentState = PlayerState.CARRYING;
+                }
             }
             else if(m_playerInventory.GetSelectItem().GetToolType() == ToolType.WaterCan)
             {
@@ -234,27 +261,12 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                m_currentState = PlayerState.CARRYING;
+                m_currentState = PlayerState.DEFAULT;
             }
-        }
-        else
-        {
-            m_currentState = PlayerState.DEFAULT;
         }
 
         switch (m_currentState)
         {
-            case PlayerState.DEFAULT:
-                if (!m_player.isActive)
-                {
-                    m_carryItem.SetActive(false);
-                    m_player.SetActive(true);
-
-                    m_waterplayer.SetActive(false);
-                    m_shovelplayer.SetActive(false);
-                    m_carryplayer.SetActive(false);
-                }
-                break;
             case PlayerState.ATTACKING:
                 if (!m_shovelplayer.isActive)
                 {
@@ -289,6 +301,15 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             default:
+                if (!m_player.isActive)
+                {
+                    m_carryItem.SetActive(false);
+                    m_player.SetActive(true);
+
+                    m_waterplayer.SetActive(false);
+                    m_shovelplayer.SetActive(false);
+                    m_carryplayer.SetActive(false);
+                }
                 break;
         }
     }
