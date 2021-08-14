@@ -14,10 +14,52 @@ public class DialogSection
     }
     public String myName;
     public String questImage;
+    public String questText;
     public DialogText[] greeting;
     public DialogText noQuest;
     public DialogText acceptQuest;
     public DialogText declineQuest;
+
+    public string DecodeQuest(Quest quest)
+    {
+        string encripted = questText;
+        string result = "";
+        string itemName = "";
+
+        if(quest.m_amount > 1)
+        {
+            itemName = GameManager.instance.m_items.list[quest.m_itemId].pluralName;
+        }
+        else
+        {
+            itemName = GameManager.instance.m_items.list[quest.m_itemId].name;
+        }
+
+        while (encripted.IndexOf('$') != -1)
+        {
+            result += encripted.Substring(0, encripted.IndexOf('$'));
+            char command = encripted[encripted.IndexOf('$')+1];
+            switch (command)
+            {
+                default:
+                    break;
+                case 'a':
+                    result += $"{ quest.m_amount }";
+                    break;
+                case 'd':
+                    result += $"{ quest.m_dueDay }";
+                    break;
+                case 'n':
+                    result += $"{  itemName.ToLower()}";
+                    break;
+                case 'N':
+                    result += itemName;
+                    break;
+            }
+            encripted = encripted.Substring(encripted.IndexOf('$') + 2);
+        }
+        return result + encripted;
+    }
 }
 public class QuestNPC : NPCScript
 {
@@ -152,8 +194,7 @@ public class QuestNPC : NPCScript
     public void GenerateRandomQuest()
     {
         m_myQuest = new Quest(UnityEngine.Random.Range(0, 4), UnityEngine.Random.Range(5, 15), UnityEngine.Random.Range(3, 9));
-        string itemName = GameManager.instance.m_items.list[m_myQuest.m_itemId].name;
-        m_questDialog.dialog = $"Can I get {m_myQuest.m_amount} {itemName.ToLower()} within {m_myQuest.GetRemainingDays()} days?";
+        m_questDialog.dialog = m_data.DecodeQuest(m_myQuest);
     }
 
     private void InitialiseGreetingDialog()

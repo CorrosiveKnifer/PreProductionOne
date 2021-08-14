@@ -62,19 +62,36 @@ public class PlayerQuests : MonoBehaviour
                 m_playerQuests.Remove(item);
                 GameManager.instance.m_questsFailed += 1;
             }
+
+            if (m_display.gameObject.activeInHierarchy)
+            {
+                m_display.ClearList();
+                GenerateOnDisplay(m_display.gameObject.activeInHierarchy);
+            }
         }
     }
 
     public void GenerateOnDisplay(bool isActive)
     {
-        m_display.Generate(m_playerQuests);
         m_display.gameObject.SetActive(isActive);
+        m_display.Generate(m_playerQuests);
+    }
+    public void ClearDisplay()
+    {
+        m_display.ClearList();
     }
 
     public void AddQuest(Quest quest)
     {
         m_playerQuests.Add(quest);
         GameManager.instance.m_saveSlot.AddQuest(quest);
+        m_display.ShowNewQuestDisplay();
+        HUDManager.instance.GetComponent<MultiAudioAgent>().PlayOnce("NewQuest");
+        if (m_display.gameObject.activeInHierarchy)
+        {
+            m_display.ClearList();
+            GenerateOnDisplay(m_display.gameObject.activeInHierarchy);
+        }
     }
 
     public int RedeemQuests()
@@ -102,6 +119,12 @@ public class PlayerQuests : MonoBehaviour
             m_playerQuests.Remove(item);
         }
         GameManager.instance.m_questsDone += result;
+
+        if (m_display.gameObject.activeInHierarchy)
+        {
+            m_display.ClearList();
+            GenerateOnDisplay(m_display.gameObject.activeInHierarchy);
+        }
         return result;
     }
 }

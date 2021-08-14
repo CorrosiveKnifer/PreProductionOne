@@ -11,9 +11,11 @@
 	
 	"questImage" : "QuestBoard/QuestBoard",
 	
-	"acceptQuest" : {"text" : "", "image" : "QuestBoard/QuestBoard"},
+	"questText" : "*Quest for $a $n with a deadline of $d days*",
+	
+	"acceptQuest" : {"text" : "*Quest has been added.*", "image" : "QuestBoard/QuestBoard"},
 	
 	"noQuest" : {"text" : "*No new quests available.*", "image" : "QuestBoard/QuestBoard"},
 	
-	"declineQuest" : {"text" : "", "image" : "QuestBoard/QuestBoard"}
+	"declineQuest" : {"text" : "*The quest listing vanishes.*", "image" : "QuestBoard/QuestBoard"}
 }

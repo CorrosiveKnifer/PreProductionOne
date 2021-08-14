@@ -11,6 +11,7 @@
 	],
 	
 	"questImage" : "Perry/Happy",
+	"questText" : "Can I get $a $n within $d days?",
 	
 	"acceptQuest" : {"text" : "Thank you! I can't wait.", "image" : "Perry/Happy"},
 	
