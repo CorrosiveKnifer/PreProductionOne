@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1382340774876169920, guid: cbd2d02abcdba3c48919f6268a924988, type: 3}
+  - {fileID: 2100000, guid: c9f636647a9a8db408ff50d1a9f63684, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,7 +104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451939574390242700}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.487, z: 0}
+  m_LocalPosition: {x: -0, y: 0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4384842904629127776}
@@ -159,7 +159,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8685282784221034138}
   m_Father: {fileID: 940772975413094198}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -189,7 +190,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4642215195220588508, guid: cbd2d02abcdba3c48919f6268a924988, type: 3}
+  - {fileID: 2100000, guid: c9f636647a9a8db408ff50d1a9f63684, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -236,11 +237,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3525130025801847852}
   m_LocalRotation: {x: 0.017369928, y: -0.024689954, z: 0.93972045, w: 0.3406086}
-  m_LocalPosition: {x: -0.004, y: 1.8200003, z: 0.053}
-  m_LocalScale: {x: 0.013049999, y: 0.013049997, z: 0.013049999}
+  m_LocalPosition: {x: -0.004, y: 1.7600003, z: 0.053}
+  m_LocalScale: {x: 0.013049998, y: 0.013049996, z: 0.013049998}
   m_Children: []
-  m_Father: {fileID: 235418039582014302}
-  m_RootOrder: 1
+  m_Father: {fileID: 4384842904629127776}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 3.3390002, y: 0.90800005, z: 140.18001}
 --- !u!198 &1833769891307090422
 ParticleSystem:
@@ -4985,10 +4986,10 @@ GameObject:
   - component: {fileID: 3229508470434338126}
   - component: {fileID: 8810385195300149626}
   - component: {fileID: 1351716561397745282}
-  - component: {fileID: 4975931497945739485}
   - component: {fileID: -5908922326195584753}
   - component: {fileID: 3038825264625846793}
   - component: {fileID: 4657598610298389409}
+  - component: {fileID: 8319240087156963199}
   m_Layer: 0
   m_Name: Sunflower
   m_TagString: SerializedObject
@@ -5004,11 +5005,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8691799465482203243}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.17, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 940772975413094198}
-  - {fileID: 8685282784221034138}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5019,7 +5019,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8691799465482203243}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -5310381455651172296, guid: 307dbea9a7b9add40a90e62fd12f94fc, type: 3}
 --- !u!23 &8810385195300149626
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5071,24 +5071,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2884fe8e150b5418d11bb196bb231d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_data: {fileID: 0}
-  m_plant: {fileID: 0}
-  m_harvest: {fileID: 0}
+  m_data: {fileID: 11400000, guid: 12ca926855fb48d4ab70a33ca56424f7, type: 2}
+  m_plant: {fileID: 451939574390242700}
+  m_harvest: {fileID: 1989556614607422783}
   m_birthDay: 0
   m_waterValue: 0
---- !u!135 &4975931497945739485
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8691799465482203243}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-5908922326195584753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5102,7 +5089,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    m_itemID: 0
+    m_itemID: 2
     m_age: -1
     m_nextHarvest: -1
     m_water: 0
@@ -5155,3 +5142,17 @@ CapsuleCollider:
   m_Height: 3.5
   m_Direction: 1
   m_Center: {x: 0, y: 1.22, z: 0}
+--- !u!64 &8319240087156963199
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8691799465482203243}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5310381455651172296, guid: 307dbea9a7b9add40a90e62fd12f94fc, type: 3}

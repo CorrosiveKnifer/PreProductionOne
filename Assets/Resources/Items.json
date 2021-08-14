@@ -8,11 +8,11 @@
       "dropPrefabName": "",
       "itemType": "Crop"
     },
-    {
+	{
       "id": 1,
-      "name": "Strawberries",
-      "placePrefabName": "Prefabs/Strawberries",
-      "inventoryImageName": "Sprites/StrawberryIcon",
+      "name": "Emberberry",
+      "placePrefabName": "Prefabs/Emberberry",
+      "inventoryImageName": "Sprites/EmberberryIcon",
       "dropPrefabName": "",
       "itemType": "Crop"
     },
@@ -63,54 +63,6 @@
       "inventoryImageName": "Sprites/WateringCanIcon",
       "dropPrefabName": "",
       "itemType": "Tool"
-    },
-	{
-      "id": 8,
-      "name": "Common Mulch",
-      "placePrefabName": "Data/Common",
-      "inventoryImageName": "Sprites/CommonMulch",
-      "dropPrefabName": "",
-      "itemType": "CropUtil"
-    },
-	{
-      "id": 9,
-      "name": "Uncommon Mulch",
-      "placePrefabName": "Data/Uncommon",
-      "inventoryImageName": "Sprites/UncommonMulch",
-      "dropPrefabName": "",
-      "itemType": "CropUtil"
-    },
-	{
-      "id": 10,
-      "name": "Rare Mulch",
-      "placePrefabName": "Data/Rare",
-      "inventoryImageName": "Sprites/RareMulch",
-      "dropPrefabName": "",
-      "itemType": "CropUtil"
-    },
-	{
-      "id": 11,
-      "name": "Epic Mulch",
-      "placePrefabName": "Data/Epic",
-      "inventoryImageName": "Sprites/EpicMulch",
-      "dropPrefabName": "",
-      "itemType": "CropUtil"
-    },
-	{
-      "id": 12,
-      "name": "Legendary Mulch",
-      "placePrefabName": "Data/Legendary",
-      "inventoryImageName": "Sprites/LegendaryMulch",
-      "dropPrefabName": "",
-      "itemType": "CropUtil"
-    },
-	{
-      "id": 13,
-      "name": "Emberberry",
-      "placePrefabName": "Prefabs/Emberberry",
-      "inventoryImageName": "Sprites/EmberberryIcon",
-      "dropPrefabName": "",
-      "itemType": "Crop"
     }
   ]
 }
