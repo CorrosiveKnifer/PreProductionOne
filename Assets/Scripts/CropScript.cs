@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class CropScript : MonoBehaviour
 {
@@ -50,6 +51,11 @@ public class CropScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.instance.m_gameTimer.m_isRaining)
+        {
+            m_waterValue = Mathf.Clamp(m_waterValue + 0.10f * Time.deltaTime, 0.0f, 1.0f);
+        }
+
         if(m_lastRecordedDay < GameManager.instance.m_day)
         {
             Grow(GameManager.instance.m_day - m_lastRecordedDay);
@@ -88,16 +94,12 @@ public class CropScript : MonoBehaviour
 
         if (item?.GetToolType() == ToolType.WaterCan)
         {
-            float amount = Mathf.Clamp(item.m_amount-1, 0, 20.0f);
-            Water(amount);
-
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().RemoveItem(7, (int)amount);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().StartWaterActionOn(gameObject);
             return;
         }
 
         if (item?.GetToolType() == ToolType.Shovel)
         {
-            Destroy(gameObject);
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().StartDigActionOn(gameObject);
             return;
         }

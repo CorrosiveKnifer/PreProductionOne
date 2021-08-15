@@ -51,6 +51,9 @@ public class SaveSlot
         public int m_columns;
         public int m_hotbarCount;
 
+        public int m_questsCompleted;
+        public int m_questsFailed;
+
         public Save_Item[] m_backpack;
         public Save_Item[] m_hotbar;
 
@@ -59,6 +62,8 @@ public class SaveSlot
             m_rows = 3;
             m_columns = 5;
             m_hotbarCount = 5;
+            m_questsCompleted = 0;
+            m_questsFailed = 0;
             m_backpack = new Save_Item[m_columns * m_rows];
 
             for (int i = 0; i < m_columns; i++)
@@ -74,6 +79,24 @@ public class SaveSlot
             {
                 m_hotbar[i] = new Save_Item();
             }
+
+            m_backpack[0 * m_rows + 0].m_id = 0;
+            m_backpack[0 * m_rows + 0].m_quantity = 5;
+
+            m_backpack[0 * m_rows + 1].m_id = 1;
+            m_backpack[0 * m_rows + 1].m_quantity = 5;
+
+            m_backpack[0 * m_rows + 2].m_id = 3;
+            m_backpack[0 * m_rows + 2].m_quantity = 5;
+
+            m_backpack[0 * m_rows + 3].m_id = 4;
+            m_backpack[0 * m_rows + 3].m_quantity = 5;
+
+            m_hotbar[0].m_id = 6;
+            m_hotbar[0].m_quantity = 50;
+
+            m_hotbar[1].m_id = 5;
+            m_hotbar[1].m_quantity = 1;
         }
     }
     [Serializable]
@@ -103,6 +126,21 @@ public class SaveSlot
         }
     }
 
+    public void SetQuests(int m_questsDone, int m_questsFailed)
+    {
+        savedData.m_player.m_questsCompleted = m_questsDone;
+        savedData.m_player.m_questsFailed = m_questsFailed;
+    }
+    public int GetQuestsData(int dataIndex)
+    {
+        switch (dataIndex)
+        {
+            default: return 0;
+            case 0: return savedData.m_player.m_questsCompleted;
+            case 1: return savedData.m_player.m_questsFailed;
+        }
+    }
+
     [Serializable]
     public class Save
     {
@@ -110,12 +148,15 @@ public class SaveSlot
         public Save_Scene[] m_scenes;
         public List<Save_Quest> m_quests;
         public List<Save_NPC> m_npcs;
-
+        public int m_isRaining;
+        public float m_weatherTimer;
         public int m_day = 0;
         public float m_hour = 6.0f;
 
         public Save()
         {
+            m_isRaining = 0;
+            m_weatherTimer = 0.0f;
             m_player = new Save_Player();
 
             m_scenes = new Save_Scene[SceneManager.sceneCountInBuildSettings];
@@ -332,5 +373,24 @@ public class SaveSlot
     {
         if(script != null)
             savedData.m_npcs.Add(new Save_NPC(script));
+    }
+
+    public bool IsRaining()
+    {
+        return savedData.m_isRaining == 1;
+    }
+
+    public void SetRaining(bool isRaining)
+    {
+        savedData.m_isRaining = (isRaining) ? 1 : 0;
+    }
+    public float GetWeatherTimer()
+    {
+        return savedData.m_weatherTimer;
+    }
+
+    public void SetWeatherTimer(float time)
+    {
+        savedData.m_weatherTimer = time;
     }
 }

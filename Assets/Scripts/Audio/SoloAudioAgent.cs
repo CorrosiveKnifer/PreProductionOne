@@ -53,7 +53,7 @@ public class SoloAudioAgent : AudioAgent
     /// </summary>
     public void Play() 
     {
-        player.SetLooping(false);
+        player.SetLooping(isLooping);
         player.Play();
     }
 
@@ -108,6 +108,11 @@ public class SoloAudioAgent : AudioAgent
     /// Pause the audio clip
     /// </summary>
     public void Pause() { player.Pause(); }
+
+    public bool IsPlaying()
+    {
+        return player.IsPlaying();
+    }
 
     /// <summary>
     /// Pause the audio clip with a fade out

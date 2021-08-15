@@ -9,6 +9,9 @@ public class Slime : MonoBehaviour
     public GameObject m_slimeModel;
 
     private EnemyHealthbar m_healthbar;
+    private Camera m_camera;
+
+    private MultiAudioAgent m_audioAgent;
 
     private bool m_combining = false;
     private bool m_spawning = true;
@@ -18,15 +21,22 @@ public class Slime : MonoBehaviour
     private int m_health = 5;
     private int m_maxHealth = 5;
 
-    private float m_knockbackTimer = 0.0f;
+    private float m_knockbackTimer = -1.0f;
     private float m_knockbackDuration = 1.0f;
 
     private float m_attackTimer = 0.0f;
     private float m_attackCooldown = 1.0f;
 
+    private float m_circleAngle = 0.0f;
+
+    public GameObject m_hitVFX;
+    public GameObject m_deathVFX;
+
     private void Awake()
     {
+        m_camera = Camera.main;
         m_healthbar = GetComponentInChildren<EnemyHealthbar>();
+        m_audioAgent = GetComponent<MultiAudioAgent>();
         m_healthbar.transform.position = Camera.main.WorldToScreenPoint(transform.position + transform.up);
     }
     // Start is called before the first frame update
@@ -68,7 +78,15 @@ public class Slime : MonoBehaviour
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<NavMeshAgent>().enabled = true;
-            GetComponent<NavMeshAgent>().destination = m_target.transform.position;
+            if (Vector3.Distance(transform.position, m_target.transform.position) < 6.0f)
+            {
+                GetComponent<NavMeshAgent>().destination = m_target.transform.position;
+                Debug.Log("I'm locked on");
+            }
+            else
+            {
+                GetComponent<NavMeshAgent>().destination = CreateRandomTargetPosition();
+            }
 
             if (m_attackTimer > 0.0f)
             {
@@ -79,6 +97,28 @@ public class Slime : MonoBehaviour
         m_healthbar.transform.position = Camera.main.WorldToScreenPoint(transform.position + transform.up);
     }
 
+
+    private Vector3 CreateRandomTargetPosition()
+    {
+        Vector3 circlePos = transform.position + transform.forward * 2.5f;
+
+        // Create random displacement
+        float randDisp = Random.Range(-180.0f, 180.0f);
+
+        // Random displacement added to target angle 
+        m_circleAngle += Time.deltaTime * randDisp * 150;
+        // Make sure angle doesn't get too large.
+        if (m_circleAngle >= 360)
+        {
+            m_circleAngle -= 360;
+        }
+        else if (m_circleAngle <= -360)
+        {
+            m_circleAngle += 360;
+        }
+
+        return circlePos + new Vector3(Mathf.Cos(m_circleAngle * 3.14f / 180.0f), 0, Mathf.Sin(m_circleAngle * 3.14f / 180.0f));
+    }
 
     public void SetSize(int _size)
     {
@@ -138,6 +178,9 @@ public class Slime : MonoBehaviour
     public void DamageEnemy(int _damage)
     {
         StartCoroutine(DamageFlash());
+        m_audioAgent.Play("SlimeDamage");
+
+        Instantiate(m_hitVFX, transform.position, transform.rotation);
 
         m_health -= _damage;
         DamageNumberManager.instance.CreateDamageNumber(transform.position, _damage);
@@ -157,9 +200,12 @@ public class Slime : MonoBehaviour
     IEnumerator Death()
     {
         m_dead = true;
-        GetComponent<NavMeshAgent>().enabled = false;
-        yield return new WaitForSecondsRealtime(2.0f);
-        DropLoot();
+        m_target.GetComponent<PlayerController>().PlayAudio("SlimeDeath");
+        //GetComponent<NavMeshAgent>().enabled = false;
+        yield return new WaitForSecondsRealtime(0.0f);
+        //DropLoot();
+
+        Instantiate(m_deathVFX, transform.position, transform.rotation);
         Destroy(gameObject);
     }
     private void DropLoot()
@@ -171,6 +217,7 @@ public class Slime : MonoBehaviour
     {
         m_target.GetComponent<PlayerVitality>().Damage(m_size * 5.0f);
         m_attackTimer = m_attackCooldown;
+        m_audioAgent.Play("SlimeAttack");
         GetComponentInChildren<Animator>().SetTrigger("Attack");
     }
 
@@ -204,18 +251,20 @@ public class Slime : MonoBehaviour
 
                 // Destroy this slime.
                 SetToCombine();
+
+                m_target.GetComponent<PlayerController>().PlayAudio("SlimeCombine");
             }
         }
         else if (collision.gameObject.GetComponent<CropScript>())
         {
             // Growth data
-            MulchData data = new MulchData();
+            MulchData data = ScriptableObject.CreateInstance<MulchData>();
             data.m_age = 0.5f * m_size;
             data.m_water = 0.4f * m_size;
 
             // Call crop grow function.
             collision.gameObject.GetComponent<CropScript>().ApplyUtility(data);
-
+            Instantiate(m_deathVFX, collision.gameObject.transform.position, Quaternion.identity);
             // Destroy this slime.
             SetToCombine();
         }

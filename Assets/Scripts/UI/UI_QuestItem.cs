@@ -26,7 +26,16 @@ public class UI_QuestItem : UI_Element
     // Update is called once per frame
     void Update()
     {
-
+        if(m_quest.GetRemainingDays() == 0)
+        {
+            m_remainingText.fontStyle = FontStyle.Bold;
+            m_remainingText.text = $"Due today!";
+        }
+        else
+        {
+            m_remainingText.text = $"Days remaining: {m_quest.GetRemainingDays()}";
+            m_remainingText.fontStyle = FontStyle.Normal;
+        }
     }
 
     public void SetQuest(Quest _quest)
@@ -41,7 +50,7 @@ public class UI_QuestItem : UI_Element
         string name = GameManager.instance.m_items.list[m_quest.m_itemId].inventoryImageName;
         m_itemIcon.sprite = Resources.Load<Sprite>(name);
         m_itemAmount.text = m_quest.m_amount.ToString();
-        m_remainingText.text = $"Days remaining: {m_quest.GetRemainingDays()}.";
+        m_remainingText.text = $"Days remaining: {m_quest.GetRemainingDays()}";
     }
 
     public override bool IsContainingVector(Vector2 _pos)

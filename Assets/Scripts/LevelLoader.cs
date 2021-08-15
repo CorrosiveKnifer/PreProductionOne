@@ -92,6 +92,10 @@ public class LevelLoader : MonoBehaviour
         #endif
     }
 
+    public void ReloadLevel()
+    {
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().name));
+    }
     public void LoadNextLevel()
     {
         loadingNextArea = true;
