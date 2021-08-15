@@ -195,7 +195,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: e6d9b8b24eed32041ad6ab8aba3ff8bd, type: 3}
     m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
@@ -242,7 +242,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 85.22, y: -3.8038}
+  m_AnchoredPosition: {x: 111.8, y: -3.8038}
   m_SizeDelta: {x: 432.5829, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5478600484050011475
@@ -273,7 +273,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: e6d9b8b24eed32041ad6ab8aba3ff8bd, type: 3}
     m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
@@ -381,7 +381,7 @@ PrefabInstance:
     - target: {fileID: 4238733401706800305, guid: 97fde3e8e54737049a2008c2fe0ccd05,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -186.21
+      value: -174.6
       objectReference: {fileID: 0}
     - target: {fileID: 4238733401706800305, guid: 97fde3e8e54737049a2008c2fe0ccd05,
         type: 3}
