@@ -3973,6 +3973,61 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 450168586041692528, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: audioClipB
+      value: 
+      objectReference: {fileID: 8300000, guid: 1e32cdf2bc224bf4a87b0621bc915193, type: 3}
+    - target: {fileID: 450168586041692528, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: audioACurve.m_Curve.Array.data[1].time
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 450168586041692528, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: audioACurve.m_Curve.Array.data[3].time
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 450168586041692528, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: audioBCurve.m_Curve.Array.data[1].time
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 450168586041692528, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: audioBCurve.m_Curve.Array.data[3].time
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 450168586041692528, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: audioBCurve.m_Curve.Array.data[4].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 450168586041692528, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: audioACurve.m_Curve.Array.data[3].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450168586041692528, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: audioBCurve.m_Curve.Array.data[4].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 450168586041692528, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: audioACurve.m_Curve.Array.data[1].inSlope
+      value: 9.993544
+      objectReference: {fileID: 0}
+    - target: {fileID: 450168586041692528, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: audioACurve.m_Curve.Array.data[2].inSlope
+      value: 0.0025595152
+      objectReference: {fileID: 0}
+    - target: {fileID: 450168586041692528, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: audioACurve.m_Curve.Array.data[3].outSlope
+      value: 0.023593904
+      objectReference: {fileID: 0}
     - target: {fileID: 920286131735855487, guid: f37c82fddde230d48a63df140781f1f9,
         type: 3}
       propertyPath: m_carryItem
