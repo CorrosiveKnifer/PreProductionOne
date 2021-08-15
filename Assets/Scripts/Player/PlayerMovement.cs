@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform m_swingPoint;
     public float m_swingRange = 0.5f;
     public LayerMask m_enemyLayer;
+    public GameObject m_SlamVFX;
 
     private void Awake()
     {
@@ -209,15 +210,14 @@ public class PlayerMovement : MonoBehaviour
 
         m_audioAgent.Play("SlamHit");
         m_playerController.GetCamera().GetComponent<ScreenShake>().StartScreenShake();
+        Instantiate(m_SlamVFX, m_slamPoint.position, Quaternion.identity);
 
         // Damage them
         foreach (var enemy in hits)
         {
-            Debug.Log("Detected!");
             if (enemy.GetComponentInParent<Slime>())
             {
                 enemy.GetComponentInParent<Slime>().DamageEnemy(5);
-                Debug.Log("Damage Enemy");
             }
         }
     }
