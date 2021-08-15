@@ -24,11 +24,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758500218}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.28538463, z: 0.136}
-  m_LocalScale: {x: 0.3846154, y: 0.3846154, z: 0.3846154}
+  m_LocalPosition: {x: 0, y: -0.5, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7272305648781194447}
-  m_RootOrder: 5
+  m_Father: {fileID: 4645000283525166482}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2356916006097011718
 GameObject:
@@ -61,6 +61,7 @@ Transform:
   - {fileID: 1554378517568852201}
   - {fileID: 7272305648781194447}
   - {fileID: 6954968034129986772}
+  - {fileID: 1758500219}
   m_Father: {fileID: 4574658800959128121}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -81,6 +82,7 @@ GameObject:
   - component: {fileID: 1841691188748609179}
   - component: {fileID: 1253047123}
   - component: {fileID: 8247789444242203816}
+  - component: {fileID: 171398436725818452}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -169,7 +171,7 @@ MonoBehaviour:
   gravity: 9.81
   ledgeForgiveDelay: 0.2
   m_attackPoint: {fileID: 1758500219}
-  m_attackRange: 1
+  m_attackRange: 1.5
   m_enemyLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -245,6 +247,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_display: {fileID: 0}
   m_lastDayChecked: 0
+--- !u!114 &171398436725818452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4574658800959128103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c936e73eec43a43969c7948e51a2a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localVolume: 1
+  isMuted: 0
+  audioClips:
+  - {fileID: 8300000, guid: d7628f35bdd9e004a85fa3aa91d28818, type: 3}
+  - {fileID: 8300000, guid: 1f3d1336a1b35bc4984c5bb4177b7d0d, type: 3}
+  - {fileID: 8300000, guid: e59cf9ea09a8239489da5b0163a8a3b0, type: 3}
+  - {fileID: 8300000, guid: 404848dd15728b54c83aabfaec062544, type: 3}
+  audioPlayersCount: 5
+  channel: 0
 --- !u!1001 &676357871421460327
 PrefabInstance:
   m_ObjectHideFlags: 0

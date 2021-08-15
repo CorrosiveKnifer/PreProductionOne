@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public float ledgeForgiveDelay = 0.0f;
     private float ledgeForgiveTimer = 0.0f;
 
+    private MultiAudioAgent m_audioAgent;
+
     [Header("Combat")]
     public Transform m_attackPoint;
     public float m_attackRange = 0.5f;
@@ -29,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        m_audioAgent = GetComponent<MultiAudioAgent>();
         characterController = GetComponent<CharacterController>();
         m_playerVitality = GetComponent<PlayerVitality>();
     }
@@ -168,8 +171,12 @@ public class PlayerMovement : MonoBehaviour
     }
     public void SwingAttack()
     {
+        m_audioAgent.Play("AttackSwing");
+
         // Detect enemies in range of attacks
         Collider[] hits = Physics.OverlapSphere(m_attackPoint.position, m_attackRange, m_enemyLayer);
+
+        bool hitEnemy = false;
 
         // Damage them
         foreach (var enemy in hits)
@@ -177,6 +184,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Detected!");
             if (enemy.GetComponentInParent<Slime>())
             {
+                hitEnemy = true;
                 Vector3 direction = enemy.transform.position - transform.position;
                 direction.y = 0;
                 direction = direction.normalized;
@@ -185,6 +193,9 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("Damage Enemy");
             }
         }
+
+        if (hitEnemy)
+            m_audioAgent.Play("ShovelHit");
     }
 
     public void SlamAttack()

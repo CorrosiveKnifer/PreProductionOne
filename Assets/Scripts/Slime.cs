@@ -11,6 +11,8 @@ public class Slime : MonoBehaviour
     private EnemyHealthbar m_healthbar;
     private Camera m_camera;
 
+    private MultiAudioAgent m_audioAgent;
+
     private bool m_combining = false;
     private bool m_spawning = true;
     private bool m_dead = false;
@@ -33,11 +35,13 @@ public class Slime : MonoBehaviour
     {
         m_camera = Camera.main;
         m_healthbar = GetComponentInChildren<EnemyHealthbar>();
+        m_audioAgent = GetComponent<MultiAudioAgent>();
         m_healthbar.transform.position = Camera.main.WorldToScreenPoint(transform.position + transform.up);
     }
     // Start is called before the first frame update
     void Start()
     {
+        m_audioAgent.Play("SlimeCombine");
         transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
         m_target = FindObjectOfType<PlayerController>().gameObject;
     }
@@ -174,6 +178,7 @@ public class Slime : MonoBehaviour
     public void DamageEnemy(int _damage)
     {
         StartCoroutine(DamageFlash());
+        m_audioAgent.Play("SlimeDamage");
 
         m_health -= _damage;
         DamageNumberManager.instance.CreateDamageNumber(transform.position, _damage);
@@ -193,9 +198,10 @@ public class Slime : MonoBehaviour
     IEnumerator Death()
     {
         m_dead = true;
-        GetComponent<NavMeshAgent>().enabled = false;
-        yield return new WaitForSecondsRealtime(2.0f);
-        DropLoot();
+        m_audioAgent.Play("SlimeDeath");
+        //GetComponent<NavMeshAgent>().enabled = false;
+        yield return new WaitForSecondsRealtime(0.0f);
+        //DropLoot();
         Destroy(gameObject);
     }
     private void DropLoot()
@@ -207,6 +213,7 @@ public class Slime : MonoBehaviour
     {
         m_target.GetComponent<PlayerVitality>().Damage(m_size * 5.0f);
         m_attackTimer = m_attackCooldown;
+        m_audioAgent.Play("SlimeAttack");
         GetComponentInChildren<Animator>().SetTrigger("Attack");
     }
 
