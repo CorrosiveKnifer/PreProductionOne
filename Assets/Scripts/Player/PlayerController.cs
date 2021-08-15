@@ -181,10 +181,7 @@ public class PlayerController : MonoBehaviour
         // Die animation here
         m_player.animator.SetTrigger("Die");
         yield return new WaitForSecondsRealtime(1.0f);
-        GameManager.instance.SkipTime(24);
-        GameManager.instance.SkipTime(24);
-        GameManager.instance.SkipTime(24);
-
+        GameManager.instance.SkipTime(72, 2.0f);
         LevelLoader.instance.ReloadLevel();
     }
 
