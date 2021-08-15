@@ -81,6 +81,7 @@ public class Slime : MonoBehaviour
             if (Vector3.Distance(transform.position, m_target.transform.position) < 6.0f)
             {
                 GetComponent<NavMeshAgent>().destination = m_target.transform.position;
+                Debug.Log("I'm locked on");
             }
             else
             {
@@ -257,7 +258,7 @@ public class Slime : MonoBehaviour
         else if (collision.gameObject.GetComponent<CropScript>())
         {
             // Growth data
-            MulchData data = new MulchData();
+            MulchData data = ScriptableObject.CreateInstance<MulchData>();
             data.m_age = 0.5f * m_size;
             data.m_water = 0.4f * m_size;
 
