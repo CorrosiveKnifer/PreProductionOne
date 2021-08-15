@@ -9454,6 +9454,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass
       objectReference: {fileID: 0}
+    - target: {fileID: 3774501474539520450, guid: 32e9b3391013f9440a03785d9ed8323c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967287
+      objectReference: {fileID: 0}
     - target: {fileID: 3774501474539520451, guid: 32e9b3391013f9440a03785d9ed8323c,
         type: 3}
       propertyPath: m_Enabled
