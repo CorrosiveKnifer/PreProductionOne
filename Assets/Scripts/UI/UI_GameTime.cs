@@ -25,7 +25,7 @@ public class UI_GameTime : UI_Element
         {
             if (time >= 0 && time < 1)
             {
-                m_display.text = $"Day: {GameManager.instance.m_day} - 12:{minuteDisplay} PM";
+                m_display.text = $"Day: {GameManager.instance.m_day} - 12:{minuteDisplay} AM";
             }
             else
             {

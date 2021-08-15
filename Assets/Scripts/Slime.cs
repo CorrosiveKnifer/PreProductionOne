@@ -78,7 +78,7 @@ public class Slime : MonoBehaviour
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<NavMeshAgent>().enabled = true;
-            if (Vector3.Distance(transform.position, m_target.transform.position) < 6.0f)
+            if (Vector3.Distance(transform.position, m_target.transform.position) < 8.0f)
             {
                 GetComponent<NavMeshAgent>().destination = m_target.transform.position;
                 Debug.Log("I'm locked on");

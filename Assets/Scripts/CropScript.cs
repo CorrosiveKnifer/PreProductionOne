@@ -140,7 +140,7 @@ public class CropScript : MonoBehaviour
 
         if(m_waterValue >= m_data.m_waterRequirement)
         {
-            growthRate = m_waterValue * 1.5f; //Fixed increase.
+            growthRate = m_waterValue * 2.0f; //Fixed increase.
         }
         else
         {
@@ -175,6 +175,6 @@ public class CropScript : MonoBehaviour
 
     public void Water(float val)
     {
-        m_waterValue = Mathf.Clamp(m_waterValue+(val/20.0f), 0.0f, 1.0f);
+        m_waterValue = Mathf.Clamp(m_waterValue+(val/15.0f), 0.0f, 1.0f);
     }
 }

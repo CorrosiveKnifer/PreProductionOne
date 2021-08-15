@@ -398,7 +398,7 @@ public class PlayerController : MonoBehaviour
     {
         if(m_actionObject.GetComponent<CropScript>() != null)
         {
-            float amount = Mathf.Clamp(m_playerInventory.GetSelectItem().m_amount - 1, 0, 20.0f);
+            float amount = Mathf.Clamp(m_playerInventory.GetSelectItem().m_amount - 1, 0, 15.0f);
 
             m_playerInventory.RemoveItem(6, (int)amount);
             if(amount > 0)
