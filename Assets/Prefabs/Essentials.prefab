@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6640078226921201789}
   - component: {fileID: 2208868978873622881}
+  - component: {fileID: 450168586041692528}
   m_Layer: 0
   m_Name: GameTimer
   m_TagString: Untagged
@@ -50,6 +51,7 @@ MonoBehaviour:
   m_isRaining: 0
   m_weatherTimer: 8
   m_rainPercentage: 0.4
+  m_weatherCheckInHours: 8
   m_sun: {fileID: 8172630791121998484}
   m_sunColor:
     serializedVersion: 2
@@ -279,6 +281,126 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_rain: {fileID: 1457954356397149411}
+--- !u!114 &450168586041692528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990195089393370251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05cb71db09190b5488eeaf355b9b3cc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localVolume: 1
+  isMuted: 0
+  audioClipA: {fileID: 8300000, guid: 534cb136d58e1024e954a03f5f0d17df, type: 3}
+  audioClipB: {fileID: 8300000, guid: 16c66a644702d114bbfc591a82d4ddc3, type: 3}
+  channel: 2
+  playOnAwake: 1
+  audioACurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.03701016
+      outSlope: 0.03701016
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.3179089
+    - serializedVersion: 3
+      time: 0.08
+      value: 0.99935436
+      inSlope: 12.49193
+      outSlope: -0.007065393
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.2279355
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.75
+      value: 1.001018
+      inSlope: 0.0024831116
+      outSlope: -11.515763
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.06442571
+    - serializedVersion: 3
+      time: 0.76
+      value: 0.0076018386
+      inSlope: -1.1005375
+      outSlope: -0.0120127415
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.0047187805
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  audioBCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0013999939
+      value: 1.0000153
+      inSlope: 0.009294387
+      outSlope: 0.009294387
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.6541264
+    - serializedVersion: 3
+      time: 0.08
+      value: 0
+      inSlope: -0.0076272963
+      outSlope: -0.0076272963
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.720248
+    - serializedVersion: 3
+      time: 0.75
+      value: 0
+      inSlope: 0.01905025
+      outSlope: 0.01905025
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.9161099
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.76
+      value: 1
+      inSlope: -0.03395229
+      outSlope: -0.03395229
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9999967
+      value: 1.0094376
+      inSlope: 0.011489065
+      outSlope: 0.011489065
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.4967697
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3727274792528800705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,18 +1293,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6643d4f021d22af4799acecc2a419c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3727274794396703596 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 52241356, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
-    type: 3}
-  m_PrefabInstance: {fileID: 3727274794447894688}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13cffe0a679034448a866f0c3e6c05d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &711643313041684426 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4204589088792432490, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
@@ -1193,6 +1303,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d4fecc0ce37a344889c6820745a0e48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3727274794396703596 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 52241356, guid: 7eb9afbf7f0ecd843a954ed4677fa798,
+    type: 3}
+  m_PrefabInstance: {fileID: 3727274794447894688}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13cffe0a679034448a866f0c3e6c05d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3727274794494526298

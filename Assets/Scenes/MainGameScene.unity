@@ -2759,6 +2759,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0decf93fac8734c852cef0c94fd4e1, type: 3}
+--- !u!1 &662784537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1457954356397149411, guid: f37c82fddde230d48a63df140781f1f9,
+    type: 3}
+  m_PrefabInstance: {fileID: 807385545}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &662784541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662784537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0deb60f02ddb847b5da99b1d5286a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localVolume: 0.5
+  isMuted: 0
+  mainClip: {fileID: 8300000, guid: e22883a1191a39c4991a5aa124218c16, type: 3}
+  channel: 1
+  isPlayOnAwake: 0
+  isLooping: 1
 --- !u!4 &667980812 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4497197982159071894, guid: a3b8e19f1c0211244b88feff9e274775,
@@ -3964,10 +3988,25 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1457954356397149411, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2181487684926177635, guid: f37c82fddde230d48a63df140781f1f9,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2208868978873622881, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: m_weatherTimer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2208868978873622881, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: m_weatherCheckInHours
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3307991906097605735, guid: f37c82fddde230d48a63df140781f1f9,
         type: 3}
@@ -4423,7 +4462,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh102018
+  m_Name: pb_Mesh19782
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

@@ -94,14 +94,6 @@ public class GameManager : MonoBehaviour
             m_questsFailed = m_saveSlot.GetQuestsData(1);
 
         }
-
-        m_gameTimer = FindObjectOfType<SunScript>();
-
-        if (m_gameTimer != null)
-        {
-            m_gameTimer.m_isRaining = m_saveSlot.IsRaining();
-            m_gameTimer.m_weatherTimer = m_saveSlot.GetWeatherTimer();
-        }
     }
 
     // Update is called once per frame
@@ -137,6 +129,14 @@ public class GameManager : MonoBehaviour
 
         m_day = m_saveSlot.GetSaveDay();
         m_currentHour = m_saveSlot.GetSaveHour();
+
+        m_gameTimer = FindObjectOfType<SunScript>();
+
+        if (m_gameTimer != null)
+        {
+            m_gameTimer.m_isRaining = m_saveSlot.IsRaining();
+            m_gameTimer.m_weatherTimer = m_saveSlot.GetWeatherTimer();
+        }
     }
 
     public void ClearGameFile()
