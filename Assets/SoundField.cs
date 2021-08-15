@@ -23,41 +23,42 @@ public class SoundField : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(fieldWithPriority == this && other.GetComponentInChildren<Animator>().GetBool("IsMoving"))
-        {
-            MultiAudioAgent agent = HUDManager.instance.GetComponent<MultiAudioAgent>();
-
-            switch (m_myType)
+        if(other.tag == "Player")
+            if(fieldWithPriority == this && other.GetComponentInChildren<Animator>().GetBool("IsMoving"))
             {
-                case MaterialType.Grass:
-                    agent.PlayOnce("Walk_Grass");
-                    agent.StopAudio("Walk_Wood");
-                    agent.StopAudio("Walk_Water");
-                    break;
-                case MaterialType.Wood:
-                    agent.PlayOnce("Walk_Wood");
-                    agent.StopAudio("Walk_Grass");
-                    agent.StopAudio("Walk_Water");
-                    break;
-                case MaterialType.Water:
-                    agent.PlayOnce("Walk_Water");
-                    agent.StopAudio("Walk_Wood");
-                    agent.StopAudio("Walk_Grass");
-                    other.GetComponent<PlayerController>().SpawnSplashVFX(other.transform.position);
-                    break;
-                default:
-                    break;
+                MultiAudioAgent agent = HUDManager.instance.GetComponent<MultiAudioAgent>();
+
+                switch (m_myType)
+                {
+                    case MaterialType.Grass:
+                        agent.PlayOnce("Walk_Grass");
+                        agent.StopAudio("Walk_Wood");
+                        agent.StopAudio("Walk_Water");
+                        break;
+                    case MaterialType.Wood:
+                        agent.PlayOnce("Walk_Wood");
+                        agent.StopAudio("Walk_Grass");
+                        agent.StopAudio("Walk_Water");
+                        break;
+                    case MaterialType.Water:
+                        agent.PlayOnce("Walk_Water");
+                        agent.StopAudio("Walk_Wood");
+                        agent.StopAudio("Walk_Grass");
+                        other.GetComponent<PlayerController>().SpawnSplashVFX(other.transform.position);
+                        break;
+                    default:
+                        break;
+                }
+
+                
             }
+            else if(fieldWithPriority == this && !other.GetComponentInChildren<Animator>().GetBool("IsMoving"))
+            {
+                MultiAudioAgent agent = HUDManager.instance.GetComponent<MultiAudioAgent>();
 
-            
-        }
-        else if(fieldWithPriority == this && !other.GetComponentInChildren<Animator>().GetBool("IsMoving"))
-        {
-            MultiAudioAgent agent = HUDManager.instance.GetComponent<MultiAudioAgent>();
-
-            agent.StopAudio("Walk_Wood");
-            agent.StopAudio("Walk_Grass");
-            agent.StopAudio("Walk_Water");
-        }
+                agent.StopAudio("Walk_Wood");
+                agent.StopAudio("Walk_Grass");
+                agent.StopAudio("Walk_Water");
+            }
     }
 }
