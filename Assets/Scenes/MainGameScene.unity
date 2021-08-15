@@ -4036,22 +4036,6 @@ PrefabInstance:
       propertyPath: audioACurve.m_Curve.Array.data[3].outSlope
       value: 0.023593904
       objectReference: {fileID: 0}
-    - target: {fileID: 920286131735855486, guid: f37c82fddde230d48a63df140781f1f9,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 920286131735855487, guid: f37c82fddde230d48a63df140781f1f9,
-        type: 3}
-      propertyPath: m_SplashVFX
-      value: 
-      objectReference: {fileID: 2261444754701972063, guid: 85e7952e37cc14840becdcab96c8e8d3,
-        type: 3}
-    - target: {fileID: 920286131735855487, guid: f37c82fddde230d48a63df140781f1f9,
-        type: 3}
-      propertyPath: m_carryItem
-      value: 
-      objectReference: {fileID: 2007791873}
     - target: {fileID: 1177680661923420548, guid: f37c82fddde230d48a63df140781f1f9,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -4087,21 +4071,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3591934429284828942, guid: f37c82fddde230d48a63df140781f1f9,
-        type: 3}
-      propertyPath: audioClips.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3591934429284828942, guid: f37c82fddde230d48a63df140781f1f9,
-        type: 3}
-      propertyPath: audioClips.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: a3dae9d8cf2657743a842cb98cd3be92, type: 3}
-    - target: {fileID: 3591934429284828942, guid: f37c82fddde230d48a63df140781f1f9,
-        type: 3}
-      propertyPath: audioClips.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: 6041a1a2674ac65428bcdeca7bf3aaa1, type: 3}
     - target: {fileID: 3727274793403782676, guid: f37c82fddde230d48a63df140781f1f9,
         type: 3}
       propertyPath: m_Name
@@ -4561,7 +4530,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh402316
+  m_Name: pb_Mesh97226
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4740,7 +4709,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh402382
+  m_Name: pb_Mesh97294
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -91013,12 +90982,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3b8e19f1c0211244b88feff9e274775, type: 3}
---- !u!1 &2007791873 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8979934930622327201, guid: f37c82fddde230d48a63df140781f1f9,
-    type: 3}
-  m_PrefabInstance: {fileID: 807385545}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2009322051
 PrefabInstance:
   m_ObjectHideFlags: 0
