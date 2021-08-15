@@ -125,6 +125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_target: {fileID: 0}
   m_slimeModel: {fileID: 7557748878799007053}
+  m_hitVFX: {fileID: 3306783674953893888, guid: 67de0951011caa34196865488ed0f2db,
+    type: 3}
   m_deathVFX: {fileID: 2261444754701972063, guid: 85e7952e37cc14840becdcab96c8e8d3,
     type: 3}
 --- !u!195 &2938100424309836006
