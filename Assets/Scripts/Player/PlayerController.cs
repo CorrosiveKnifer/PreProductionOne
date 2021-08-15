@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
     private bool m_showInventory = false;
     [SerializeField] private GameObject m_menu;
     private bool isAttacking = false;
+    
     private GameObject m_actionObject;
     private bool m_cancelAttack = false;
 
