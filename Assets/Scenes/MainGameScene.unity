@@ -108,13 +108,13 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.25
     agentHeight: 1.5
-    agentSlope: 45
-    agentClimb: 0.3
+    agentSlope: 60
+    agentClimb: 0.62
     ledgeDropHeight: 0
-    maxJumpAcrossDistance: 0
+    maxJumpAcrossDistance: 0.2
     minRegionArea: 2
     manualCellSize: 1
-    cellSize: 0.18
+    cellSize: 0.2
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 1
@@ -3935,6 +3935,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2208868978873622881, guid: f37c82fddde230d48a63df140781f1f9,
         type: 3}
+      propertyPath: m_rainPercentage
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2208868978873622881, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
       propertyPath: m_lightingIntensity.m_Curve.Array.data[1].time
       value: 0.3
       objectReference: {fileID: 0}
@@ -6681,7 +6686,7 @@ GameObject:
   m_Name: Pond Ramp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 3
   m_StaticEditorFlags: 40
   m_IsActive: 1
 --- !u!4 &1332900709
@@ -6692,7 +6697,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332900708}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 38.912, y: 3.665, z: 13.294328}
+  m_LocalPosition: {x: 38.912, y: 3.666, z: 13.294328}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1933866184}
@@ -9172,10 +9177,8 @@ MonoBehaviour:
   m_Mesh: {fileID: 854233315}
   m_IsSelectable: 1
   m_SelectedFaces: 
-  m_SelectedEdges:
-  - a: 237
-    b: 236
-  m_SelectedVertices: ed000000ec000000
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!4 &1346427197 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4497197982159071894, guid: a3b8e19f1c0211244b88feff9e274775,
@@ -90459,7 +90462,7 @@ GameObject:
   m_Name: SoundField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 3
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1933866184

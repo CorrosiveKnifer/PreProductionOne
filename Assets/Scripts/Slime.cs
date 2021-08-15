@@ -264,7 +264,7 @@ public class Slime : MonoBehaviour
 
             // Call crop grow function.
             collision.gameObject.GetComponent<CropScript>().ApplyUtility(data);
-
+            Instantiate(m_deathVFX, collision.gameObject.transform.position, Quaternion.identity);
             // Destroy this slime.
             SetToCombine();
         }
