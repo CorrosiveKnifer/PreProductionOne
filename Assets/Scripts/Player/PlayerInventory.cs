@@ -56,13 +56,6 @@ class PlayerInventory : MonoBehaviour
             m_hotbarItem[c, 0] = GameManager.instance.m_saveSlot.GetPlayerHotbarData(c);
         }
 
-        AddItem(ItemObject.CreateItem(6, 50));
-        AddItem(ItemObject.CreateItem(5, 1));
-        AddItem(ItemObject.CreateItem(0, 5));
-        AddItem(ItemObject.CreateItem(1, 5));
-        AddItem(ItemObject.CreateItem(3, 5));
-        AddItem(ItemObject.CreateItem(4, 5));
-
         m_hotbar.Generate(m_hotbarItem, new Vector2Int(5, 1));
     }
 
