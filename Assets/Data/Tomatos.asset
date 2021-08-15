@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 841e9f61ed2f5634880d3669d5ffdd60, type: 3}
-  m_Name: Corn
+  m_Name: Tomatos
   m_EditorClassIdentifier: 
-  m_maxAge: 5
-  m_timeRequired: 4
-  m_maxHeight: {x: 2.5, y: 2.5, z: 2.5}
+  m_maxAge: 4
+  m_timeRequired: 3
+  m_maxHeight: {x: 0, y: 0, z: 0}
   m_minVariance: 0.85
   m_maxVariance: 1.15
   m_isRenewable: 1
-  m_waterRequirement: 0.25
-  m_waterDecay: 0.5
+  m_waterRequirement: 0.325
+  m_waterDecay: 0.45
   m_drops:
-  - m_itemDropID: 0
+  - m_itemDropID: 3
     m_isRandom: 1
-    m_minDropAmount: 1
+    m_minDropAmount: 2
     m_maxDropAmount: 3
