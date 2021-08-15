@@ -142,8 +142,11 @@ MonoBehaviour:
   m_shovelplayerAnimator: {fileID: 4025331918752210869}
   m_carryplayerAnimator: {fileID: 2222970249983085164}
   m_waterplayerAnimator: {fileID: 7768377576899452525}
-  m_carryItem: {fileID: 0}
+  m_carryItem: {fileID: 5703478596354484987}
+  m_SplashVFX: {fileID: 2261444754701972063, guid: 85e7952e37cc14840becdcab96c8e8d3,
+    type: 3}
   m_canAttack: 1
+  m_spawnDelay: 0
   m_cameraContainer: {fileID: 2534253976193366327}
   cameraZoomSpeed: 1
   cameraZoomMax: 5
@@ -272,6 +275,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9b3e9d5bbbcf821439907cac246edf6a, type: 3}
   - {fileID: 8300000, guid: 3a2c3f761a7a4b645a5823dde6e7abb9, type: 3}
   - {fileID: 8300000, guid: e341adc3ce3f317409e50b99cab698c2, type: 3}
+  - {fileID: 8300000, guid: a3dae9d8cf2657743a842cb98cd3be92, type: 3}
   audioPlayersCount: 15
   channel: 1
 --- !u!1 &6723215644824891567
@@ -1015,6 +1019,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c9e2134b9a340c4dbb45697e4b3db8e, type: 3}
+--- !u!1 &5703478596354484987 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7314216417210644089, guid: 1c9e2134b9a340c4dbb45697e4b3db8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3073568776733269122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &2222970249983085164 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3782479629414815470, guid: 1c9e2134b9a340c4dbb45697e4b3db8e,
@@ -1852,15 +1862,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 885405d720b7dd74fa6d54fbe4b0fcb8, type: 3}
---- !u!95 &4025331918752210869 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7428468951596514590, guid: 885405d720b7dd74fa6d54fbe4b0fcb8,
-    type: 3}
-  m_PrefabInstance: {fileID: 5821996716268315307}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3483080696820003395 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6961861724182941928, guid: 885405d720b7dd74fa6d54fbe4b0fcb8,
+    type: 3}
+  m_PrefabInstance: {fileID: 5821996716268315307}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4025331918752210869 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7428468951596514590, guid: 885405d720b7dd74fa6d54fbe4b0fcb8,
     type: 3}
   m_PrefabInstance: {fileID: 5821996716268315307}
   m_PrefabAsset: {fileID: 0}
