@@ -79,6 +79,24 @@ public class SaveSlot
             {
                 m_hotbar[i] = new Save_Item();
             }
+
+            m_backpack[0 * m_rows + 0].m_id = 0;
+            m_backpack[0 * m_rows + 0].m_quantity = 5;
+
+            m_backpack[0 * m_rows + 1].m_id = 1;
+            m_backpack[0 * m_rows + 1].m_quantity = 5;
+
+            m_backpack[0 * m_rows + 2].m_id = 3;
+            m_backpack[0 * m_rows + 2].m_quantity = 5;
+
+            m_backpack[0 * m_rows + 3].m_id = 4;
+            m_backpack[0 * m_rows + 3].m_quantity = 5;
+
+            m_hotbar[0].m_id = 6;
+            m_hotbar[0].m_quantity = 50;
+
+            m_hotbar[1].m_id = 5;
+            m_hotbar[1].m_quantity = 1;
         }
     }
     [Serializable]

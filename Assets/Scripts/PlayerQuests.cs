@@ -41,12 +41,17 @@ public class PlayerQuests : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckForFailedQuests();
+    }
+
+    public void CheckForFailedQuests()
+    {
         List<Quest> toRemove = null;
         foreach (var quest in m_playerQuests)
         {
-            if(quest.m_dueDay == GameManager.instance.m_day)
+            if (quest.GetRemainingDays() < 0)
             {
-                if(toRemove == null)
+                if (toRemove == null)
                 {
                     toRemove = new List<Quest>();
                 }
@@ -62,6 +67,8 @@ public class PlayerQuests : MonoBehaviour
                 m_playerQuests.Remove(item);
                 GameManager.instance.m_questsFailed += 1;
             }
+            m_display.ShowNewQuestDisplay();
+            HUDManager.instance.GetComponent<MultiAudioAgent>().PlayOnce("QuestFail");
 
             if (m_display.gameObject.activeInHierarchy)
             {
@@ -92,6 +99,7 @@ public class PlayerQuests : MonoBehaviour
             m_display.ClearList();
             GenerateOnDisplay(m_display.gameObject.activeInHierarchy);
         }
+        m_playerQuests.Sort((a, b) => { return (a.m_dueDay < b.m_dueDay) ? 1 : 0; });
     }
 
     public int RedeemQuests()
@@ -119,6 +127,11 @@ public class PlayerQuests : MonoBehaviour
             m_playerQuests.Remove(item);
         }
         GameManager.instance.m_questsDone += result;
+
+        if(result > 0)
+        {
+            HUDManager.instance.GetComponent<MultiAudioAgent>().PlayOnce("QuestComplete");
+        }
 
         if (m_display.gameObject.activeInHierarchy)
         {

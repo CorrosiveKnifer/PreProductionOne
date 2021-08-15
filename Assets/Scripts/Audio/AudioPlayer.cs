@@ -79,6 +79,11 @@ public class AudioPlayer
             source.volume = Mathf.Clamp(volume, 0.0f, 1.0f);
     }
 
+    public float GetVolume()
+    {
+        return source.volume;
+    }
+
     /// <summary>
     /// [Coroutine] Mutates the audio player to start fading in over some time. Will start 
     /// playing the audio from zero volume, to the original volume of this player. 

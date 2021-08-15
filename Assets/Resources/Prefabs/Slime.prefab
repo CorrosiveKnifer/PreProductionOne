@@ -86,7 +86,8 @@ GameObject:
   - component: {fileID: 2938100424309836004}
   - component: {fileID: 2938100424309836006}
   - component: {fileID: 2938100424309836007}
-  - component: {fileID: 7820541414466009325}
+  - component: {fileID: 5492225876234237994}
+  - component: {fileID: 1431180050954200939}
   m_Layer: 9
   m_Name: Slime
   m_TagString: Enemy
@@ -124,6 +125,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_target: {fileID: 0}
   m_slimeModel: {fileID: 7557748878799007053}
+  m_hitVFX: {fileID: 3306783674953893888, guid: 67de0951011caa34196865488ed0f2db,
+    type: 3}
+  m_deathVFX: {fileID: 2261444754701972063, guid: 85e7952e37cc14840becdcab96c8e8d3,
+    type: 3}
 --- !u!195 &2938100424309836006
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -160,10 +165,29 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!135 &7820541414466009325
-SphereCollider:
+--- !u!114 &5492225876234237994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2938100424309836003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c936e73eec43a43969c7948e51a2a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localVolume: 1
+  isMuted: 0
+  audioClips:
+  - {fileID: 8300000, guid: 52a7c3b9b5800b94893d2b5401d417f3, type: 3}
+  - {fileID: 8300000, guid: 0c08cd9c642dbba488b1732f002cb7b2, type: 3}
+  audioPlayersCount: 5
+  channel: 1
+--- !u!136 &1431180050954200939
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -172,9 +196,10 @@ SphereCollider:
   m_Material: {fileID: 13400000, guid: df7dc2985569511459dffff8ddc605c1, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.25
-  m_Center: {x: 0, y: 0.25, z: 0}
+  m_Radius: 0.3
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.505, z: 0}
 --- !u!1 &3014248762132730581
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +471,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7117741305345676964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7181363700125382647}
@@ -600,7 +625,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cc67704ff0028d14dac2f22d39878df7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.211
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc67704ff0028d14dac2f22d39878df7,
         type: 3}

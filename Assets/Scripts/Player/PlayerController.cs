@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private MultiAudioAgent m_audioAgent;
+
     [Header("Player Animators")]
     [SerializeField] private Animator m_playerAnimator;
     [SerializeField] private Animator m_shovelplayerAnimator;
@@ -47,11 +49,11 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimationModel m_carryplayer;
     private PlayerAnimationModel m_waterplayer;
     public GameObject m_carryItem;
-
+    public GameObject m_SplashVFX;
     private PlayerState m_currentState = PlayerState.DEFAULT;
 
     public bool m_canAttack = true;
-
+    public float m_spawnDelay = 0.0f;
     public enum DisplayState
     {
         NONE,
@@ -87,12 +89,14 @@ public class PlayerController : MonoBehaviour
     private bool m_showInventory = false;
     [SerializeField] private GameObject m_menu;
     private bool isAttacking = false;
+    
     private GameObject m_actionObject;
     private bool m_cancelAttack = false;
 
     private void Awake()
     {
         m_cameraContainer.transform.parent = null;
+        m_audioAgent = GetComponent<MultiAudioAgent>();
 
         playerMovement = GetComponent<PlayerMovement>();
         m_playerPlacing = GetComponent<PlayerPlacing>();
@@ -121,6 +125,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (m_spawnDelay > 0)
+            m_spawnDelay -= Time.deltaTime;
+
         m_cancelAttack = false;
         CursorUpdate();
         HUDInput();
@@ -140,15 +147,20 @@ public class PlayerController : MonoBehaviour
             {
                 movementInput = Vector2.zero;
             }
-
-            // Call movement function
-            playerMovement.Move(movementInput);
-
-            m_player.animator.SetBool("IsMoving", movementInput != Vector2.zero);
-            m_shovelplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
-            m_carryplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
-            m_waterplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
         }
+        else
+        {
+            movementInput = Vector2.zero;
+        }
+
+        // Call movement function
+        playerMovement.Move(movementInput);
+
+        m_player.animator.SetBool("IsMoving", movementInput != Vector2.zero);
+        m_shovelplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
+        m_carryplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
+        m_waterplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
+
 
         if (m_playerVitality.m_hunger <= 0.0f && m_currentState != PlayerState.DEAD)
             StartCoroutine(Die());
@@ -167,11 +179,9 @@ public class PlayerController : MonoBehaviour
         m_currentState = PlayerState.DEAD;
         m_functionalityEnabled = false;
         // Die animation here
+        m_player.animator.SetTrigger("Die");
         yield return new WaitForSecondsRealtime(1.0f);
-        GameManager.instance.SkipTime(24);
-        GameManager.instance.SkipTime(24);
-        GameManager.instance.SkipTime(24);
-
+        GameManager.instance.SkipTime(72, 2.0f);
         LevelLoader.instance.ReloadLevel();
     }
 
@@ -379,19 +389,21 @@ public class PlayerController : MonoBehaviour
 
     public void DigAction()
     {
+        m_audioAgent.Play("Dig");
         Destroy(m_actionObject);
         m_actionObject = null;
     }
 
     public void WaterAction()
     {
-        
         if(m_actionObject.GetComponent<CropScript>() != null)
         {
             float amount = Mathf.Clamp(m_playerInventory.GetSelectItem().m_amount - 1, 0, 20.0f);
 
-            m_playerInventory.RemoveItem(7, (int)amount);
+            m_playerInventory.RemoveItem(6, (int)amount);
             m_actionObject.GetComponent<CropScript>().Water(amount);
+            SpawnSplashVFX(m_actionObject.transform.position);
+            m_audioAgent.Play("Watering");
         }
         else if(m_actionObject.GetComponent<WaterFiller>() != null)
         {
@@ -498,5 +510,19 @@ public class PlayerController : MonoBehaviour
         }
 
         m_menu.SetActive(m_showInventory);
+    }
+
+    public void SpawnSplashVFX(Vector3 pos)
+    {
+        if(m_spawnDelay <= 0)
+        {
+            Instantiate(m_SplashVFX, pos, Quaternion.identity);
+            m_spawnDelay += 0.25f;
+        }
+    }
+
+    public void PlayAudio(string _fileName)
+    {
+        m_audioAgent.Play(_fileName);
     }
 }

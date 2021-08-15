@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private PlayerVitality m_playerVitality;
+    private PlayerController m_playerController;
 
     private CharacterController characterController;
     private float yVelocity = 0.0f;
@@ -22,14 +23,21 @@ public class PlayerMovement : MonoBehaviour
     public float ledgeForgiveDelay = 0.0f;
     private float ledgeForgiveTimer = 0.0f;
 
+    private MultiAudioAgent m_audioAgent;
+
     [Header("Combat")]
-    public Transform m_attackPoint;
-    public float m_attackRange = 0.5f;
+    public Transform m_slamPoint;
+    public float m_slamRange = 0.5f;
+    public Transform m_swingPoint;
+    public float m_swingRange = 0.5f;
     public LayerMask m_enemyLayer;
+    public GameObject m_SlamVFX;
 
     private void Awake()
     {
+        m_audioAgent = GetComponent<MultiAudioAgent>();
         characterController = GetComponent<CharacterController>();
+        m_playerController = GetComponent<PlayerController>();
         m_playerVitality = GetComponent<PlayerVitality>();
     }
 
@@ -168,8 +176,12 @@ public class PlayerMovement : MonoBehaviour
     }
     public void SwingAttack()
     {
+        m_audioAgent.Play("AttackSwing");
+
         // Detect enemies in range of attacks
-        Collider[] hits = Physics.OverlapSphere(m_attackPoint.position, m_attackRange, m_enemyLayer);
+        Collider[] hits = Physics.OverlapSphere(m_swingPoint.position, m_swingRange, m_enemyLayer);
+
+        bool hitEnemy = false;
 
         // Damage them
         foreach (var enemy in hits)
@@ -177,6 +189,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Detected!");
             if (enemy.GetComponentInParent<Slime>())
             {
+                hitEnemy = true;
                 Vector3 direction = enemy.transform.position - transform.position;
                 direction.y = 0;
                 direction = direction.normalized;
@@ -185,22 +198,37 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("Damage Enemy");
             }
         }
+
+        if (hitEnemy)
+            m_audioAgent.Play("ShovelHit");
     }
 
     public void SlamAttack()
     {
         // Detect enemies in range of attacks
-        Collider[] hits = Physics.OverlapSphere(m_attackPoint.position, m_attackRange, m_enemyLayer);
+        Collider[] hits = Physics.OverlapSphere(m_slamPoint.position, m_slamRange, m_enemyLayer);
+
+        m_audioAgent.Play("SlamHit");
+        m_playerController.GetCamera().GetComponent<ScreenShake>().StartScreenShake();
+        Instantiate(m_SlamVFX, m_slamPoint.position, Quaternion.identity);
 
         // Damage them
         foreach (var enemy in hits)
         {
-            Debug.Log("Detected!");
             if (enemy.GetComponentInParent<Slime>())
             {
                 enemy.GetComponentInParent<Slime>().DamageEnemy(5);
-                Debug.Log("Damage Enemy");
             }
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(m_swingPoint.position, m_swingRange);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(m_slamPoint.position, m_slamRange);
+    }
+
 }

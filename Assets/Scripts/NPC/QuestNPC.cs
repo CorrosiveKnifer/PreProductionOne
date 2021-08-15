@@ -47,7 +47,7 @@ public class DialogSection
                     result += $"{ quest.m_amount }";
                     break;
                 case 'd':
-                    result += $"{ quest.m_dueDay }";
+                    result += $"{ quest.GetRemainingDays() }";
                     break;
                 case 'n':
                     result += $"{  itemName.ToLower()}";
@@ -193,7 +193,7 @@ public class QuestNPC : NPCScript
 
     public void GenerateRandomQuest()
     {
-        m_myQuest = new Quest(UnityEngine.Random.Range(0, 4), UnityEngine.Random.Range(5, 15), UnityEngine.Random.Range(3, 9));
+        m_myQuest = new Quest(UnityEngine.Random.Range(0, 4), UnityEngine.Random.Range(5, 15), UnityEngine.Random.Range(3, 9) + GameManager.instance.m_day);
         m_questDialog.dialog = m_data.DecodeQuest(m_myQuest);
     }
 
