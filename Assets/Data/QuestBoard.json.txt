@@ -6,7 +6,8 @@
 		{"text" : "*Remember to water your crops every day!*", "image" : "QuestBoard/QuestBoard"},
 		{"text" : "*Knock slimes into your crops to fertilize them*", "image" : "QuestBoard/QuestBoard"},
 		{"text" : "*Be careful around the pond over the bridge, that's where the slimes lurk*", "image" : "QuestBoard/QuestBoard"},
-		{"text" : "*Remember, you can knock slimes into eachother to make bigger slimes*", "image" : "QuestBoard/QuestBoard"}
+		{"text" : "*Remember, you can knock slimes into eachother to make bigger slimes*", "image" : "QuestBoard/QuestBoard"},
+		{"text" : "*You can either sleep by going into ur house or wait with the 't' button.*", "image" : "QuestBoard/QuestBoard"}
 	],
 	
 	"questImage" : "QuestBoard/QuestBoard",
