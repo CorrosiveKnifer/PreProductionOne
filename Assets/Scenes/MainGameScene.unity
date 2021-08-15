@@ -4013,6 +4013,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3591934429284828942, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: audioClips.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3591934429284828942, guid: f37c82fddde230d48a63df140781f1f9,
+        type: 3}
+      propertyPath: audioClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: a3dae9d8cf2657743a842cb98cd3be92, type: 3}
     - target: {fileID: 3727274793403782676, guid: f37c82fddde230d48a63df140781f1f9,
         type: 3}
       propertyPath: m_Name

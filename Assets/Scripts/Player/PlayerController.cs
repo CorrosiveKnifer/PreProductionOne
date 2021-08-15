@@ -399,8 +399,9 @@ public class PlayerController : MonoBehaviour
         {
             float amount = Mathf.Clamp(m_playerInventory.GetSelectItem().m_amount - 1, 0, 20.0f);
 
-            m_playerInventory.RemoveItem(7, (int)amount);
+            m_playerInventory.RemoveItem(6, (int)amount);
             m_actionObject.GetComponent<CropScript>().Water(amount);
+            m_audioAgent.Play("Watering");
         }
         else if(m_actionObject.GetComponent<WaterFiller>() != null)
         {
