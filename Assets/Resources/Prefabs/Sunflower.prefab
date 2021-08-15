@@ -5088,7 +5088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    m_itemID: 2
+    m_itemID: 4
     m_age: -1
     m_nextHarvest: -1
     m_water: 0

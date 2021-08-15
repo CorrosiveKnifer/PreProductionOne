@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841e9f61ed2f5634880d3669d5ffdd60, type: 3}
   m_Name: EmberBerry
   m_EditorClassIdentifier: 
-  m_maxAge: 7
+  m_maxAge: 5
   m_timeRequired: 2
   m_maxHeight: {x: 1.6, y: 1.6, z: 1.6}
   m_minVariance: 0.85

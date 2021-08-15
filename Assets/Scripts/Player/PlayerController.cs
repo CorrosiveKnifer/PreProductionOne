@@ -401,8 +401,12 @@ public class PlayerController : MonoBehaviour
             float amount = Mathf.Clamp(m_playerInventory.GetSelectItem().m_amount - 1, 0, 20.0f);
 
             m_playerInventory.RemoveItem(6, (int)amount);
-            m_actionObject.GetComponent<CropScript>().Water(amount);
-            SpawnSplashVFX(m_actionObject.transform.position);
+            if(amount > 0)
+            {
+                m_actionObject.GetComponent<CropScript>().Water(amount);
+                SpawnSplashVFX(m_actionObject.transform.position);
+            }
+                
             m_audioAgent.Play("Watering");
         }
         else if(m_actionObject.GetComponent<WaterFiller>() != null)

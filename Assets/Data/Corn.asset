@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841e9f61ed2f5634880d3669d5ffdd60, type: 3}
   m_Name: Corn
   m_EditorClassIdentifier: 
-  m_maxAge: 5
-  m_timeRequired: 4
-  m_maxHeight: {x: 2.5, y: 2.5, z: 2.5}
+  m_maxAge: 4
+  m_timeRequired: 2
+  m_maxHeight: {x: 1.5, y: 1.5, z: 1.5}
   m_minVariance: 0.85
   m_maxVariance: 1.15
   m_isRenewable: 1

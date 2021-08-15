@@ -5,6 +5,7 @@ using UnityEngine;
 public class SlimeSpawner : MonoBehaviour
 {
     public SunScript m_sunScript;
+    public GameObject m_slimePrefab;
     private float m_spawnTimer = 0.5f;
 
     private void Start()
@@ -37,7 +38,7 @@ public class SlimeSpawner : MonoBehaviour
     public void SpawnSlime(Vector3 _position, int _size = 1)
     {
         // Create greater slime.
-        GameObject newSlime = Instantiate(Resources.Load<GameObject>("Prefabs/Slime"), _position, transform.rotation);
+        GameObject newSlime = Instantiate(m_slimePrefab, _position, transform.rotation);
         newSlime.GetComponent<Slime>().SetSize(_size);
     }
 }

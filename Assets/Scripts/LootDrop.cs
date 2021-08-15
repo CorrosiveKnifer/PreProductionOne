@@ -9,7 +9,7 @@ public class LootDrop : MonoBehaviour
     private bool m_spawning = true;
     private float m_targetScale;
     private PlayerInventory m_targetPlayer;
-
+    private float m_maxTime = 1.5f;
     public static void CreateLoot(int _id, uint _amount, Vector3 _position)
     {
         GameObject newDrop = Instantiate(Resources.Load<GameObject>("Prefabs/LootDrop"), _position, Quaternion.Euler(new Vector3(0, Random.Range(0.0f, 360.0f), 0)));
@@ -47,6 +47,13 @@ public class LootDrop : MonoBehaviour
         
         if (!m_spawning)
         {
+            m_maxTime -= Time.deltaTime;
+            if(m_maxTime <= 0)
+            {
+                CollectLoot();
+                return;
+            }
+
             float newScale;
             float distance = Vector3.Distance(m_targetPlayer.transform.position, transform.position);
             if (distance < 2.0f)
