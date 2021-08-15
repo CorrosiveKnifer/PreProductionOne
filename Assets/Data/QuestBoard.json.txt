@@ -4,14 +4,18 @@
 	"greeting" : 
 	[
 		{"text" : "*Remember to water your crops every day!*", "image" : "QuestBoard/QuestBoard"},
+		{"text" : "*Knock slimes into your crops to fertilize them*", "image" : "QuestBoard/QuestBoard"},
+		{"text" : "*Be careful around the pond over the bridge, that's where the slimes lurk*", "image" : "QuestBoard/QuestBoard"},
 		{"text" : "*Remember, you can knock slimes into eachother to make bigger slimes*", "image" : "QuestBoard/QuestBoard"}
 	],
 	
 	"questImage" : "QuestBoard/QuestBoard",
 	
-	"acceptQuest" : {"text" : "", "image" : "QuestBoard/QuestBoard"},
+	"questText" : "*Quest for $a $n with a deadline of $d days*",
+	
+	"acceptQuest" : {"text" : "*Quest has been added.*", "image" : "QuestBoard/QuestBoard"},
 	
 	"noQuest" : {"text" : "*No new quests available.*", "image" : "QuestBoard/QuestBoard"},
 	
-	"declineQuest" : {"text" : "", "image" : "QuestBoard/QuestBoard"}
+	"declineQuest" : {"text" : "*The quest listing vanishes.*", "image" : "QuestBoard/QuestBoard"}
 }

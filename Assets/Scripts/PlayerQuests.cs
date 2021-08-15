@@ -26,7 +26,7 @@ public class PlayerQuests : MonoBehaviour
     [SerializeField] private UI_QuestList m_display;
 
     public List<Quest> m_playerQuests;
-
+    public int m_lastDayChecked;
 
     // Start is called before the first frame update
     void Start()
@@ -41,19 +41,65 @@ public class PlayerQuests : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckForFailedQuests();
+    }
+
+    public void CheckForFailedQuests()
+    {
+        List<Quest> toRemove = null;
+        foreach (var quest in m_playerQuests)
+        {
+            if (quest.GetRemainingDays() < 0)
+            {
+                if (toRemove == null)
+                {
+                    toRemove = new List<Quest>();
+                }
+                toRemove.Add(quest);
+            }
+        }
+
+        if (toRemove != null)
+        {
+            foreach (var item in toRemove)
+            {
+                GameManager.instance.m_saveSlot.RemoveQuest(item);
+                m_playerQuests.Remove(item);
+                GameManager.instance.m_questsFailed += 1;
+            }
+            m_display.ShowNewQuestDisplay();
+            HUDManager.instance.GetComponent<MultiAudioAgent>().PlayOnce("QuestFail");
+
+            if (m_display.gameObject.activeInHierarchy)
+            {
+                m_display.ClearList();
+                GenerateOnDisplay(m_display.gameObject.activeInHierarchy);
+            }
+        }
     }
 
     public void GenerateOnDisplay(bool isActive)
     {
-        m_display.Generate(m_playerQuests);
         m_display.gameObject.SetActive(isActive);
+        m_display.Generate(m_playerQuests);
+    }
+    public void ClearDisplay()
+    {
+        m_display.ClearList();
     }
 
     public void AddQuest(Quest quest)
     {
         m_playerQuests.Add(quest);
         GameManager.instance.m_saveSlot.AddQuest(quest);
+        m_display.ShowNewQuestDisplay();
+        HUDManager.instance.GetComponent<MultiAudioAgent>().PlayOnce("NewQuest");
+        if (m_display.gameObject.activeInHierarchy)
+        {
+            m_display.ClearList();
+            GenerateOnDisplay(m_display.gameObject.activeInHierarchy);
+        }
+        m_playerQuests.Sort((a, b) => { return (a.m_dueDay < b.m_dueDay) ? 1 : 0; });
     }
 
     public int RedeemQuests()
@@ -80,7 +126,18 @@ public class PlayerQuests : MonoBehaviour
             GameManager.instance.m_saveSlot.RemoveQuest(item);
             m_playerQuests.Remove(item);
         }
+        GameManager.instance.m_questsDone += result;
 
+        if(result > 0)
+        {
+            HUDManager.instance.GetComponent<MultiAudioAgent>().PlayOnce("QuestComplete");
+        }
+
+        if (m_display.gameObject.activeInHierarchy)
+        {
+            m_display.ClearList();
+            GenerateOnDisplay(m_display.gameObject.activeInHierarchy);
+        }
         return result;
     }
 }

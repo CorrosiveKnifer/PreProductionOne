@@ -5,9 +5,49 @@ using UnityEngine;
 public class SunScript : MonoBehaviour
 {
     public float m_secondsPerDay;
-    public float m_hourOfRise = 6;
-    public float m_hourOfNoon = 12;
-    public float m_hourOfSet = 20;
+    public bool m_isRaining = false;
+    public float m_weatherTimer = 0.0f;
+    [Range(0.0f, 1.0f)]
+    public float m_rainPercentage;
+    public float m_weatherCheckInHours = 8.0f;
+
+    [Header("Sun")]
+    public Light m_sun;
+    public Gradient m_sunColor;
+    public AnimationCurve m_sunIntensity;
+
+    [Header("Moon")]
+    public Light m_moon;
+    public Gradient m_moonColor;
+    public AnimationCurve m_moonIntensity;
+
+    [Header("Other")]
+    public AnimationCurve m_lightingIntensity;
+    public AnimationCurve m_reflectionIntensity;
+
+    [Header("Weather")]
+    public GameObject m_rain;
+
+    private float m_currentHour;
+    private int m_currentDay;
+    private void Start()
+    {
+        m_currentHour = GameManager.instance.m_currentHour;
+        m_currentDay = GameManager.instance.m_day;
+
+        if(m_isRaining)
+        {
+            m_rain.GetComponent<SoloAudioAgent>().PlayWithFadeIn(0.5f);
+        }
+        else
+        {
+            foreach (var system in GetComponentsInChildren<ParticleSystem>())
+            {
+                var emission = system.emission;
+                emission.enabled = false;
+            }
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -17,30 +57,80 @@ public class SunScript : MonoBehaviour
 
         GameManager.instance.SkipTime(secondsPassed / secondsPerHour);
 
-        float hour = GameManager.instance.m_currentHour;
-
-        float rotationVal = 0;
-        if (hour >= m_hourOfRise && hour < m_hourOfNoon)
-        {
-            rotationVal = Mathf.Lerp(0, 90, (hour - m_hourOfRise) / (m_hourOfNoon - m_hourOfRise));
-        }
-        else if(hour >= m_hourOfNoon && hour < m_hourOfSet)
-        {
-            rotationVal = Mathf.Lerp(90, 180, (hour - m_hourOfNoon) / (m_hourOfSet - m_hourOfNoon));
-        }
-        else if(hour >= m_hourOfSet && hour < 23)
-        {
-            rotationVal = Mathf.Lerp(180, 270, (hour - m_hourOfSet) / (23 - m_hourOfSet));
-        }
+        if (m_weatherTimer > 0)
+            m_weatherTimer -= GetInGameDeltaHours();
         else
         {
-            rotationVal = Mathf.Lerp(270, 360, (hour - 0) / (m_hourOfRise - 0));
+            bool rainBefore = m_isRaining;
+            m_isRaining = Random.Range(0, 1000) > (1.0 - m_rainPercentage) * 1000; //60% clear weather;
+            m_weatherTimer += m_weatherCheckInHours; //In game Hours
+
+            if(m_isRaining && !rainBefore)
+            {
+                m_rain.GetComponent<SoloAudioAgent>().PlayWithFadeIn(1.0f);
+                foreach (var system in GetComponentsInChildren<ParticleSystem>())
+                {
+                    var emission = system.emission;
+                    emission.enabled = true;
+                }
+            }
+            if (!m_isRaining && rainBefore)
+            {
+                m_rain.GetComponent<SoloAudioAgent>().PauseWithFadeOut(1.0f);
+                foreach (var system in GetComponentsInChildren<ParticleSystem>())
+                {
+                    var emission = system.emission;
+                    emission.enabled = false;
+                }
+            }
         }
-        
-        transform.rotation = Quaternion.Euler(new Vector3(rotationVal, 0, 0));
+
+        Rotate();
+
+        m_currentHour = GameManager.instance.m_currentHour;
+        m_currentDay = GameManager.instance.m_day;
     }
-    public float GetTimePassed()
+
+    public void Rotate()
     {
-        return (m_secondsPerDay / 24.0f) / Time.deltaTime;
+        float val = GameManager.instance.m_currentHour / 24.0f;
+        m_sun.transform.eulerAngles = (val - 0.25f) * new Vector3(90, 0, 0) * 4.0f;
+        m_moon.transform.eulerAngles = (val - 0.75f) * new Vector3(90, 0, 0) * 4.0f;
+
+        //Intensity
+        m_sun.intensity = m_sunIntensity.Evaluate(val);
+        m_moon.intensity = m_moonIntensity.Evaluate(val);
+
+        //Color
+        m_sun.color = m_sunColor.Evaluate(val);
+        m_moon.color = m_moonColor.Evaluate(val);
+
+        //Enable
+        if(m_sun.intensity == 0 && m_sun.gameObject.activeInHierarchy)
+            m_sun.gameObject.SetActive(false);
+        else if(m_sun.intensity > 0 && !m_sun.gameObject.activeInHierarchy)
+            m_sun.gameObject.SetActive(true);
+
+        //Enable
+        if (m_moon.intensity == 0 && m_moon.gameObject.activeInHierarchy)
+            m_moon.gameObject.SetActive(false);
+        else if (m_moon.intensity > 0 && !m_moon.gameObject.activeInHierarchy)
+            m_moon.gameObject.SetActive(true);
+
+        RenderSettings.ambientIntensity = m_lightingIntensity.Evaluate(val);
+        RenderSettings.reflectionIntensity = m_reflectionIntensity.Evaluate(val);
+
+        GetComponent<FadeDualAgent>().SetFadeValues(val, val);
+    }
+    private float GetInGameDeltaHours()
+    {
+        float oldHour = m_currentHour;
+        float nextHour = GameManager.instance.m_currentHour;
+        if (m_currentDay < GameManager.instance.m_day)
+        {
+            nextHour += 23.0f;
+        }
+
+        return nextHour - oldHour;
     }
 }

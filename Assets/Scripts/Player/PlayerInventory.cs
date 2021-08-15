@@ -56,12 +56,6 @@ class PlayerInventory : MonoBehaviour
             m_hotbarItem[c, 0] = GameManager.instance.m_saveSlot.GetPlayerHotbarData(c);
         }
 
-        //Remove me
-        for (int i = 0; i < GameManager.instance.m_items.list.Length; i++)
-        {
-            AddItem(ItemObject.CreateItem(i, 1));
-        }
-
         m_hotbar.Generate(m_hotbarItem, new Vector2Int(5, 1));
     }
 
@@ -233,41 +227,41 @@ class PlayerInventory : MonoBehaviour
         ref ItemObject slot = ref nullSlot;
         bool foundDupe = false;
 
-        for (int c = 0; c < m_hotbarItem.Length; c++)
+        for (int c = 0; c < m_size.x; c++)
         {
-            if (m_hotbarItem[c, 0] == null || m_hotbarItem[c, 0].m_id == -1)
-            {
-                slot = ref m_hotbarItem[c, 0];
-                continue;
-            }
-            if (m_hotbarItem[c, 0].m_id == addition.m_id && m_hotbarItem[c, 0].m_amount != ItemObject.MAX_AMOUNT)
-            {
-                slot = ref m_hotbarItem[c, 0];
-                foundDupe = true;
+            if (foundDupe)
                 break;
+
+            for (int r = 0; r < m_size.y; r++)
+            {
+                if (m_itemGrid[c, r] == null || m_itemGrid[c, r].m_id == -1)
+                {
+                    slot = ref m_itemGrid[c, r];
+                    continue;
+                }
+                if (m_itemGrid[c, r].m_id == addition.m_id && m_itemGrid[c, r].m_amount != ItemObject.MAX_AMOUNT)
+                {
+                    slot = ref m_itemGrid[c, r];
+                    foundDupe = true;
+                    break;
+                }
             }
         }
 
-        if(!foundDupe)
+        if (!foundDupe)
         {
-            for (int c = 0; c < m_size.x; c++)
+            for (int c = m_hotbarItem.Length - 1; c >= 0; c--)
             {
-                if (foundDupe)
-                    break;
-
-                for (int r = 0; r < m_size.y; r++)
+                if (m_hotbarItem[c, 0] == null || m_hotbarItem[c, 0].m_id == -1)
                 {
-                    if (m_itemGrid[c, r] == null || m_itemGrid[c, r].m_id == -1)
-                    {
-                        slot = ref m_itemGrid[c, r];
-                        continue;
-                    }
-                    if (m_itemGrid[c, r].m_id == addition.m_id && m_itemGrid[c, r].m_amount != ItemObject.MAX_AMOUNT)
-                    {
-                        slot = ref m_itemGrid[c, r];
-                        foundDupe = true;
-                        break;
-                    }
+                    slot = ref m_hotbarItem[c, 0];
+                    continue;
+                }
+                if (m_hotbarItem[c, 0].m_id == addition.m_id && m_hotbarItem[c, 0].m_amount != ItemObject.MAX_AMOUNT)
+                {
+                    slot = ref m_hotbarItem[c, 0];
+                    foundDupe = true;
+                    break;
                 }
             }
         }
