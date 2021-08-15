@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimationModel m_carryplayer;
     private PlayerAnimationModel m_waterplayer;
     public GameObject m_carryItem;
-
+    public GameObject m_SplashVFX;
     private PlayerState m_currentState = PlayerState.DEFAULT;
 
     public bool m_canAttack = true;
@@ -401,6 +401,7 @@ public class PlayerController : MonoBehaviour
 
             m_playerInventory.RemoveItem(6, (int)amount);
             m_actionObject.GetComponent<CropScript>().Water(amount);
+            SpawnSplashVFX(m_actionObject.transform.position);
             m_audioAgent.Play("Watering");
         }
         else if(m_actionObject.GetComponent<WaterFiller>() != null)
@@ -508,5 +509,10 @@ public class PlayerController : MonoBehaviour
         }
 
         m_menu.SetActive(m_showInventory);
+    }
+
+    public void SpawnSplashVFX(Vector3 pos)
+    {
+        Instantiate(m_SplashVFX, pos, Quaternion.identity);
     }
 }

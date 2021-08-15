@@ -47,6 +47,11 @@ public class SoundField : MonoBehaviour
                 default:
                     break;
             }
-        }
+
+            if (m_myType == MaterialType.Water && other.GetComponent<PlayerController>() != null)
+            {
+                other.GetComponent<PlayerController>().SpawnSplashVFX(other.transform.position);
+            }
+        }  
     }
 }

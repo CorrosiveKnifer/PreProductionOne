@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 7011827089798610362}
   - component: {fileID: 7011827089798610363}
   - component: {fileID: 7011827089798610366}
+  - component: {fileID: 9196838846795453666}
   m_Layer: 0
   m_Name: Well
   m_TagString: Interactable
@@ -205,6 +206,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55959f9fa5b84254d81c8c9601d337a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9196838846795453666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7011827089798610367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0deb60f02ddb847b5da99b1d5286a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localVolume: 1
+  isMuted: 0
+  mainClip: {fileID: 8300000, guid: 6041a1a2674ac65428bcdeca7bf3aaa1, type: 3}
+  channel: 1
+  isPlayOnAwake: 0
+  isLooping: 0
 --- !u!1001 &1762773327103024947
 PrefabInstance:
   m_ObjectHideFlags: 0

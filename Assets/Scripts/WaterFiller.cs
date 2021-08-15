@@ -10,6 +10,7 @@ public class WaterFiller : MonoBehaviour
         if (item?.GetToolType() == ToolType.WaterCan)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().StartWaterActionOn(gameObject);
+            GetComponent<SoloAudioAgent>().Play();
             return;
         }
     }
