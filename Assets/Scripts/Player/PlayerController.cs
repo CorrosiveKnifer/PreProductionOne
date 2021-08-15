@@ -175,6 +175,7 @@ public class PlayerController : MonoBehaviour
         m_currentState = PlayerState.DEAD;
         m_functionalityEnabled = false;
         // Die animation here
+        m_player.animator.SetTrigger("Die");
         yield return new WaitForSecondsRealtime(1.0f);
         GameManager.instance.SkipTime(24);
         GameManager.instance.SkipTime(24);
