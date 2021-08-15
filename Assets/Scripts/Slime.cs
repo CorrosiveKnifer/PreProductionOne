@@ -41,7 +41,6 @@ public class Slime : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_audioAgent.Play("SlimeCombine");
         transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
         m_target = FindObjectOfType<PlayerController>().gameObject;
     }
@@ -116,7 +115,6 @@ public class Slime : MonoBehaviour
             m_circleAngle += 360;
         }
 
-        Debug.Log(m_circleAngle);
         return circlePos + new Vector3(Mathf.Cos(m_circleAngle * 3.14f / 180.0f), 0, Mathf.Sin(m_circleAngle * 3.14f / 180.0f));
     }
 
@@ -198,9 +196,9 @@ public class Slime : MonoBehaviour
     IEnumerator Death()
     {
         m_dead = true;
-        m_audioAgent.Play("SlimeDeath");
+        m_target.GetComponent<PlayerController>().PlayAudio("SlimeDeath");
         //GetComponent<NavMeshAgent>().enabled = false;
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(0.0f);
         //DropLoot();
         Destroy(gameObject);
     }
@@ -247,6 +245,8 @@ public class Slime : MonoBehaviour
 
                 // Destroy this slime.
                 SetToCombine();
+
+                m_target.GetComponent<PlayerController>().PlayAudio("SlimeCombine");
             }
         }
         else if (collision.gameObject.GetComponent<CropScript>())

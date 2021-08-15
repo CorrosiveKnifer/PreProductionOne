@@ -508,4 +508,9 @@ public class PlayerController : MonoBehaviour
 
         m_menu.SetActive(m_showInventory);
     }
+
+    public void PlayAudio(string _fileName)
+    {
+        m_audioAgent.Play(_fileName);
+    }
 }

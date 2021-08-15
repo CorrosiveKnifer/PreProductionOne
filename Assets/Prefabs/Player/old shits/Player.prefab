@@ -267,8 +267,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e59cf9ea09a8239489da5b0163a8a3b0, type: 3}
   - {fileID: 8300000, guid: 404848dd15728b54c83aabfaec062544, type: 3}
   - {fileID: 8300000, guid: 9b3e9d5bbbcf821439907cac246edf6a, type: 3}
-  audioPlayersCount: 5
-  channel: 0
+  - {fileID: 8300000, guid: 3a2c3f761a7a4b645a5823dde6e7abb9, type: 3}
+  - {fileID: 8300000, guid: e341adc3ce3f317409e50b99cab698c2, type: 3}
+  audioPlayersCount: 15
+  channel: 1
 --- !u!1001 &676357871421460327
 PrefabInstance:
   m_ObjectHideFlags: 0
