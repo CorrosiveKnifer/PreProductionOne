@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Animations/Screen.meta
+guid: cd21e0df4dcbf3e43a47d83ab8e3cf8f
+=======
 guid: 8957b5479dbd11a4fb9c13b87d92bbac
+>>>>>>> origin/Petre:Assets/VFX/Material.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -25,10 +25,12 @@ public class PlayerVitality : MonoBehaviour
     [SerializeField] private UI_HungerBar m_hungerBar;
     public float m_hunger;
     public List<statusEffect> playerEffects = new List<statusEffect>();
+    private MultiAudioAgent m_audioAgent;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_audioAgent = GetComponent<MultiAudioAgent>();
         m_hunger = GameManager.instance.m_hunger;
     }
 
@@ -52,6 +54,8 @@ public class PlayerVitality : MonoBehaviour
 
     public void Damage(float _damage)
     {
+        if (m_hunger > 0)
+        m_audioAgent.Play("PlayerHurt");
         m_hunger -= _damage;
     }
 

@@ -4,14 +4,18 @@
 	"greeting" : 
 	[
 		{"text" : "Hello Child", "image" : "Perry/Happy"},
-		{"text" : "Oh boiiiii", "image" : "Perry/Happy"}
+		{"text" : "Oh boiiiii", "image" : "Perry/Happy"},
+		{"text" : "Good to see you friend", "image" : "Perry/Happy"},
+		{"text" : "What can I do for you?", "image" : "Perry/Happy"},
+		{"text" : "Hello there!", "image" : "Perry/Happy"}
 	],
 	
 	"questImage" : "Perry/Happy",
+	"questText" : "Can I get $a $n within $d days?",
 	
 	"acceptQuest" : {"text" : "Thank you! I can't wait.", "image" : "Perry/Happy"},
 	
-	"noQuest" : {"text" : "Sorry but I have no quests.", "image" : "Perry/Neutral"},
+	"noQuest" : {"text" : "I'm sorry but I have no quests for you at the moment.", "image" : "Perry/Neutral"},
 	
-	"declineQuest" : {"text" : "Unfortunate.", "image" : "Perry/Neutral"}
+	"declineQuest" : {"text" : "Ah... I see. That is rather unfortunate.", "image" : "Perry/Sad"}
 }

@@ -13,6 +13,7 @@ public class ItemDB
     {
         public int id;
         public string name;
+        public string pluralName;
         public string placePrefabName;
         public string inventoryImageName;
         public string dropPrefabName;
