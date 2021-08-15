@@ -41,7 +41,7 @@ public class SoundField : MonoBehaviour
                         agent.StopAudio("Walk_Water");
                         break;
                     case MaterialType.Water:
-                        agent.PlayOnce("Walk_Water");
+                        agent.PlayOnce("Walk_Water",false, Random.Range(0.95f, 1.05f));
                         agent.StopAudio("Walk_Wood");
                         agent.StopAudio("Walk_Grass");
                         other.GetComponent<PlayerController>().SpawnSplashVFX(other.transform.position);

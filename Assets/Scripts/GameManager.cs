@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
     {
         if(InputManager.instance.IsKeyDown(KeyType.T))
         {
-            SkipTime(8.0f);
+            SkipTime(4.0f, 1.0f);
         }
 
         if(m_gameTimer == null)
