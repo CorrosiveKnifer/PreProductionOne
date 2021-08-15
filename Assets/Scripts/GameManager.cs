@@ -90,8 +90,6 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            m_day = m_saveSlot.GetSaveDay();
-            m_currentHour = m_saveSlot.GetSaveHour();
             m_questsDone = m_saveSlot.GetQuestsData(0);
             m_questsFailed = m_saveSlot.GetQuestsData(1);
 
@@ -136,7 +134,9 @@ public class GameManager : MonoBehaviour
             Debug.Log($"SaveSlot doesn't exist, it was created in {Application.dataPath}/");
             m_saveSlot = new SaveSlot();
         }
-        
+
+        m_day = m_saveSlot.GetSaveDay();
+        m_currentHour = m_saveSlot.GetSaveHour();
     }
 
     public void ClearGameFile()

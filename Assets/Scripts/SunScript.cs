@@ -6,9 +6,10 @@ public class SunScript : MonoBehaviour
 {
     public float m_secondsPerDay;
     public bool m_isRaining = false;
-    public float m_weatherTimer = 8.0f;
+    public float m_weatherTimer = 0.0f;
     [Range(0.0f, 1.0f)]
     public float m_rainPercentage;
+    public float m_weatherCheckInHours = 8.0f;
 
     [Header("Sun")]
     public Light m_sun;
@@ -29,6 +30,12 @@ public class SunScript : MonoBehaviour
 
     private float m_currentHour;
     private int m_currentDay;
+    private void Start()
+    {
+        m_currentHour = GameManager.instance.m_currentHour;
+        m_currentDay = GameManager.instance.m_day;
+        m_weatherTimer = m_weatherCheckInHours;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -41,8 +48,26 @@ public class SunScript : MonoBehaviour
             m_weatherTimer -= GetInGameDeltaHours();
         else
         {
+            bool rainBefore = m_isRaining;
             m_isRaining = Random.Range(0, 1000) > (1.0 - m_rainPercentage) * 1000; //60% clear weather;
-            m_weatherTimer += 8.0f; //In game Hours
+            m_weatherTimer += m_weatherCheckInHours; //In game Hours
+
+            if(m_isRaining && !rainBefore)
+            {
+                foreach (var system in GetComponentsInChildren<ParticleSystem>())
+                {
+                    var emission = system.emission;
+                    emission.enabled = true;
+                }
+            }
+            if (!m_isRaining && rainBefore)
+            {
+                foreach (var system in GetComponentsInChildren<ParticleSystem>())
+                {
+                    var emission = system.emission;
+                    emission.enabled = false;
+                }
+            }
         }
 
         m_rain.SetActive(m_isRaining);
@@ -50,11 +75,6 @@ public class SunScript : MonoBehaviour
 
         m_currentHour = GameManager.instance.m_currentHour;
         m_currentDay = GameManager.instance.m_day;
-    }
-
-    public float GetTimePassed()
-    {
-        return (m_secondsPerDay / 24.0f) / Time.deltaTime;
     }
 
     public void Rotate()
@@ -96,5 +116,23 @@ public class SunScript : MonoBehaviour
         }
 
         return nextHour - oldHour;
+    }
+
+    private IEnumerator FadeInRain(float duration)
+    {
+        ParticleSystem[] systems = GetComponentsInChildren<ParticleSystem>();
+
+        float time = duration;
+        //while (time != 0)
+        //{
+        //    foreach (var system in GetComponentsInChildren<ParticleSystem>())
+        //    {
+        //        var emission = system.emission;
+        //        emission.enabled = false;
+        //    }
+        //    yield return new WaitForEndOfFrame();
+        //    time -= Time.deltaTime;
+        //}
+        yield return null;
     }
 }
