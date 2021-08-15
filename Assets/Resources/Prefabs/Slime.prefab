@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 2938100424309836006}
   - component: {fileID: 2938100424309836007}
   - component: {fileID: 7820541414466009325}
+  - component: {fileID: 5492225876234237994}
   m_Layer: 9
   m_Name: Slime
   m_TagString: Enemy
@@ -175,6 +176,27 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.25
   m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!114 &5492225876234237994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2938100424309836003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c936e73eec43a43969c7948e51a2a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localVolume: 1
+  isMuted: 0
+  audioClips:
+  - {fileID: 8300000, guid: 3a2c3f761a7a4b645a5823dde6e7abb9, type: 3}
+  - {fileID: 8300000, guid: 0c08cd9c642dbba488b1732f002cb7b2, type: 3}
+  - {fileID: 8300000, guid: e341adc3ce3f317409e50b99cab698c2, type: 3}
+  - {fileID: 8300000, guid: 52a7c3b9b5800b94893d2b5401d417f3, type: 3}
+  audioPlayersCount: 5
+  channel: 1
 --- !u!1 &3014248762132730581
 GameObject:
   m_ObjectHideFlags: 0

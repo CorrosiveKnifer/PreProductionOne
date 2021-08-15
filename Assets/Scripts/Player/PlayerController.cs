@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private MultiAudioAgent m_audioAgent;
+
     [Header("Player Animators")]
     [SerializeField] private Animator m_playerAnimator;
     [SerializeField] private Animator m_shovelplayerAnimator;
@@ -93,6 +95,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         m_cameraContainer.transform.parent = null;
+        m_audioAgent = GetComponent<MultiAudioAgent>();
 
         playerMovement = GetComponent<PlayerMovement>();
         m_playerPlacing = GetComponent<PlayerPlacing>();
@@ -140,15 +143,20 @@ public class PlayerController : MonoBehaviour
             {
                 movementInput = Vector2.zero;
             }
-
-            // Call movement function
-            playerMovement.Move(movementInput);
-
-            m_player.animator.SetBool("IsMoving", movementInput != Vector2.zero);
-            m_shovelplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
-            m_carryplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
-            m_waterplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
         }
+        else
+        {
+            movementInput = Vector2.zero;
+        }
+
+        // Call movement function
+        playerMovement.Move(movementInput);
+
+        m_player.animator.SetBool("IsMoving", movementInput != Vector2.zero);
+        m_shovelplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
+        m_carryplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
+        m_waterplayer.animator.SetBool("IsMoving", movementInput != Vector2.zero);
+
 
         if (m_playerVitality.m_hunger <= 0.0f && m_currentState != PlayerState.DEAD)
             StartCoroutine(Die());
@@ -379,6 +387,7 @@ public class PlayerController : MonoBehaviour
 
     public void DigAction()
     {
+        m_audioAgent.Play("Dig");
         Destroy(m_actionObject);
         m_actionObject = null;
     }
