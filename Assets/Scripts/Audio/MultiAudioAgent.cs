@@ -98,6 +98,17 @@ class MultiAudioAgent : AudioAgent
         return false;
     }
 
+    public void StopAudio(string clipName)
+    {
+        foreach (var player in players)
+        {
+            if (player.IsPlaying() && player.currentClip?.name == clipName)
+            {
+                player.Stop();
+            }
+        }
+    }
+
     public bool IsAudioPlaying(string clipName)
     {
         foreach (var player in players)

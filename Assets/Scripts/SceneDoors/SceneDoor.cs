@@ -77,7 +77,7 @@ public class SceneDoor : MonoBehaviour
 
     public void Sleep()
     {
-        GameManager.instance.SkipTime(8);
+        GameManager.instance.SkipTime(8, 1.0f);
         FindObjectOfType<PlayerVitality>().m_hunger = 100.0f;
     }    
 }

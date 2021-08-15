@@ -104,6 +104,11 @@ public class GameManager : MonoBehaviour
             SkipTime(8.0f);
         }
 
+        if(m_gameTimer == null)
+        {
+            m_gameTimer = FindObjectOfType<SunScript>();
+        }
+
         m_saveSlot.SetTime(m_day, m_currentHour);
         m_saveSlot.SetQuests(m_questsDone, m_questsFailed);
         m_saveSlot.SetRaining(m_gameTimer.m_isRaining);
@@ -144,8 +149,14 @@ public class GameManager : MonoBehaviour
         m_saveSlot = new SaveSlot();
     }
 
-    public void SkipTime(float hoursIncreased)
+    public void SkipTime(float hoursIncreased, float duration = 0.0f)
     {
+        if (duration > 0)
+        {
+            StartCoroutine(Skip(hoursIncreased, duration));
+            return;
+        }
+
         m_currentHour += hoursIncreased;
         while (m_currentHour >= 24)
         {
@@ -153,7 +164,25 @@ public class GameManager : MonoBehaviour
             m_day++;
         }
     }
+    private IEnumerator Skip(float hoursIncreased, float duration = 0.0f)
+    {
+        float time = duration;
+        float timePerStep =  hoursIncreased / duration;
+        while(time > 0)
+        {
+            m_currentHour += timePerStep * Time.deltaTime;
+            while (m_currentHour >= 24)
+            {
+                m_currentHour -= 24;
+                m_day++;
+            }
 
+            yield return new WaitForEndOfFrame();
+            time -= Time.deltaTime;
+        }
+
+        yield return null;
+    }
     public void OnApplicationQuit()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
