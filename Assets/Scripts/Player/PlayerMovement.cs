@@ -203,6 +203,8 @@ public class PlayerMovement : MonoBehaviour
         // Detect enemies in range of attacks
         Collider[] hits = Physics.OverlapSphere(m_attackPoint.position, m_attackRange, m_enemyLayer);
 
+        m_audioAgent.Play("SlamHit");
+
         // Damage them
         foreach (var enemy in hits)
         {

@@ -200,7 +200,7 @@ public class Slime : MonoBehaviour
         m_dead = true;
         m_audioAgent.Play("SlimeDeath");
         //GetComponent<NavMeshAgent>().enabled = false;
-        yield return new WaitForSecondsRealtime(0.0f);
+        yield return new WaitForSecondsRealtime(0.5f);
         //DropLoot();
         Destroy(gameObject);
     }
