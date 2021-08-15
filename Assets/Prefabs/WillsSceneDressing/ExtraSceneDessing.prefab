@@ -354,6 +354,8 @@ GameObject:
   - component: {fileID: 8440029491216179415}
   - component: {fileID: 1183238637629137445}
   - component: {fileID: 8843444093961077088}
+  - component: {fileID: 6641251552479288492}
+  - component: {fileID: 6477544343967601844}
   m_Layer: 0
   m_Name: PotClean
   m_TagString: Untagged
@@ -369,7 +371,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3640894423872961603}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.13965015, y: 0.00012523388, z: -0.00025368127}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6832116597785019007}
@@ -422,6 +424,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &6641251552479288492
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3640894423872961603}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5966620188639278160, guid: cacfaa4b970ff1c4698cda425593e508, type: 3}
+--- !u!208 &6477544343967601844
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3640894423872961603}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.13800001, y: 0.18800001, z: 0.13800001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.18800001, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4574473331210867032
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +496,8 @@ GameObject:
   - component: {fileID: 5633237510396888802}
   - component: {fileID: 2952117974333821372}
   - component: {fileID: 4576393268201912234}
+  - component: {fileID: 4902535537704929125}
+  - component: {fileID: 6110760268689807007}
   m_Layer: 0
   m_Name: PotClean
   m_TagString: Untagged
@@ -479,7 +513,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5084871285315356261}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.013, z: 0}
+  m_LocalPosition: {x: 0.16921549, y: 0.013151747, z: -0.00030738814}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 630773955905579277}
@@ -532,6 +566,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &4902535537704929125
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5084871285315356261}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5966620188639278160, guid: cacfaa4b970ff1c4698cda425593e508, type: 3}
+--- !u!208 &6110760268689807007
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5084871285315356261}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.13800001, y: 0.18800001, z: 0.13800001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.18800001, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5674119483015158027
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,6 +862,8 @@ GameObject:
   - component: {fileID: 2069820280493641337}
   - component: {fileID: 7912288955631264529}
   - component: {fileID: 513232560507732503}
+  - component: {fileID: 7537519385578351409}
+  - component: {fileID: 7385167402168023248}
   m_Layer: 0
   m_Name: PotClean (1)
   m_TagString: Untagged
@@ -866,6 +932,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &7537519385578351409
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6270057154692374650}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5966620188639278160, guid: cacfaa4b970ff1c4698cda425593e508, type: 3}
+--- !u!208 &7385167402168023248
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6270057154692374650}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.13800001, y: 0.18800001, z: 0.13800001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.18800001, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &6306291480488092301
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,6 +1004,8 @@ GameObject:
   - component: {fileID: 7562376529855939935}
   - component: {fileID: 3708006713530215642}
   - component: {fileID: 4007580566518782107}
+  - component: {fileID: 2063901331037705485}
+  - component: {fileID: 7909071490722283220}
   m_Layer: 0
   m_Name: PotClean
   m_TagString: Untagged
@@ -923,7 +1021,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6328533154154558434}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.01, y: 0.056, z: -0.157}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6003906456212373627}
@@ -976,6 +1074,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &2063901331037705485
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6328533154154558434}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5966620188639278160, guid: cacfaa4b970ff1c4698cda425593e508, type: 3}
+--- !u!208 &7909071490722283220
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6328533154154558434}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.13800001, y: 0.18800001, z: 0.13800001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.18800001, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &6828602812080196385
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,6 +1431,8 @@ GameObject:
   - component: {fileID: 8645921953018589735}
   - component: {fileID: 5346613807387088563}
   - component: {fileID: 3497145999843732094}
+  - component: {fileID: 39529331678839220}
+  - component: {fileID: 3533607362664421797}
   m_Layer: 0
   m_Name: PotClean (2)
   m_TagString: Untagged
@@ -1318,7 +1448,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8479801986356381237}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.55, y: 0.34, z: 7.66}
+  m_LocalPosition: {x: -2.55, y: 0.211, z: 7.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6832116597785019007}
@@ -1371,6 +1501,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &39529331678839220
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8479801986356381237}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5966620188639278160, guid: cacfaa4b970ff1c4698cda425593e508, type: 3}
+--- !u!208 &3533607362664421797
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8479801986356381237}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.13800001, y: 0.18800001, z: 0.13800001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.18800001, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8498029873056514562
 GameObject:
   m_ObjectHideFlags: 0
