@@ -3,10 +3,15 @@
 	
 	"greeting" : 
 	[
-		{"text" : "Hello Child", "image" : "Perry/Happy"},
+		{"text" : "Hello child. How are you doing today?", "image" : "Perry/Neutral"},
 		{"text" : "It's good to see you!", "image" : "Perry/Happy"},
-		{"text" : "What can I do for you?", "image" : "Perry/Happy"},
-		{"text" : "Hello there!", "image" : "Perry/Happy"}
+		{"text" : "What can I do for you?", "image" : "Perry/Neutral"},
+		{"text" : "Hello!", "image" : "Perry/Happy"},
+		{"text" : "Hello there! I do hope you've found some of the notes pinned on the quest board useful.", "image" : "Perry/Happy"},
+		{"text" : "Did you know you could knock slimes together to create bigger ones?", "image" : "Perry/Neutral"},
+		{"text" : "Delivering mail is tough work. Do you have a snack on you by any chance?", "image" : "Perry/Neutral"},
+		{"text" : "Those small slimes are quite tasty. I wish I could take a day off to lounge in the pond...", "image" : "Perry/Sad"},
+
 	],
 	
 	"questImage" : "Perry/Happy",
