@@ -29,7 +29,7 @@ public class Slime : MonoBehaviour
 
     private float m_circleAngle = 0.0f;
 
-
+    public GameObject m_deathVFX;
 
     private void Awake()
     {
@@ -200,6 +200,8 @@ public class Slime : MonoBehaviour
         //GetComponent<NavMeshAgent>().enabled = false;
         yield return new WaitForSecondsRealtime(0.0f);
         //DropLoot();
+
+        Instantiate(m_deathVFX, transform.position, transform.rotation);
         Destroy(gameObject);
     }
     private void DropLoot()
