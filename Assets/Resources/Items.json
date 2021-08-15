@@ -46,7 +46,7 @@
       "itemType": "Crop"
     },
 	{
-      "id": 6,
+      "id": 5,
       "name": "Shovel",
       "placePrefabName": "Null",
       "inventoryImageName": "Sprites/ShovelIcon",
@@ -54,7 +54,7 @@
       "itemType": "Tool"
     },
 	{
-      "id": 7,
+      "id": 6,
       "name": "Watering Can",
       "placePrefabName": "Null",
       "inventoryImageName": "Sprites/WateringCanIcon",

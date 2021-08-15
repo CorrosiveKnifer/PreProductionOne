@@ -10,12 +10,13 @@ public class WaterFiller : MonoBehaviour
         if (item?.GetToolType() == ToolType.WaterCan)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().StartWaterActionOn(gameObject);
+            GetComponent<SoloAudioAgent>().Play();
             return;
         }
     }
 
     public void FillWater()
     {
-        GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerInventory>()?.AddItem(ItemObject.CreateItem(7, 25));
+        GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerInventory>()?.AddItem(ItemObject.CreateItem(6, 25));
     }
 }

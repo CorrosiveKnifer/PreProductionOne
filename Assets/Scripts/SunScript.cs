@@ -34,8 +34,21 @@ public class SunScript : MonoBehaviour
     {
         m_currentHour = GameManager.instance.m_currentHour;
         m_currentDay = GameManager.instance.m_day;
-        m_weatherTimer = m_weatherCheckInHours;
+
+        if(m_isRaining)
+        {
+            m_rain.GetComponent<SoloAudioAgent>().PlayWithFadeIn(0.5f);
+        }
+        else
+        {
+            foreach (var system in GetComponentsInChildren<ParticleSystem>())
+            {
+                var emission = system.emission;
+                emission.enabled = false;
+            }
+        }
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -54,6 +67,7 @@ public class SunScript : MonoBehaviour
 
             if(m_isRaining && !rainBefore)
             {
+                m_rain.GetComponent<SoloAudioAgent>().PlayWithFadeIn(1.0f);
                 foreach (var system in GetComponentsInChildren<ParticleSystem>())
                 {
                     var emission = system.emission;
@@ -62,6 +76,7 @@ public class SunScript : MonoBehaviour
             }
             if (!m_isRaining && rainBefore)
             {
+                m_rain.GetComponent<SoloAudioAgent>().PauseWithFadeOut(1.0f);
                 foreach (var system in GetComponentsInChildren<ParticleSystem>())
                 {
                     var emission = system.emission;
@@ -70,7 +85,6 @@ public class SunScript : MonoBehaviour
             }
         }
 
-        m_rain.SetActive(m_isRaining);
         Rotate();
 
         m_currentHour = GameManager.instance.m_currentHour;
@@ -105,6 +119,8 @@ public class SunScript : MonoBehaviour
 
         RenderSettings.ambientIntensity = m_lightingIntensity.Evaluate(val);
         RenderSettings.reflectionIntensity = m_reflectionIntensity.Evaluate(val);
+
+        GetComponent<FadeDualAgent>().SetFadeValues(val, val);
     }
     private float GetInGameDeltaHours()
     {
@@ -116,23 +132,5 @@ public class SunScript : MonoBehaviour
         }
 
         return nextHour - oldHour;
-    }
-
-    private IEnumerator FadeInRain(float duration)
-    {
-        ParticleSystem[] systems = GetComponentsInChildren<ParticleSystem>();
-
-        float time = duration;
-        //while (time != 0)
-        //{
-        //    foreach (var system in GetComponentsInChildren<ParticleSystem>())
-        //    {
-        //        var emission = system.emission;
-        //        emission.enabled = false;
-        //    }
-        //    yield return new WaitForEndOfFrame();
-        //    time -= Time.deltaTime;
-        //}
-        yield return null;
     }
 }

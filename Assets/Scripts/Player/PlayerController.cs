@@ -49,11 +49,11 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimationModel m_carryplayer;
     private PlayerAnimationModel m_waterplayer;
     public GameObject m_carryItem;
-
+    public GameObject m_SplashVFX;
     private PlayerState m_currentState = PlayerState.DEFAULT;
 
     public bool m_canAttack = true;
-
+    public float m_spawnDelay = 0.0f;
     public enum DisplayState
     {
         NONE,
@@ -124,6 +124,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (m_spawnDelay > 0)
+            m_spawnDelay -= Time.deltaTime;
+
         m_cancelAttack = false;
         CursorUpdate();
         HUDInput();
@@ -395,13 +398,14 @@ public class PlayerController : MonoBehaviour
 
     public void WaterAction()
     {
-        
         if(m_actionObject.GetComponent<CropScript>() != null)
         {
             float amount = Mathf.Clamp(m_playerInventory.GetSelectItem().m_amount - 1, 0, 20.0f);
 
-            m_playerInventory.RemoveItem(7, (int)amount);
+            m_playerInventory.RemoveItem(6, (int)amount);
             m_actionObject.GetComponent<CropScript>().Water(amount);
+            SpawnSplashVFX(m_actionObject.transform.position);
+            m_audioAgent.Play("Watering");
         }
         else if(m_actionObject.GetComponent<WaterFiller>() != null)
         {
@@ -508,6 +512,15 @@ public class PlayerController : MonoBehaviour
         }
 
         m_menu.SetActive(m_showInventory);
+    }
+
+    public void SpawnSplashVFX(Vector3 pos)
+    {
+        if(m_spawnDelay <= 0)
+        {
+            Instantiate(m_SplashVFX, pos, Quaternion.identity);
+            m_spawnDelay += 0.25f;
+        }
     }
 
     public void PlayAudio(string _fileName)
