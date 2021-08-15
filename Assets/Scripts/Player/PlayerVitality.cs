@@ -54,8 +54,9 @@ public class PlayerVitality : MonoBehaviour
 
     public void Damage(float _damage)
     {
-        m_hunger -= _damage;
+        if (m_hunger > 0)
         m_audioAgent.Play("PlayerHurt");
+        m_hunger -= _damage;
     }
 
     public void PlayerDeath()

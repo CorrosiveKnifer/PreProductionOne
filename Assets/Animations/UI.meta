@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Animations/UI.meta
 guid: 2e67a47b057bd0a468ad924d64126818
+=======
+guid: f30ca87efce338f4dbef9ff7ec3af103
+>>>>>>> origin/Petre:Assets/Prefabs/Sabrina_Model.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

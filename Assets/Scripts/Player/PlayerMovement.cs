@@ -26,8 +26,10 @@ public class PlayerMovement : MonoBehaviour
     private MultiAudioAgent m_audioAgent;
 
     [Header("Combat")]
-    public Transform m_attackPoint;
-    public float m_attackRange = 0.5f;
+    public Transform m_slamPoint;
+    public float m_slamRange = 0.5f;
+    public Transform m_swingPoint;
+    public float m_swingRange = 0.5f;
     public LayerMask m_enemyLayer;
 
     private void Awake()
@@ -176,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
         m_audioAgent.Play("AttackSwing");
 
         // Detect enemies in range of attacks
-        Collider[] hits = Physics.OverlapSphere(m_attackPoint.position, m_attackRange, m_enemyLayer);
+        Collider[] hits = Physics.OverlapSphere(m_swingPoint.position, m_swingRange, m_enemyLayer);
 
         bool hitEnemy = false;
 
@@ -203,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
     public void SlamAttack()
     {
         // Detect enemies in range of attacks
-        Collider[] hits = Physics.OverlapSphere(m_attackPoint.position, m_attackRange, m_enemyLayer);
+        Collider[] hits = Physics.OverlapSphere(m_slamPoint.position, m_slamRange, m_enemyLayer);
 
         m_audioAgent.Play("SlamHit");
         m_playerController.GetCamera().GetComponent<ScreenShake>().StartScreenShake();
@@ -219,4 +221,14 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(m_swingPoint.position, m_swingRange);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(m_slamPoint.position, m_slamRange);
+    }
+
 }

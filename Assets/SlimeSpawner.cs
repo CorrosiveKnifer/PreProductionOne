@@ -15,7 +15,7 @@ public class SlimeSpawner : MonoBehaviour
 
     private void Update()
     {
-        m_spawnTimer -= Time.deltaTime * 0.05f;
+        m_spawnTimer -= Time.deltaTime * 0.05f * (GameManager.instance.m_gameTimer.m_isRaining ? 2.0f : 1.0f);
         if (m_spawnTimer < 0 && FindObjectsOfType<Slime>().Length < 10)
         {
             int amount = Random.Range(2, 7);
