@@ -43,6 +43,8 @@ GameObject:
   - component: {fileID: 3471113089756612216}
   - component: {fileID: 7003531325189429727}
   - component: {fileID: 2670109151820981759}
+  - component: {fileID: 7590663438562321625}
+  - component: {fileID: 7525926582271690936}
   m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -146,3 +148,34 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &7590663438562321625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9136883949137658330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f264a2748403b840b9c0dddb2a9e84a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &7525926582271690936
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9136883949137658330}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f643b195d10f78a46824a5620493eabc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

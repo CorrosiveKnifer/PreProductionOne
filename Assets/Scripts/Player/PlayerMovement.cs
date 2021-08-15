@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private PlayerVitality m_playerVitality;
+    private PlayerController m_playerController;
 
     private CharacterController characterController;
     private float yVelocity = 0.0f;
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     {
         m_audioAgent = GetComponent<MultiAudioAgent>();
         characterController = GetComponent<CharacterController>();
+        m_playerController = GetComponent<PlayerController>();
         m_playerVitality = GetComponent<PlayerVitality>();
     }
 
@@ -204,6 +206,7 @@ public class PlayerMovement : MonoBehaviour
         Collider[] hits = Physics.OverlapSphere(m_attackPoint.position, m_attackRange, m_enemyLayer);
 
         m_audioAgent.Play("SlamHit");
+        m_playerController.GetCamera().GetComponent<ScreenShake>().StartScreenShake();
 
         // Damage them
         foreach (var enemy in hits)
