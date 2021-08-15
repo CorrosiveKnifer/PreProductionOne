@@ -29,6 +29,7 @@ public class Slime : MonoBehaviour
 
     private float m_circleAngle = 0.0f;
 
+    public GameObject m_hitVFX;
     public GameObject m_deathVFX;
 
     private void Awake()
@@ -77,7 +78,7 @@ public class Slime : MonoBehaviour
         {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<NavMeshAgent>().enabled = true;
-            if (Vector3.Distance(transform.position, m_target.transform.position) < 4.0f)
+            if (Vector3.Distance(transform.position, m_target.transform.position) < 6.0f)
             {
                 GetComponent<NavMeshAgent>().destination = m_target.transform.position;
             }
@@ -177,6 +178,8 @@ public class Slime : MonoBehaviour
     {
         StartCoroutine(DamageFlash());
         m_audioAgent.Play("SlimeDamage");
+
+        Instantiate(m_hitVFX, transform.position, transform.rotation);
 
         m_health -= _damage;
         DamageNumberManager.instance.CreateDamageNumber(transform.position, _damage);
