@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3075113073288392863}
   - component: {fileID: 2867578043954953461}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2635335676478230464}
   - component: {fileID: 7629702967810366923}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TikiRog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 5133708469824799129}
   - component: {fileID: 6640944206830732552}
   - component: {fileID: 5474300460898685505}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: pCylinder5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 6870429334080895508}
   - component: {fileID: 6870429334080895511}
   - component: {fileID: 6671366351959912814}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -140,7 +140,7 @@ public class CropScript : MonoBehaviour
 
         if(m_waterValue >= m_data.m_waterRequirement)
         {
-            growthRate = m_waterValue;
+            growthRate = m_waterValue * 1.5f; //Fixed increase.
         }
         else
         {

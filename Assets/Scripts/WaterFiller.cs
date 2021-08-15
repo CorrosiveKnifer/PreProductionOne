@@ -17,6 +17,6 @@ public class WaterFiller : MonoBehaviour
 
     public void FillWater()
     {
-        GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerInventory>()?.AddItem(ItemObject.CreateItem(6, 25));
+        GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerInventory>()?.AddItem(ItemObject.CreateItem(6, 50));
     }
 }

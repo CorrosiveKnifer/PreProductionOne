@@ -23,11 +23,25 @@ public class UI_GameTime : UI_Element
         string minuteDisplay = (minutes >= 10) ? minutes.ToString() : "0"+ minutes.ToString();
         if (time > 0 && time < 12)
         {
-            m_display.text = $"Day: {GameManager.instance.m_day} - {(int)Mathf.Floor(time)}:{minuteDisplay} AM";
+            if (time >= 0 && time < 1)
+            {
+                m_display.text = $"Day: {GameManager.instance.m_day} - 12:{minuteDisplay} PM";
+            }
+            else
+            {
+                m_display.text = $"Day: {GameManager.instance.m_day} - {(int)Mathf.Floor(time)}:{minuteDisplay} AM";
+            }
         }
-        else if(time >= 12 && time <= 24)
+        else if(time >= 12 && time < 24)
         {
-            m_display.text = $"Day: {GameManager.instance.m_day} - {(int)Mathf.Floor(time) - 12}:{minuteDisplay} PM";
+            if(time >= 12 && time < 13)
+            {
+                m_display.text = $"Day: {GameManager.instance.m_day} - {(int)Mathf.Floor(time)}:{minuteDisplay} PM";
+            }
+            else
+            {
+                m_display.text = $"Day: {GameManager.instance.m_day} - {(int)Mathf.Floor(time) - 12}:{minuteDisplay} PM";
+            }
         }
         else
         {
