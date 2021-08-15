@@ -43,15 +43,21 @@ public class SoundField : MonoBehaviour
                     agent.PlayOnce("Walk_Water");
                     agent.StopAudio("Walk_Wood");
                     agent.StopAudio("Walk_Grass");
+                    other.GetComponent<PlayerController>().SpawnSplashVFX(other.transform.position);
                     break;
                 default:
                     break;
             }
 
-            if (m_myType == MaterialType.Water && other.GetComponent<PlayerController>() != null)
-            {
-                other.GetComponent<PlayerController>().SpawnSplashVFX(other.transform.position);
-            }
-        }  
+            
+        }
+        else if(fieldWithPriority == this && !other.GetComponentInChildren<Animator>().GetBool("IsMoving"))
+        {
+            MultiAudioAgent agent = HUDManager.instance.GetComponent<MultiAudioAgent>();
+
+            agent.StopAudio("Walk_Wood");
+            agent.StopAudio("Walk_Grass");
+            agent.StopAudio("Walk_Water");
+        }
     }
 }

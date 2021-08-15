@@ -9648,6 +9648,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass
       objectReference: {fileID: 0}
+    - target: {fileID: 3774501474539520451, guid: 32e9b3391013f9440a03785d9ed8323c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3774501474539520453, guid: 32e9b3391013f9440a03785d9ed8323c,
         type: 3}
       propertyPath: m_RootOrder

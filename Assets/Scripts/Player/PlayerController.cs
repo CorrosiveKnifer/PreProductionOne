@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     private PlayerState m_currentState = PlayerState.DEFAULT;
 
     public bool m_canAttack = true;
-
+    public float m_spawnDelay = 0.0f;
     public enum DisplayState
     {
         NONE,
@@ -124,6 +124,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (m_spawnDelay > 0)
+            m_spawnDelay -= Time.deltaTime;
+
         m_cancelAttack = false;
         CursorUpdate();
         HUDInput();
@@ -394,7 +397,6 @@ public class PlayerController : MonoBehaviour
 
     public void WaterAction()
     {
-        
         if(m_actionObject.GetComponent<CropScript>() != null)
         {
             float amount = Mathf.Clamp(m_playerInventory.GetSelectItem().m_amount - 1, 0, 20.0f);
@@ -513,6 +515,10 @@ public class PlayerController : MonoBehaviour
 
     public void SpawnSplashVFX(Vector3 pos)
     {
-        Instantiate(m_SplashVFX, pos, Quaternion.identity);
+        if(m_spawnDelay <= 0)
+        {
+            Instantiate(m_SplashVFX, pos, Quaternion.identity);
+            m_spawnDelay += 0.25f;
+        }
     }
 }
